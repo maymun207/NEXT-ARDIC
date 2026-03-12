@@ -1,0 +1,547 @@
+/**
+ * ============================================================================
+ * Analytics Dashboard — Stylesheet
+ * ============================================================================
+ *
+ * A dark-themed, glassmorphism-inspired design system for the analytics
+ * dashboard.  All colours, spacings, and typography tokens are defined as
+ * CSS custom properties so they can be adjusted from a single location.
+ * ============================================================================
+ */
+
+/* ── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Surface colours */
+  --bg-body: #0b0f1a;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --bg-header: rgba(11, 15, 26, 0.85);
+  --bg-table-row: rgba(255, 255, 255, 0.02);
+  --bg-table-hover: rgba(255, 255, 255, 0.06);
+  --bg-tab: rgba(255, 255, 255, 0.05);
+  --bg-tab-active: rgba(99, 102, 241, 0.15);
+
+  /* Border & glass */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(99, 102, 241, 0.5);
+
+  /* Text colours */
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* Accent colours — one per card */
+  --accent-visitors: #6366f1;
+  --accent-visits: #06b6d4;
+  --accent-contacts: #f59e0b;
+  --accent-chats: #10b981;
+  --accent-newsletter: #ec4899;
+
+  /* Typography */
+  --font-family: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
+
+/* ── Reset & Base ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+
+  /* Subtle gradient overlay */
+  background-image:
+    radial-gradient(
+      ellipse at 20% 0%,
+      rgba(99, 102, 241, 0.08) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 100%,
+      rgba(6, 182, 212, 0.06) 0%,
+      transparent 60%
+    );
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────── */
+#dashboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--bg-header);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.header-left h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* "Last refreshed" badge */
+.refresh-badge {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+}
+
+/* Manual refresh button */
+.btn-refresh {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.btn-refresh:hover {
+  background: var(--bg-card-hover);
+  transform: rotate(90deg);
+}
+
+/* ── Summary Cards ──────────────────────────────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base),
+    border-color var(--transition-base);
+  cursor: default;
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Accent left-border per card type */
+.card-visitors {
+  border-left: 3px solid var(--accent-visitors);
+}
+.card-visits {
+  border-left: 3px solid var(--accent-visits);
+}
+.card-contacts {
+  border-left: 3px solid var(--accent-contacts);
+}
+.card-chats {
+  border-left: 3px solid var(--accent-chats);
+}
+.card-newsletter {
+  border-left: 3px solid var(--accent-newsletter);
+}
+
+.card-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.card-label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Accent colour for the value number */
+.card-visitors .card-value {
+  color: var(--accent-visitors);
+}
+.card-visits .card-value {
+  color: var(--accent-visits);
+}
+.card-contacts .card-value {
+  color: var(--accent-contacts);
+}
+.card-chats .card-value {
+  color: var(--accent-chats);
+}
+.card-newsletter .card-value {
+  color: var(--accent-newsletter);
+}
+
+/* ── Tab Navigation ─────────────────────────────────────────────────────── */
+.tab-nav {
+  display: flex;
+  gap: var(--space-xs);
+  padding: 0 var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.tab {
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-tab);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.tab.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-visitors);
+  background: var(--bg-tab-active);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+/* ── Panels ─────────────────────────────────────────────────────────────── */
+#tab-panels {
+  padding: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  background: rgba(11, 15, 26, 0.6);
+  border-bottom: 1px solid var(--border-glass);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  vertical-align: top;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Expandable cells on hover */
+tbody td:hover {
+  white-space: normal;
+  word-break: break-word;
+}
+
+tbody tr {
+  transition: background var(--transition-fast);
+}
+
+tbody tr:hover {
+  background: var(--bg-table-hover);
+}
+
+/* Alternating row backgrounds */
+tbody tr:nth-child(even) {
+  background: var(--bg-table-row);
+}
+
+tbody tr:nth-child(even):hover {
+  background: var(--bg-table-hover);
+}
+
+/* Role badge in chat table */
+.role-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.role-user {
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--accent-visitors);
+}
+
+.role-assistant {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-chats);
+}
+
+/* Empty-state message */
+.empty-state {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+#dashboard-footer {
+  text-align: center;
+  padding: var(--space-lg);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border-glass);
+  margin-top: var(--space-xl);
+}
+
+/* ── Responsive tweaks ──────────────────────────────────────────────────── */
+/* ── Detail Modal (click-to-expand for chat / contact rows) ─────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-panel {
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #111827;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+}
+
+.modal-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.modal-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-xs) var(--space-md);
+  font-size: 0.8rem;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.modal-meta dt {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.modal-meta dd {
+  color: var(--text-primary);
+}
+
+.modal-content {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--bg-table-row);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-glass);
+}
+
+/* Make clickable rows look interactive */
+.clickable-row {
+  cursor: pointer;
+}
+
+.clickable-row:hover {
+  background: var(--bg-table-hover) !important;
+}
+
+/* ── Responsive tweaks ──────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  #dashboard-header {
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: var(--space-md);
+  }
+
+  .tab-nav {
+    overflow-x: auto;
+    padding: 0 var(--space-md);
+  }
+
+  #tab-panels {
+    padding: var(--space-md);
+  }
+}

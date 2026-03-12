@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── STEP 1: CHANGE THESE 3 COLORS TO MATCH YOUR BRAND ───────────────────
+   * These are the only CSS variables you MUST change to rebrand this template.
+   * Tip: Use a color tool like oklch.com or coolors.co to find harmonious values.
+   * ────────────────────────────────────────────────────────────────────────── */
+
+  /* Primary brand color — used for headers, buttons, focus rings, links */
+  --color-primary: #1e3a8a; /* TODO: Replace with your primary brand color  */
+  --color-primary-light: #2563eb; /* 20% lighter variant — hover states          */
+  --color-primary-dark: #1e2d5b; /* 20% darker variant — pressed states         */
+
+  /* Secondary/accent color — used for highlights, badges, CTAs */
+  --color-secondary: #f97316; /* TODO: Replace with your accent color        */
+  --color-secondary-light: #fb923c; /* Lighter variant                             */
+  --color-secondary-dark: #ea580c; /* Darker variant                              */
+
+  /* Accent/success color — used for metrics, positive indicators */
+  --color-accent: #00d1ff; /* TODO: Optionally replace with a third color   */
+  --color-accent-light: #57e1ff; /* Lighter variant                               */
+  --color-accent-dark: #00a3ff; /* Darker variant                                */
+
+  /* ── STEP 2: NEUTRAL SCALE — Leave these as-is unless you need custom grays ─
+   * These follow the Tailwind neutral scale. Change only if you want warm/cool grays.
+   * ────────────────────────────────────────────────────────────────────────── */
+  --color-neutral-50: #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-300: #d1d5db;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+  --color-neutral-600: #4b5563;
+  --color-neutral-700: #374151;
+  --color-neutral-800: #1f2937;
+  --color-neutral-900: #111827;
+
+  /* ── STEP 3: TYPOGRAPHY — Change fonts in src/app/layout.tsx ─────────────
+   * Inter (heading) + Source Sans 3 (body) is a premium, universally readable
+   * pairing. To change fonts: edit the Google Font imports in layout.tsx.
+   * ────────────────────────────────────────────────────────────────────────── */
+  --font-heading: var(--font-inter);
+  --font-body: var(--font-source-sans);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-body), system-ui, sans-serif;
+    color: var(--color-neutral-300);
+    background-color: #000000;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .skip-to-content {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 1rem;
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+  }
+
+  .skip-to-content:focus {
+    left: 0;
+  }
+}

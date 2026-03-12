@@ -1,0 +1,58 @@
+# ============================================================================
+# dependabot.yml — Automated Dependency Update Configuration
+# ============================================================================
+#
+# Configures GitHub Dependabot to scan npm dependencies weekly and open
+# pull requests for updates. PRs target the 'develop' branch for review
+# before merging to main. Dependencies are grouped by ecosystem to reduce
+# PR noise.
+#
+# Schedule: Every Monday at 09:00 Europe/Istanbul
+# Max open PRs: 5 (to avoid overwhelming reviewers)
+# Target branch: develop (not main — changes flow develop → main)
+# ============================================================================
+
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      # TODO: Change this to your local timezone (e.g., "America/New_York", "Europe/Paris")
+      timezone: "Europe/London"
+
+    # Limit concurrent Dependabot PRs to avoid review fatigue
+    open-pull-requests-limit: 5
+
+    # PRs target develop branch — never push directly to main
+    target-branch: "develop"
+
+    # Label PRs for easy filtering in GitHub
+    labels: ["dependencies", "automated"]
+
+    # Prefix commit messages for conventional commits compliance
+    commit-message:
+      prefix: "chore(deps)"
+
+    # Group related dependencies to reduce PR count
+    groups:
+      # Core Next.js framework and React ecosystem
+      next-ecosystem:
+        patterns: ["next", "react", "react-dom", "@types/react*"]
+
+      # Supabase client and related packages
+      supabase:
+        patterns: ["@supabase/*"]
+
+      # Development tooling (linters, test runners, type checkers)
+      dev-tooling:
+        patterns:
+          - "typescript"
+          - "eslint*"
+          - "jest*"
+          - "@types/*"
+          - "@testing-library/*"
+          - "tailwindcss"

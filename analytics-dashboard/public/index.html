@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CompanyTech Analytics Dashboard</title>
+    <meta
+      name="description"
+      content="Real-time analytics dashboard for the CompanyTech Sentient Factory website."
+    />
+
+    <!-- Google Fonts — Inter for a clean, modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Dashboard styles -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ================================================================== -->
+    <!-- Header                                                             -->
+    <!-- ================================================================== -->
+    <header id="dashboard-header">
+      <div class="header-left">
+        <h1>📊 CompanyTech Analytics</h1>
+        <span class="header-subtitle">Real-time website insights</span>
+      </div>
+      <div class="header-right">
+        <!-- Last-refreshed timestamp updated by app.js -->
+        <span id="last-refresh" class="refresh-badge">Loading…</span>
+        <button id="btn-refresh" class="btn-refresh" title="Refresh data now">
+          ⟳
+        </button>
+      </div>
+    </header>
+
+    <!-- ================================================================== -->
+    <!-- Summary Cards                                                      -->
+    <!-- ================================================================== -->
+    <section id="summary-cards" class="card-grid">
+      <!-- Each card is populated dynamically by app.js -->
+      <div class="card card-visitors" data-stat="visitors" data-tab="visitors">
+        <div class="card-icon">👤</div>
+        <div class="card-body">
+          <span class="card-value" id="stat-visitors">—</span>
+          <span class="card-label">Visitors</span>
+        </div>
+      </div>
+
+      <div class="card card-visits" data-stat="visits" data-tab="visits">
+        <div class="card-icon">🌐</div>
+        <div class="card-body">
+          <span class="card-value" id="stat-visits">—</span>
+          <span class="card-label">Page Views</span>
+        </div>
+      </div>
+
+      <div class="card card-contacts" data-stat="contacts" data-tab="contacts">
+        <div class="card-icon">✉️</div>
+        <div class="card-body">
+          <span class="card-value" id="stat-contacts">—</span>
+          <span class="card-label">Contacts</span>
+        </div>
+      </div>
+
+      <div class="card card-chats" data-stat="chatMessages" data-tab="chats">
+        <div class="card-icon">💬</div>
+        <div class="card-body">
+          <span class="card-value" id="stat-chatMessages">—</span>
+          <span class="card-label">Chat Messages</span>
+        </div>
+      </div>
+
+      <div
+        class="card card-newsletter"
+        data-stat="newsletter"
+        data-tab="newsletter"
+      >
+        <div class="card-icon">📧</div>
+        <div class="card-body">
+          <span class="card-value" id="stat-newsletter">—</span>
+          <span class="card-label">Subscribers</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- Tab Navigation                                                     -->
+    <!-- ================================================================== -->
+    <nav id="tab-nav" class="tab-nav">
+      <button class="tab active" data-tab="visitors">👤 Visitors</button>
+      <button class="tab" data-tab="visits">🌐 Visits</button>
+      <button class="tab" data-tab="contacts">✉️ Contacts</button>
+      <button class="tab" data-tab="chats">💬 Chat Messages</button>
+      <button class="tab" data-tab="newsletter">📧 Subscribers</button>
+    </nav>
+
+    <!-- ================================================================== -->
+    <!-- Tab Panels (data tables)                                           -->
+    <!-- ================================================================== -->
+    <main id="tab-panels">
+      <!-- Visitors panel -->
+      <section id="panel-visitors" class="panel active">
+        <div class="table-wrap">
+          <table id="table-visitors">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Fingerprint</th>
+                <th>Visit Count</th>
+                <th>First Seen</th>
+                <th>Last Seen</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty-state" style="display: none">
+          No visitors recorded yet.
+        </p>
+      </section>
+
+      <!-- Visits panel -->
+      <section id="panel-visits" class="panel">
+        <div class="table-wrap">
+          <table id="table-visits">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Page</th>
+                <th>Locale</th>
+                <th>Browser</th>
+                <th>OS</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>IP</th>
+                <th>Referrer</th>
+                <th>Visited At</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty-state" style="display: none">No visits recorded yet.</p>
+      </section>
+
+      <!-- Contacts panel -->
+      <section id="panel-contacts" class="panel">
+        <div class="table-wrap">
+          <table id="table-contacts">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Company</th>
+                <th>Message</th>
+                <th>Submitted At</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty-state" style="display: none">
+          No contact submissions yet.
+        </p>
+      </section>
+
+      <!-- Chat messages panel -->
+      <section id="panel-chats" class="panel">
+        <div class="table-wrap">
+          <table id="table-chats">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Role</th>
+                <th>Content</th>
+                <th>Page</th>
+                <th>Locale</th>
+                <th>Session</th>
+                <th>Sent At</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty-state" style="display: none">No chat messages yet.</p>
+      </section>
+
+      <!-- Newsletter subscribers panel -->
+      <section id="panel-newsletter" class="panel">
+        <div class="table-wrap">
+          <table id="table-newsletter">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Locale</th>
+                <th>Subscribed At</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="empty-state" style="display: none">
+          No newsletter subscribers yet.
+        </p>
+      </section>
+    </main>
+
+    <!-- ================================================================== -->
+    <!-- Footer                                                             -->
+    <!-- ================================================================== -->
+    <footer id="dashboard-footer">
+      <span>CompanyTech Analytics Dashboard · Auto-refreshes every 30 s</span>
+    </footer>
+
+    <!-- Client-side application logic -->
+    <script src="app.js"></script>
+  </body>
+</html>

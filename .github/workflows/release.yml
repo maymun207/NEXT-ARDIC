@@ -1,0 +1,106 @@
+# ============================================================================
+# release.yml — Automated GitHub Release on SemVer Tag Push
+# ============================================================================
+#
+# Triggered when a SemVer tag (v*.*.*) is pushed to the repository.
+#
+# Pipeline:
+#   1. Checkout code
+#   2. Setup Node.js 20.x
+#   3. Install dependencies
+#   4. Run full CI checks (lint, typecheck, build)
+#   5. Generate release notes from conventional commits since last tag
+#   6. Create a GitHub Release with the generated notes
+#
+# Usage:
+#   git tag -a v1.1.0 -m "Description of release"
+#   git push origin v1.1.0
+# ============================================================================
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release
+    runs-on: ubuntu-latest
+
+    steps:
+      # ── Step 1: Checkout the tagged commit ──────────────────────────
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history needed for release notes
+
+      # ── Step 2: Setup Node.js 20.x (matching package.json engines) ──
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # ── Step 3: Install dependencies ────────────────────────────────
+      - name: Install dependencies
+        run: npm ci
+
+      # ── Step 4: Run full CI checks ──────────────────────────────────
+      - name: TypeScript typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build
+        env:
+          # Provide placeholder values so build doesn't fail on missing env vars
+          NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "placeholder"
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: "placeholder"
+          NEXT_PUBLIC_SENTRY_DSN: ""
+
+      # ── Step 5: Generate release notes ──────────────────────────────
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          # Get the previous tag (or use the initial commit if no previous tag)
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          CURRENT_TAG=${GITHUB_REF_NAME}
+
+          echo "## What's Changed" > release_notes.md
+          echo "" >> release_notes.md
+
+          # Group commits by conventional commit type
+          echo "### Features" >> release_notes.md
+          git log ${PREV_TAG}..${CURRENT_TAG} --pretty=format:"- %s (%h)" --grep="^feat" >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "### Bug Fixes" >> release_notes.md
+          git log ${PREV_TAG}..${CURRENT_TAG} --pretty=format:"- %s (%h)" --grep="^fix" >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "### Documentation" >> release_notes.md
+          git log ${PREV_TAG}..${CURRENT_TAG} --pretty=format:"- %s (%h)" --grep="^docs" >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "### Other Changes" >> release_notes.md
+          git log ${PREV_TAG}..${CURRENT_TAG} --pretty=format:"- %s (%h)" --grep="^chore\|^refactor\|^style\|^perf\|^ci" >> release_notes.md || true
+          echo "" >> release_notes.md
+
+          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${CURRENT_TAG}" >> release_notes.md
+
+      # ── Step 6: Create GitHub Release ───────────────────────────────
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "CompanyTech Website ${{ github.ref_name }}"
+          body_path: release_notes.md
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

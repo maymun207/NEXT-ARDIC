@@ -1,0 +1,14 @@
+{
+  "name": "TemplateWEB-analytics-dashboard",
+  "version": "1.0.0",
+  "description": "Standalone analytics dashboard for TemplateWEB — pulls data from Supabase and displays it in a modern UI.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

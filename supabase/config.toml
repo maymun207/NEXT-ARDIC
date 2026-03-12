@@ -1,0 +1,21 @@
+# ============================================================================
+# Supabase CLI Configuration
+# ============================================================================
+#
+# This file is safe to commit — it contains only structural config with
+# placeholder values. Real credentials live in .env.local (gitignored)
+# and Vercel environment variables.
+#
+# To link this config to your Supabase project, replace the project_id
+# below with the value from Supabase Dashboard → Settings → General.
+# ============================================================================
+
+project_id = "YOUR_SUPABASE_PROJECT_ID"
+
+[db]
+# Local development database port (used by supabase start)
+port = 54322
+
+[studio]
+# Local Supabase Studio port (used by supabase start)
+port = 54323

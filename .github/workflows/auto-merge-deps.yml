@@ -1,0 +1,48 @@
+# ============================================================================
+# auto-merge-deps.yml — Auto-Merge Patch-Level Dependabot PRs
+# ============================================================================
+#
+# Automatically merges Dependabot pull requests that are PATCH-level updates
+# only (e.g., 1.2.3 → 1.2.4). MINOR and MAJOR updates require human review.
+#
+# Flow:
+#   1. Dependabot opens a PR to 'develop'
+#   2. CI checks run (lint, typecheck, tests, build, security-audit)
+#   3. If all checks pass AND it's a patch update → auto-merge
+#   4. Developer merges develop → main when ready
+#
+# Safety: Only merges to develop, never directly to main.
+# ============================================================================
+
+name: Auto-Merge Dependabot (Patch Only)
+
+on:
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto-Merge Patch Updates
+    runs-on: ubuntu-latest
+
+    # Only run for Dependabot PRs
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+      # Fetch Dependabot metadata to determine update type
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      # Only auto-merge if the version bump is PATCH level (x.x.PATCH)
+      - name: Auto-merge patch updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

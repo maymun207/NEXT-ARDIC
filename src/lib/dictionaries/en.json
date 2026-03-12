@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "YOUR_COMPANY_NAME — Enterprise Software for Modern Business",
+    "description": "Build, scale, and automate your enterprise operations. Trusted by hundreds of B2B teams worldwide."
+  },
+  "site": {
+    "name": "YOUR_COMPANY_NAME",
+    "tagline": "Enterprise Software Solutions",
+    "description": "Build, scale, and automate your enterprise operations.",
+    "url": "https://yourdomain.com"
+  },
+  "nav": {
+    "solution": "Our Solution",
+    "caseStudies": "Case Studies",
+    "features": "Features",
+    "roi": "ROI Calculator",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "bookDemo": "Book a Demo"
+  },
+  "hero": {
+    "badge": "Enterprise-Grade from Day One",
+    "headline": "The Platform Your Business Deserves.",
+    "subheadline": "Stop stitching together point solutions. Our integrated platform gives your team a single source of truth — from day one.",
+    "ctaPrimary": "Book a Demo",
+    "ctaSecondary": "Learn More"
+  },
+  "features": {
+    "title": "Everything You Need to Operate at Scale",
+    "subtitle": "Six core capabilities that work together to accelerate your business.",
+    "items": [
+      {
+        "icon": "Zap",
+        "title": "Real-Time Operations",
+        "description": "Monitor every process, workflow, and KPI as it happens. Get instant alerts when performance deviates from targets."
+      },
+      {
+        "icon": "Shield",
+        "title": "Enterprise Security",
+        "description": "Bank-grade encryption, role-based access control, and SOC 2 Type II compliance built in from the start."
+      },
+      {
+        "icon": "Globe",
+        "title": "Global & Multi-Site",
+        "description": "Manage teams and locations across time zones from a single, unified dashboard. No per-site licenses."
+      },
+      {
+        "icon": "BarChart3",
+        "title": "Advanced Analytics",
+        "description": "Turn raw data into actionable insight. Customizable dashboards, scheduled reports, and AI-driven recommendations."
+      },
+      {
+        "icon": "Code2",
+        "title": "API-First Integration",
+        "description": "Connect to your existing ERP, CRM, or any third-party system via our REST API. No rip-and-replace required."
+      },
+      {
+        "icon": "Users",
+        "title": "Collaboration Tools",
+        "description": "Shared workspaces, real-time commenting, and permission-aware views for every team member — from the floor to the C-suite."
+      }
+    ]
+  },
+  "stats": {
+    "title": "Trusted by Teams Just Like Yours",
+    "items": [
+      {
+        "value": "500+",
+        "label": "Enterprise Customers",
+        "sublabel": "Across 30 countries"
+      },
+      {
+        "value": "40%",
+        "label": "Average Efficiency Gain",
+        "sublabel": "In the first 90 days"
+      },
+      {
+        "value": "9 mo",
+        "label": "Average Payback Period",
+        "sublabel": "Full ROI"
+      },
+      {
+        "value": "99.9%",
+        "label": "Platform Uptime",
+        "sublabel": "SLA guaranteed"
+      }
+    ]
+  },
+  "cta": {
+    "headline": "Ready to Transform Your Operations?",
+    "subtitle": "Join hundreds of enterprise teams who replaced spreadsheets and siloed tools with a single, intelligent platform.",
+    "button": "Book Your Free Demo"
+  },
+  "contact": {
+    "title": "Book Your Demo",
+    "subtitle": "Fill out the form and our team will reach out within 24 hours to schedule a personalized walkthrough.",
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Business Email",
+      "company": "Company Name",
+      "phone": "Phone Number",
+      "message": "Tell us about your challenges"
+    },
+    "submit": "Send Message",
+    "success": "Thank you! Our team will reach out within 24 hours.",
+    "error": "Something went wrong. Please try again or email us directly.",
+    "sending": "Sending...",
+    "privacy": "By submitting this form, you agree to our Privacy Policy. We respect your data and comply with GDPR and applicable privacy laws."
+  },
+  "newsletter": {
+    "title": "Stay Ahead of the Curve",
+    "placeholder": "Your business email",
+    "subscribe": "Subscribe",
+    "success": "You're subscribed! Check your inbox for a confirmation link.",
+    "error": "Subscription failed. Please try again.",
+    "consent": "I agree to receive email updates. Unsubscribe anytime."
+  },
+  "footer": {
+    "tagline": "Enterprise software solutions for the modern, data-driven business.",
+    "location": "YOUR_CITY, YOUR_COUNTRY",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "links": {
+      "about": "About Us",
+      "platform": "Our Solution",
+      "caseStudies": "Case Studies",
+      "contact": "Contact Us",
+      "careers": "Careers"
+    },
+    "legalLinks": {
+      "privacy-policy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookie-policy": "Cookie Policy"
+    },
+    "newsletter": {
+      "title": "Stay in the Loop",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe",
+      "gdpr": "I agree to receive email updates. Unsubscribe anytime."
+    },
+    "copyright": "© 2026 YOUR_COMPANY_NAME. All rights reserved."
+  },
+  "cookieConsent": {
+    "title": "Cookie Preferences",
+    "description": "We use cookies to improve your experience and analyze site traffic. Under GDPR and applicable privacy laws, we require your explicit consent before setting non-essential cookies.",
+    "categories": {
+      "necessary": {
+        "label": "Necessary",
+        "description": "Required for the website to function. Cannot be disabled."
+      },
+      "analytics": {
+        "label": "Analytics",
+        "description": "Help us understand how visitors use the site to improve performance."
+      },
+      "marketing": {
+        "label": "Marketing",
+        "description": "Used to deliver relevant content and measure campaign effectiveness."
+      }
+    },
+    "buttons": {
+      "acceptAll": "Accept All",
+      "rejectNonEssential": "Reject Non-Essential",
+      "customize": "Customize",
+      "savePreferences": "Save Preferences"
+    },
+    "links": {
+      "privacyPolicy": "Privacy Policy",
+      "cookiePolicy": "Cookie Policy"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "The page you're looking for doesn't exist or has been moved.",
+      "back": "Go Back Home"
+    },
+    "serverError": {
+      "title": "Something Went Wrong",
+      "description": "An unexpected error occurred. Our team has been notified.",
+      "reset": "Try Again"
+    }
+  },
+  "chatAgent": {
+    "title": "AI Assistant",
+    "subtitle": "Online · Powered by AI",
+    "placeholder": "Ask me anything...",
+    "send": "Send",
+    "greeting": "👋 Hi! I'm your AI assistant. How can I help you today?",
+    "thinking": "Thinking...",
+    "error": "Sorry, something went wrong. Please try again.",
+    "poweredBy": "Powered by AI · Responses may not always be accurate"
+  }
+}

@@ -1,0 +1,85 @@
+CompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTechCompanyTech
+
+Homepage -> Cookies Policy
+Below is information about how CompanyTECH and its affiliates (�we�) use cookies and other similar technology on this website.
+
+This policy is effective as of Aug 23, 2023. Please note that this privacy statement will be updated from time to time.
+We can place cookies and other similar technology on your device, including mobile device, in accordance with your preferences set on our cookie consent manager. Depending on your settings in our cookie consent manager on your mobile device, the following information may be collected through cookies or similar technology: your unique device identifier, mobile device IP address, information about your device�s operating system, mobile carrier and your location information (to the extent permissible under applicable law).
+
+What are cookies?
+
+Cookies are text files containing small amounts of information which are downloaded to your computer or mobile device when you visit a site and allow a site to recognize your device. Cookies managed by CompanyTECH only are called �first party cookies� whereas cookies from third parties are called �third party cookies� as explained below.
+
+Why do we use cookies and similar technologies?
+
+Cookies do a lot of different jobs, such as letting you navigate between pages efficiently, remembering your preferences and generally improving the user experience. They can also help to ensure that the advertisements you see online are more relevant to you and your interests. In addition, cookies can help us to analyze the use of our websites and online content (analytics cookies) and they can also facilitate/track the interaction on our websites and online content with social media (e.g. links to social media sites, like buttons, etc.).
+
+Does CompanyTECH use cookies for marketing and analytics?
+
+Yes, we may use information collected from our cookies to identify user behavior and to serve content and offers based on your profile, and for the other purposes described below, to the extent legally permissible in certain jurisdictions.
+
+In other cases, we can associate cookie information (including information from cookies placed via our advertisements on third party sites) with an identifiable individual. For example:
+
+If we send you a targeted email which includes web beacons, cookies or similar technologies we will know whether you open, read, or delete the message.
+When you click a link in a marketing e-mail you receive from CompanyTECH, we will also use a cookie to log what pages you view and what content you download from our websites, even if you are not registered at or signed into our site.
+Combining and analyzing personal data � As described above, we may combine data from publicly available sources, and from our different e-mail, website, and personal interactions with you (this includes information collected across our different websites such as our careers and corporate sites and information collected when you sign-up or log on to our sites or connect to our sites using your social media credentials (such as LinkedIn). We combine this data to better assess your experience with CompanyTECH and to perform the other activities described throughout our privacy policy.
+Do you use any cookies from third party companies?
+
+Some cookies, web beacons and other tracking and storage technologies that we use are from third party companies (third party cookies), such as Facebook, Microsoft, Marketo Munchkin Tracking, Twitter, Knotch, YouTube, Instagram, Yoptima and Linkedin Analytics to provide us with web analytics and intelligence about our sites which may also be used to provide measurement services and target ads. These companies use programming code to collect information about your interaction with our sites, such as the pages you visit, the links you click on and how long you are on our sites. This code is only active while you are on an CompanyTECH website. For more information on how these companies collect and use information on our behalf, please refer to their privacy policies: Facebook at Facebook Data Policy Google (including YouTube) at Google Privacy & Terms , Microsoft at Microsoft Privacy Statement , Marketo at Marketo Privacy Policy , Linkedin at Linkedin Privacy Policy , Twitter at Twitter Privacy Policy , Knotch at Knotch Privacy Policy , Instagram at Instagram Data Policy and Yoptima at Yoptima Privacy Policy .
+
+Does CompanyTECH use any tracking technologies similar to cookies?
+
+We may also use web beacons (including conversion pixels) or other technologies for similar purposes as above and we may include these on our sites, in marketing e-mail messages or our newsletter, affiliated websites, to determine whether messages have been opened and links clicked on. Web beacons do not place information on your device, but they may work in conjunction with cookies to monitor website activity. The information provided below about cookies also applies to web beacons and similar technologies. Conversion pixels are small codes located on a particular web page which are triggered when someone visits a page resulting in an increase in the conversion count.
+
+What if I don�t want cookies or similar tracking technologies?
+
+You can adjust your cookie settings through our cookie consent manager . If you want to remove existing cookies from your device, you can do this using your browser options. If you want to block future cookies being placed on your device you can use our cookie consent manager .
+
+
+Please bear in mind that deleting and blocking cookies may have an impact on your user experience.
+
+Cookie Preferences
+
+The tool will record when you have consented to our Cookies Policy and will ask for consent every six (6) months to ensure users stay up-to-date with changes to our Cookies Policy and Privacy Policies.
+
+Please note that Strictly Necessary Cookies cannot be disabled, nor can the tool be used to block cookies on third-party websites linked to our website. Also, disabling a cookie or category of cookies does not delete the disabled cookie from your browser unless manually completed through your browser function.
+
+Using your browser to control cookies
+
+Your browser settings allow you to configure which Cookies may be saved on your device but note that some parts of our website may not function properly if Cookies are disabled. For further information on how to change these settings, visit your browser�s support site.
+
+What Type Of Cookies Are Used By CompanyTECH�s Websites And Why?
+
+Our websites uses different types of cookies to distinguish you from other website users. You do not need to allow cookies to visit most of the website. However, some cookies are required for certain parts of the website to work properly. In addition, enabling cookies may allow for a more tailored browsing experience. Cookies managed by CompanyTECH only are called �first party cookies� whereas cookies from third parties are called �third party cookies� as explained below.
+
+The cookies used on CompanyTECH websites are explained below:
+
+Strictly Necessary Cookies
+
+These cookies are essential to provide you with the services you request on our website and for us to comply with legal obligations such as our security obligations under applicable privacy and data protection laws. We do not need to ask for your consent to use these cookies, as without them we would not be able to provide the services requested by you, and the website would not function properly. These are always active on the website.
+
+Performance Cookies
+
+We use first party and third party performance cookies on our website. Such cookies collect information about how you use our website (e.g., which pages you visit and if any errors occur). They are used to help us improve our website, understand what interests our users, and measure how effective our content is and help us to provide more relevant content to you. These cookies don't collect information that identifies a visitor down to an individual level that is available to us. These cookies are not passing personally identifiable information to any external third party other than in limited cases when we engage a service provider to act on our behalf but who is then unable to use the data for their own purposes.
+
+We use Google Analytics cookies, a web analytics service provided by Google, Inc. (�Google�), which in turn uses performance cookies. You may refuse the use of cookies by selecting the appropriate settings on your browser. However, please note that if you do this, you may not be able to use the full functionality of our website. You can also opt-out of Google Analytics through Google settings or visit https://tools.google.com/dlpage/gaoptout/ .
+
+Functional Cookies
+
+These cookies allow our website to remember choices you have made in the past. For example, the cookie will remember your login details or optimize video streaming speeds or volume settings. We may use site performance cookies to remember your preferences for operational settings on our websites so that you do not have to reset the preferences every time you visit.
+
+Advertising Cookies
+
+We use third party cookies (cookies that are created by website domains other than CompanyTECH) for purposes such as collecting information on user behavior, demographics, advertising or personalized marketing. This may include showing you ads on non- CompanyTECH websites.
+
+For more information on how these companies collect and use third party cookies information, please refer to their privacy policies: Facebook at Facebook Privacy Policy , Google (including YouTube) at Google Privacy & Terms , LinkedIn at LinkedIn Privacy Policy , Influ2 at Influ2 Privacy Policy , Twitter at Twitter Privacy Policy and Demandbase at Demandbase Privacy Policy .
+
+Social Media Cookies
+
+These cookies are set by a range of social media services that we have added to our website to enable you to share our content with your peers or networks. They can track your browser across other sites and build up a profile of your interests. We do not control social media cookies and they do not allow us to gain access to your social media accounts. The relevant social media platform may also show you ads and content from us when you visit its websites or use its applications. Also, if you use a social media-sharing button or widget on one of our websites, the social network that created the button will record your action for its own purposes. Please refer to the relevant social media platform�s privacy policies for information about their cookies.
+
+Contact Us
+
+If you have any questions now or during your visit, please submit your request through our Contact Us form. Contact Us
+
+You can adjust your cookie settings at any time from our cookie consent manager.

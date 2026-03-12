@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "title": "YOUR_COMPANY_NAME — Kurumsal İşletmeler için Yazılım Çözümleri",
+    "description": "Kurumsal operasyonlarınızı oluşturun, büyütün ve otomatikleştirin. Dünya genelinde yüzlerce B2B ekibi tarafından tercih edilmektedir."
+  },
+  "site": {
+    "name": "YOUR_COMPANY_NAME",
+    "tagline": "Kurumsal Yazılım Çözümleri",
+    "description": "Kurumsal operasyonlarınızı oluşturun, büyütün ve otomatikleştirin.",
+    "url": "https://yourdomain.com"
+  },
+  "nav": {
+    "solution": "Çözümümüz",
+    "caseStudies": "Başarı Hikayeleri",
+    "features": "Özellikler",
+    "roi": "ROI Hesaplayıcı",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
+    "bookDemo": "Demo Talep Et"
+  },
+  "hero": {
+    "badge": "İşletmenizin İlk Gününden İtibaren Kurumsal Hazır",
+    "headline": "İşletmenizin Hak Ettiği Platform.",
+    "subheadline": "Parçalı çözümleri bir araya getirmeyi bırakın. Entegre platformumuz ekibinize ilk günden itibaren tek bir gerçek kaynağı sunar.",
+    "ctaPrimary": "Demo Talep Et",
+    "ctaSecondary": "Daha Fazla Bilgi"
+  },
+  "features": {
+    "title": "Ölçekli Operasyon İçin İhtiyacınız Olan Her Şey",
+    "subtitle": "İşletmenizi hızlandırmak için birlikte çalışan altı temel yetenek.",
+    "items": [
+      {
+        "icon": "Zap",
+        "title": "Gerçek Zamanlı Operasyonlar",
+        "description": "Her süreci, iş akışını ve KPI'yı anlık olarak izleyin. Performans hedeflerden saptığında anında uyarı alın."
+      },
+      {
+        "icon": "Shield",
+        "title": "Kurumsal Güvenlik",
+        "description": "Banka düzeyinde şifreleme, rol tabanlı erişim kontrolü ve SOC 2 Tip II uyumluluğu başlangıçtan itibaren dahil edilmiştir."
+      },
+      {
+        "icon": "Globe",
+        "title": "Küresel ve Çok Konumlu",
+        "description": "Farklı saat dilimlerindeki ekipleri ve lokasyonları tek bir birleşik panodan yönetin. Lokasyon başına lisans yok."
+      },
+      {
+        "icon": "BarChart3",
+        "title": "Gelişmiş Analitik",
+        "description": "Ham veriyi eyleme geçirilebilir içgörüye dönüştürün. Özelleştirilebilir panolar, zamanlanmış raporlar ve yapay zeka destekli öneriler."
+      },
+      {
+        "icon": "Code2",
+        "title": "API-First Entegrasyon",
+        "description": "Mevcut ERP, CRM veya herhangi bir üçüncü taraf sistemi REST API'miz aracılığıyla bağlayın. Sistem değişikliği gerekmez."
+      },
+      {
+        "icon": "Users",
+        "title": "İşbirliği Araçları",
+        "description": "Paylaşılan çalışma alanları, gerçek zamanlı yorumlar ve sahadan üst yönetime kadar her ekip üyesi için izin bazlı görünümler."
+      }
+    ]
+  },
+  "stats": {
+    "title": "Sizin Gibi Ekiplerin Güveni",
+    "items": [
+      {
+        "value": "500+",
+        "label": "Kurumsal Müşteri",
+        "sublabel": "30 ülkede"
+      },
+      {
+        "value": "%40",
+        "label": "Ortalama Verimlilik Artışı",
+        "sublabel": "İlk 90 günde"
+      },
+      {
+        "value": "9 ay",
+        "label": "Ortalama Geri Ödeme Süresi",
+        "sublabel": "Tam ROI"
+      },
+      {
+        "value": "%99,9",
+        "label": "Platform Çalışma Süresi",
+        "sublabel": "SLA garantili"
+      }
+    ]
+  },
+  "cta": {
+    "headline": "Operasyonlarınızı Dönüştürmeye Hazır mısınız?",
+    "subtitle": "Elektronik tabloları ve ayrık araçları akıllı, entegre bir platformla değiştiren yüzlerce kurumsal ekibe katılın.",
+    "button": "Ücretsiz Demonuzu Talep Edin"
+  },
+  "contact": {
+    "title": "Demonuzu Talep Edin",
+    "subtitle": "Formu doldurun; ekibimiz 24 saat içinde kişiselleştirilmiş bir sunum planlamak için size ulaşacaktır.",
+    "fields": {
+      "fullName": "Ad Soyad",
+      "email": "Kurumsal E-posta",
+      "company": "Şirket Adı",
+      "phone": "Telefon Numarası",
+      "message": "Zorluklarınızı bize anlatın"
+    },
+    "submit": "Mesaj Gönder",
+    "success": "Teşekkürler! Ekibimiz 24 saat içinde sizinle iletişime geçecektir.",
+    "error": "Bir sorun oluştu. Lütfen tekrar deneyin veya bize doğrudan e-posta gönderin.",
+    "sending": "Gönderiliyor...",
+    "privacy": "Bu formu göndererek Gizlilik Politikamızı kabul etmiş olursunuz. Verilerinize saygı duyuyor ve GDPR ile ilgili gizlilik yasalarına uygun hareket ediyoruz."
+  },
+  "newsletter": {
+    "title": "Güncel Kalın",
+    "placeholder": "Kurumsal e-posta adresiniz",
+    "subscribe": "Abone Ol",
+    "success": "Aboneliğiniz başarılı! Onay bağlantısı için gelen kutunuzu kontrol edin.",
+    "error": "Abonelik başarısız oldu. Lütfen tekrar deneyin.",
+    "consent": "E-posta güncellemeleri almayı kabul ediyorum. İstediğim zaman abonelikten çıkabilirim."
+  },
+  "footer": {
+    "tagline": "Modern, veri odaklı işletmeler için kurumsal yazılım çözümleri.",
+    "location": "ŞEHRİNİZ, ÜLKENİZ",
+    "quickLinks": "Hızlı Bağlantılar",
+    "legal": "Yasal",
+    "links": {
+      "about": "Hakkımızda",
+      "platform": "Çözümümüz",
+      "caseStudies": "Başarı Hikayeleri",
+      "contact": "İletişim",
+      "careers": "Kariyer"
+    },
+    "legalLinks": {
+      "privacy-policy": "Gizlilik Politikası",
+      "terms": "Hizmet Şartları",
+      "cookie-policy": "Çerez Politikası"
+    },
+    "newsletter": {
+      "title": "Haberdar Olun",
+      "placeholder": "E-posta adresinizi girin",
+      "subscribe": "Abone Ol",
+      "gdpr": "E-posta güncellemeleri almayı kabul ediyorum. İstediğim zaman abonelikten çıkabilirim."
+    },
+    "copyright": "© 2026 YOUR_COMPANY_NAME. Tüm hakları saklıdır."
+  },
+  "cookieConsent": {
+    "title": "Çerez Tercihleri",
+    "description": "Deneyiminizi iyileştirmek ve site trafiğini analiz etmek için çerezler kullanıyoruz. GDPR ve ilgili gizlilik mevzuatı kapsamında, zorunlu olmayan çerezleri ayarlamadan önce açık onayınız gerekmektedir.",
+    "categories": {
+      "necessary": {
+        "label": "Zorunlu",
+        "description": "Web sitesinin çalışması için gereklidir. Devre dışı bırakılamaz."
+      },
+      "analytics": {
+        "label": "Analitik",
+        "description": "Siteyi nasıl kullandığınızı anlamamıza ve performansı iyileştirmemize yardımcı olur."
+      },
+      "marketing": {
+        "label": "Pazarlama",
+        "description": "İlgili içerikleri sunmak ve kampanya etkinliğini ölçmek için kullanılır."
+      }
+    },
+    "buttons": {
+      "acceptAll": "Tümünü Kabul Et",
+      "rejectNonEssential": "Zorunlu Olmayanları Reddet",
+      "customize": "Özelleştir",
+      "savePreferences": "Tercihleri Kaydet"
+    },
+    "links": {
+      "privacyPolicy": "Gizlilik Politikası",
+      "cookiePolicy": "Çerez Politikası"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "title": "Sayfa Bulunamadı",
+      "description": "Aradığınız sayfa mevcut değil ya da taşınmış.",
+      "back": "Ana Sayfaya Dön"
+    },
+    "serverError": {
+      "title": "Bir Şeyler Ters Gitti",
+      "description": "Beklenmedik bir hata oluştu. Ekibimiz bilgilendirildi.",
+      "reset": "Tekrar Dene"
+    }
+  },
+  "chatAgent": {
+    "title": "AI Asistan",
+    "subtitle": "Çevrimiçi · Yapay Zeka Destekli",
+    "placeholder": "Bana her şeyi sorabilirsiniz...",
+    "send": "Gönder",
+    "greeting": "👋 Merhaba! Ben yapay zeka asistanınızım. Size nasıl yardımcı olabilirim?",
+    "thinking": "Düşünüyorum...",
+    "error": "Üzgünüm, bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "poweredBy": "Yapay Zeka Destekli · Yanıtlar her zaman doğru olmayabilir"
+  }
+}
