@@ -1,230 +1,234 @@
-/**
- * ============================================================================
- * src/components/layout/Header.tsx — Site Header / Navigation
- * ============================================================================
- *
- * Client-side header component with scroll-aware styling, desktop nav links,
- * a language switcher, and a mobile hamburger menu.
- *
- * HOW TO CUSTOMIZE:
- *   1. navItems: Update the `label` keys to match your dictionary nav keys
- *      and `href` targets to match your page section IDs or routes.
- *   2. Logo: The logo image is located at `/public/images/logo.png`.
- *   3. The language switcher (EN/TR) is built-in. To add a third locale,
- *      update the otherLocale logic and the SUPPORTED_LOCALES constant.
- *
- * DEPENDENCIES:
- *   - dict.site.name — from the active locale dictionary
- *   - dict.site.tagline — tagline shown under the logo
- *   - dict.nav.* — all navigation link labels
- * ============================================================================
- */
-
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import type { Dictionary, Locale } from "@/types";
-import Button from "@/components/ui/Button";
 
-/** Props accepted by the Header component. */
 interface HeaderProps {
-  /** The full locale dictionary — used for all navigation text. */
   dict: Dictionary;
-  /** Current active locale (e.g. "en" or "tr"). */
   locale: Locale;
 }
 
+interface NavItem {
+  label: string;
+  href?: string;
+  children?: { label: string; href: string }[];
+}
+
 export default function Header({ dict, locale }: HeaderProps) {
-  /* Controls whether the mobile side-drawer is open. */
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  /* Set to true after the user scrolls 10px — triggers the frosted header style. */
   const [scrolled, setScrolled] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const nav = (dict as any).nav;
 
-  /* Listen to the scroll position for the frosted-glass effect on scroll. */
   useEffect(() => {
-    /* Passive listener so it doesn't block paint. */
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /**
-   * Navigation items for the main desktop + mobile menu.
-   * TODO: Update href values to match your section IDs in page.tsx.
-   * The `label` is a key path into the dict.nav object for i18n text.
-   */
-  const navItems = [
-    { label: dict.nav.solution, href: `/${locale}#features` },
-    { label: dict.nav.caseStudies, href: `/${locale}#stats` },
-    { label: dict.nav.roi, href: `/${locale}#cta` },
-    { label: dict.nav.about, href: `/${locale}/about` },
-    { label: dict.nav.contact, href: `/${locale}#contact` },
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const navItems: NavItem[] = [
+    {
+      label: nav?.about || "About ARDIC",
+      children: [
+        { label: nav?.aboutUs || "About Us", href: `/${locale}/about` },
+        { label: nav?.history || "History", href: `/${locale}/about#history` },
+      ],
+    },
+    {
+      label: nav?.products || "Products & Services",
+      children: [
+        { label: nav?.modiverse || "Modiverse", href: `/${locale}/products/modiverse` },
+        { label: nav?.armes || "ArMES", href: `/${locale}/products/armes` },
+        { label: nav?.digitalTransformation || "Digital Transformation", href: `/${locale}/products/digital-transformation` },
+        { label: nav?.cwf || "CWF: Data Intelligence", href: `/${locale}/products/cwf` },
+        { label: nav?.coe || "Center of Excellence", href: `/${locale}/products/coe` },
+      ],
+    },
+    {
+      label: nav?.technologies || "Technologies & Platforms",
+      children: [
+        { label: nav?.arcloud || "ArCloud", href: `/${locale}/technologies/arcloud` },
+        { label: nav?.iotIgnite || "IoT-Ignite", href: `/${locale}/technologies/iot-ignite` },
+        { label: nav?.arai || "ArAI", href: `/${locale}/technologies/arai` },
+        { label: nav?.blockchain || "Blockchain", href: `/${locale}/technologies/blockchain` },
+        { label: nav?.aricaas || "ArICAAAS", href: `/${locale}/technologies/aricaas` },
+        { label: nav?.pilaros || "PilarOS / AFEX", href: `/${locale}/technologies/pilaros` },
+      ],
+    },
+    {
+      label: nav?.projects || "Projects",
+      children: [
+        { label: nav?.grantProjects || "Grant Projects", href: `/${locale}/projects/grants` },
+        { label: nav?.caseStudies || "Case Studies", href: `/${locale}/case-studies` },
+      ],
+    },
   ];
 
-  /**
-   * Handles clicks on anchor-link nav items.
-   * If already on the homepage, scrolls smoothly without a full page reload.
-   * If on a different page, navigates to the homepage with the hash.
-   */
-  const handleHashNavClick = (href: string, e: React.MouseEvent) => {
-    /* Check if the user is already on the locale home page. */
-    const isHomepage =
-      window.location.pathname === `/${locale}` ||
-      window.location.pathname === `/${locale}/`;
-
-    /* Extract the hash fragment (e.g., "#contact"). */
-    const hashIndex = href.indexOf("#");
-    if (hashIndex !== -1) {
-      const hash = href.substring(hashIndex + 1);
-      e.preventDefault();
-      if (isHomepage) {
-        /* Smooth-scroll to the target section element by ID. */
-        const el = document.getElementById(hash);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
-          window.history.replaceState(null, "", `/${locale}#${hash}`);
-        }
-      } else {
-        /* Navigate to homepage with the hash — scroll will happen on load. */
-        window.location.assign(`/${locale}#${hash}`);
-      }
-    }
-  };
-
-  /* The other locale for the language switcher link. */
   const otherLocale: Locale = locale === "en" ? "tr" : "en";
 
+  const textColor = scrolled ? "text-[#1c2b2b]" : "text-[#1c2b2b]";
+  const headerBg = scrolled
+    ? "bg-white/90 border-b border-[#e8e8e0] backdrop-blur-md shadow-sm"
+    : "bg-white/80 backdrop-blur-sm";
+
   return (
-    <header
-      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? /* Frosted-glass style when user has scrolled */
-            "bg-black/80 border-b border-white/10 backdrop-blur-md"
-          : /* Fully transparent when at the top of the page */
-            "bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* ── Logo & Company Name ──────────────────────────────────────────── */}
-        <a href={`/${locale}`} className="flex items-center gap-3">
-          <div className="relative h-12 w-12 shrink-0">
+    <header ref={headerRef} className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${headerBg}`}>
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        {/* Logo */}
+        <a href={`/${locale}`} className="flex items-center gap-3 shrink-0">
+          <div className="relative h-10 w-10 shrink-0">
             <Image
-              src="/images/logo.png"
-              alt={dict.site.name}
-              width={48}
-              height={48}
+              src="/images/Logo Social Light.png"
+              alt="ARDICTECH"
+              width={44}
+              height={44}
               className="h-full w-full object-contain"
               priority
               unoptimized
             />
           </div>
           <div className="flex flex-col">
-            {/* Company name — reads from the dictionary (dict.site.name) */}
-            <span
-              className={`font-heading text-xl font-bold leading-tight transition-colors ${
-                scrolled ? "text-white" : "text-white"
-              }`}
-            >
-              {dict.site.name}
+            <span className="font-bold text-[#1a4d3a] text-lg leading-tight" style={{ fontFamily: "'DM Serif Display', serif" }}>
+              ARDICTECH
             </span>
-            {/* Tagline — reads from the dictionary (dict.site.tagline) */}
-            <span
-              className={`text-[11px] font-medium leading-tight transition-colors ${
-                scrolled ? "text-neutral-400" : "text-white/90"
-              }`}
-            >
-              {dict.site.tagline}
+            <span className="text-[10px] font-bold leading-tight tracking-wide" style={{ color: "#4a8fdb" }}>
+              Engineering Resilience
             </span>
           </div>
         </a>
 
-        {/* ── Desktop Navigation ───────────────────────────────────────────── */}
-        <div className="hidden items-center gap-6 lg:flex">
+        {/* Desktop Nav */}
+        <div className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={(e) => handleHashNavClick(item.href, e)}
-              className={`text-sm font-medium transition-colors hover:text-accent ${
-                scrolled ? "text-neutral-300" : "text-white"
-              }`}
-            >
-              {item.label}
-            </a>
+            <div key={item.label} className="relative">
+              {item.children ? (
+                <>
+                  <button
+                    onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                    onMouseEnter={() => setOpenDropdown(item.label)}
+                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] ${textColor}`}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      className={`h-3.5 w-3.5 transition-transform duration-200 ${openDropdown === item.label ? "rotate-180" : ""}`}
+                    />
+                  </button>
+
+                  {/* Dropdown */}
+                  {openDropdown === item.label && (
+                    <div
+                      className="absolute top-full left-0 mt-1 min-w-[220px] rounded-xl border border-[#e8e8e0] bg-white shadow-xl py-2 z-50"
+                      onMouseLeave={() => setOpenDropdown(null)}
+                    >
+                      {item.children.map((child) => (
+                        <a
+                          key={child.href}
+                          href={child.href}
+                          className="block px-4 py-2.5 text-sm text-[#505048] hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] transition-colors"
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <a
+                  href={item.href}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] ${textColor}`}
+                >
+                  {item.label}
+                </a>
+              )}
+            </div>
           ))}
 
-          {/* Language switcher — links to the same page in the other locale. */}
+          {/* Language switcher */}
           <a
             href={`/${otherLocale}`}
-            className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent ${
-              scrolled ? "text-neutral-300" : "text-white"
-            }`}
+            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] ${textColor}`}
             aria-label={`Switch to ${otherLocale === "en" ? "English" : "Turkish"}`}
           >
             <Globe className="h-4 w-4" />
             {otherLocale.toUpperCase()}
           </a>
 
-          {/* CTA Button — links to the contact section */}
-          <Button
+          {/* CTA Button */}
+          <a
             href={`/${locale}#contact`}
-            onClick={(e: React.MouseEvent) =>
-              handleHashNavClick(`/${locale}#contact`, e)
-            }
-            size="sm"
+            className="ml-2 inline-flex items-center justify-center rounded-full bg-[#1a4d3a] px-5 py-2 text-sm font-semibold text-white hover:bg-[#256b51] transition-all duration-200 hover:shadow-md"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            {dict.nav.bookDemo}
-          </Button>
+            {nav?.bookDemo || "Book a Demo"}
+          </a>
         </div>
 
-        {/* ── Mobile Hamburger Toggle ──────────────────────────────────────── */}
+        {/* Mobile toggle */}
         <button
           type="button"
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`lg:hidden ${scrolled ? "text-white" : "text-white"}`}
+          className="lg:hidden text-[#1a4d3a]"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? (
-            /* Close (X) icon when menu is open */
-            <X className="h-6 w-6" />
-          ) : (
-            /* Hamburger icon when menu is closed */
-            <Menu className="h-6 w-6" />
-          )}
+          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
 
-      {/* ── Mobile Menu Drawer ─────────────────────────────────────────────── */}
+      {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="border-t border-white/5 bg-black/95 backdrop-blur-xl lg:hidden">
+        <div className="border-t border-[#e8e8e0] bg-white lg:hidden">
           <div className="space-y-1 px-4 py-4">
-            {/* Render each nav item as a full-width block link */}
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  handleHashNavClick(item.href, e);
-                  /* Close the mobile menu after navigation */
-                  setMobileOpen(false);
-                }}
-                className="block rounded-lg px-4 py-3 text-base font-medium text-neutral-300 hover:bg-white/5 hover:text-accent"
-              >
-                {item.label}
-              </a>
+              <div key={item.label}>
+                <div className="px-3 py-2 text-xs font-bold uppercase tracking-widest text-[#c8a96e]">
+                  {item.label}
+                </div>
+                {item.children?.map((child) => (
+                  <a
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block rounded-lg px-6 py-2.5 text-sm text-[#505048] hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] transition-colors"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
             ))}
 
-            {/* Language switcher in the mobile menu */}
             <a
               href={`/${otherLocale}`}
-              className="flex items-center gap-2 rounded-lg px-4 py-3 text-base font-medium text-neutral-300 hover:bg-white/5"
+              className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-[#505048] hover:bg-[#1a4d3a]/5"
             >
               <Globe className="h-4 w-4" />
               {otherLocale === "en" ? "English" : "Türkçe"}
+            </a>
+
+            <a
+              href={`/${locale}#contact`}
+              onClick={() => setMobileOpen(false)}
+              className="block mt-2 text-center rounded-full bg-[#1a4d3a] px-5 py-2.5 text-sm font-semibold text-white"
+            >
+              {nav?.bookDemo || "Book a Demo"}
             </a>
           </div>
         </div>

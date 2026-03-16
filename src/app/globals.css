@@ -1,69 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* ── STEP 1: CHANGE THESE 3 COLORS TO MATCH YOUR BRAND ───────────────────
-   * These are the only CSS variables you MUST change to rebrand this template.
-   * Tip: Use a color tool like oklch.com or coolors.co to find harmonious values.
-   * ────────────────────────────────────────────────────────────────────────── */
+  /* ── ARDICTECH Digital Mycelium Brand Colors ── */
+  --color-primary: #1a4d3a;          /* Deep forest green */
+  --color-primary-light: #256b51;    /* Lighter green — hover */
+  --color-primary-dark: #0f2e22;     /* Darker green — pressed */
 
-  /* Primary brand color — used for headers, buttons, focus rings, links */
-  --color-primary: #1e3a8a; /* TODO: Replace with your primary brand color  */
-  --color-primary-light: #2563eb; /* 20% lighter variant — hover states          */
-  --color-primary-dark: #1e2d5b; /* 20% darker variant — pressed states         */
+  --color-secondary: #c8a96e;        /* Warm gold — mycelium threads */
+  --color-secondary-light: #d9be8a;
+  --color-secondary-dark: #a88a4e;
 
-  /* Secondary/accent color — used for highlights, badges, CTAs */
-  --color-secondary: #f97316; /* TODO: Replace with your accent color        */
-  --color-secondary-light: #fb923c; /* Lighter variant                             */
-  --color-secondary-dark: #ea580c; /* Darker variant                              */
+  --color-accent: #00c4a0;           /* Bioluminescent teal — data nodes */
+  --color-accent-light: #00e5bc;
+  --color-accent-dark: #009e82;
 
-  /* Accent/success color — used for metrics, positive indicators */
-  --color-accent: #00d1ff; /* TODO: Optionally replace with a third color   */
-  --color-accent-light: #57e1ff; /* Lighter variant                               */
-  --color-accent-dark: #00a3ff; /* Darker variant                                */
+  /* Neutrals */
+  --color-neutral-50:  #fafaf8;
+  --color-neutral-100: #f5f5f0;
+  --color-neutral-200: #e8e8e0;
+  --color-neutral-300: #d0d0c8;
+  --color-neutral-400: #a0a098;
+  --color-neutral-500: #707068;
+  --color-neutral-600: #505048;
+  --color-neutral-700: #383830;
+  --color-neutral-800: #242420;
+  --color-neutral-900: #1c2b2b;
 
-  /* ── STEP 2: NEUTRAL SCALE — Leave these as-is unless you need custom grays ─
-   * These follow the Tailwind neutral scale. Change only if you want warm/cool grays.
-   * ────────────────────────────────────────────────────────────────────────── */
-  --color-neutral-50: #f9fafb;
-  --color-neutral-100: #f3f4f6;
-  --color-neutral-200: #e5e7eb;
-  --color-neutral-300: #d1d5db;
-  --color-neutral-400: #9ca3af;
-  --color-neutral-500: #6b7280;
-  --color-neutral-600: #4b5563;
-  --color-neutral-700: #374151;
-  --color-neutral-800: #1f2937;
-  --color-neutral-900: #111827;
-
-  /* ── STEP 3: TYPOGRAPHY — Change fonts in src/app/layout.tsx ─────────────
-   * Inter (heading) + Source Sans 3 (body) is a premium, universally readable
-   * pairing. To change fonts: edit the Google Font imports in layout.tsx.
-   * ────────────────────────────────────────────────────────────────────────── */
-  --font-heading: var(--font-inter);
-  --font-body: var(--font-source-sans);
+  --font-heading: 'DM Serif Display', serif;
+  --font-body:    'Inter', system-ui, sans-serif;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
-    font-family: var(--font-body), system-ui, sans-serif;
-    color: var(--color-neutral-300);
-    background-color: #000000;
+    font-family: var(--font-body);
+    color: var(--color-neutral-900);
+    background-color: #fafaf8;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-heading), system-ui, sans-serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), system-ui, serif;
   }
 
   :focus-visible {
@@ -85,4 +68,80 @@
   .skip-to-content:focus {
     left: 0;
   }
+}
+
+/* ── Mycelium Animation ────────────────────────────────── */
+@keyframes mycelium-pulse {
+  0%, 100% { opacity: 0.3; stroke-dashoffset: 0; }
+  50%       { opacity: 0.7; stroke-dashoffset: -20; }
+}
+
+@keyframes node-glow {
+  0%, 100% { box-shadow: 0 0 6px 2px rgba(0, 196, 160, 0.3); }
+  50%       { box-shadow: 0 0 16px 6px rgba(0, 196, 160, 0.6); }
+}
+
+@keyframes float-up {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes thread-draw {
+  from { stroke-dashoffset: 800; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ── Utility Classes ────────────────────────────────────── */
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease forwards;
+}
+
+.animate-float {
+  animation: float-up 4s ease-in-out infinite;
+}
+
+.animate-node-glow {
+  animation: node-glow 2.5s ease-in-out infinite;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(26, 77, 58, 0.12);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(26, 77, 58, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 8px 40px rgba(0, 196, 160, 0.18);
+  transform: translateY(-4px);
+}
+
+.mycelium-thread {
+  stroke: #c8a96e;
+  stroke-width: 1.2;
+  fill: none;
+  stroke-dasharray: 800;
+  animation: thread-draw 3s ease forwards, mycelium-pulse 4s ease-in-out infinite 3s;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+}
+
+.accent-line {
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, #00c4a0, #c8a96e);
+  border-radius: 2px;
+  margin: 0.75rem 0 1.25rem;
 }

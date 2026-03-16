@@ -1,105 +1,189 @@
 {
   "meta": {
-    "title": "YOUR_COMPANY_NAME — Enterprise Software for Modern Business",
-    "description": "Build, scale, and automate your enterprise operations. Trusted by hundreds of B2B teams worldwide."
+    "title": "ARDICTECH — The Digital Mycelium of Industry",
+    "description": "ARDICTECH: AI-powered industrial intelligence connecting machines, data, and decisions. IoT, AI, MES and mobility solutions for the sentient factory."
   },
   "site": {
-    "name": "YOUR_COMPANY_NAME",
-    "tagline": "Enterprise Software Solutions",
-    "description": "Build, scale, and automate your enterprise operations.",
-    "url": "https://yourdomain.com"
+    "name": "ARDICTECH",
+    "tagline": "The Digital Mycelium of Industry",
+    "description": "AI-powered digital transformation for manufacturing.",
+    "url": "https://www.ardictech.com"
   },
   "nav": {
-    "solution": "Our Solution",
+    "about": "About ARDIC",
+    "aboutUs": "About Us",
+    "history": "History",
+    "products": "Products & Services",
+    "modiverse": "Modiverse",
+    "armes": "ArMES",
+    "digitalTransformation": "Digital Transformation",
+    "cwf": "CWF: Data Intelligence",
+    "coe": "Center of Excellence",
+    "technologies": "Technologies & Platforms",
+    "arcloud": "ArCloud",
+    "iotIgnite": "IoT-Ignite",
+    "arai": "ArAI",
+    "blockchain": "Blockchain",
+    "aricaas": "ArICAAAS",
+    "pilaros": "PilarOS / AFEX",
+    "projects": "Projects",
+    "grantProjects": "Grant Projects",
     "caseStudies": "Case Studies",
-    "features": "Features",
-    "roi": "ROI Calculator",
-    "about": "About Us",
     "contact": "Contact Us",
-    "bookDemo": "Book a Demo"
+    "bookDemo": "Book a Demo",
+    "solution": "Our Solution",
+    "roi": "ROI",
+    "features": "Features"
   },
   "hero": {
-    "badge": "Enterprise-Grade from Day One",
-    "headline": "The Platform Your Business Deserves.",
-    "subheadline": "Stop stitching together point solutions. Our integrated platform gives your team a single source of truth — from day one.",
-    "ctaPrimary": "Book a Demo",
-    "ctaSecondary": "Learn More"
+    "badge": "Industrial AI Since 2012",
+    "headline": "The Digital Mycelium of Industry",
+    "subheadline": "The invisible intelligence connecting your machines, data, and decisions. We bridge the gap between raw industrial data and digital consciousness — turning every sensor into a voice.",
+    "ctaPrimary": "Explore the Network",
+    "ctaSecondary": "See the Demo"
   },
-  "features": {
-    "title": "Everything You Need to Operate at Scale",
-    "subtitle": "Six core capabilities that work together to accelerate your business.",
+  "products": {
+    "title": "Products & Services",
+    "subtitle": "Five interconnected nodes in the ARDICTECH network — each solving a distinct industrial challenge.",
     "items": [
       {
-        "icon": "Zap",
-        "title": "Real-Time Operations",
-        "description": "Monitor every process, workflow, and KPI as it happens. Get instant alerts when performance deviates from targets."
+        "id": "modiverse",
+        "icon": "Smartphone",
+        "title": "Modiverse",
+        "description": "Ultimate Mobility Device Management. Control and manage your enterprise mobile fleet with SaaS-grade simplicity — Essential or Premium.",
+        "tag": "MDM SaaS"
       },
       {
-        "icon": "Shield",
-        "title": "Enterprise Security",
-        "description": "Bank-grade encryption, role-based access control, and SOC 2 Type II compliance built in from the start."
+        "id": "armes",
+        "icon": "Factory",
+        "title": "ArMES",
+        "description": "11-module Manufacturing Execution System for total operational control. Contextualize, orchestrate, and integrate your entire factory floor.",
+        "tag": "MES Platform"
       },
       {
-        "icon": "Globe",
-        "title": "Global & Multi-Site",
-        "description": "Manage teams and locations across time zones from a single, unified dashboard. No per-site licenses."
+        "id": "digital-transformation",
+        "icon": "CircleDot",
+        "title": "Digital Transformation",
+        "description": "The Operational Ensō — a circle of continuous becoming. From dark data to sentient factory, we guide your full digitalization journey.",
+        "tag": "Consulting"
       },
       {
-        "icon": "BarChart3",
-        "title": "Advanced Analytics",
-        "description": "Turn raw data into actionable insight. Customizable dashboards, scheduled reports, and AI-driven recommendations."
+        "id": "cwf",
+        "icon": "MessageCircle",
+        "title": "CWF: Data Intelligence",
+        "description": "Chat With Your Factory. Natural language insights from your production floor. If your factory could speak — what would it say?",
+        "tag": "AI Analytics"
       },
       {
-        "icon": "Code2",
-        "title": "API-First Integration",
-        "description": "Connect to your existing ERP, CRM, or any third-party system via our REST API. No rip-and-replace required."
-      },
-      {
+        "id": "coe",
         "icon": "Users",
-        "title": "Collaboration Tools",
-        "description": "Shared workspaces, real-time commenting, and permission-aware views for every team member — from the floor to the C-suite."
+        "title": "Center of Excellence",
+        "description": "Software development outsourcing and managed services. Scalable platform integration at the highest data volumes, cost-effectively.",
+        "tag": "Outsourcing"
+      }
+    ]
+  },
+  "technologies": {
+    "title": "Technologies & Platforms",
+    "subtitle": "The network nodes powering the ARDICTECH ecosystem.",
+    "items": [
+      {
+        "id": "iot-ignite",
+        "icon": "Wifi",
+        "title": "IoT-Ignite",
+        "description": "PaaS IoT platform with smart edge computing, protocol-agnostic connectivity, and secure overlay. The data collection backbone.",
+        "color": "#00c4a0"
+      },
+      {
+        "id": "arai",
+        "icon": "Brain",
+        "title": "ArAI",
+        "description": "Advanced reasoning and semantics. Predictive quality, energy optimization, and the data moat that makes your intelligence proprietary.",
+        "color": "#1a4d3a"
+      },
+      {
+        "id": "arcloud",
+        "icon": "Cloud",
+        "title": "ArCloud",
+        "description": "Geographically distributed, managed cloud infrastructure. Large-scale platform hosting at enterprise grade — cost effectively.",
+        "color": "#c8a96e"
+      },
+      {
+        "id": "blockchain",
+        "icon": "Link",
+        "title": "Blockchain",
+        "description": "Immutable audit trails and trustless data integrity for industrial operations. Transparency you can prove.",
+        "color": "#6366f1"
+      },
+      {
+        "id": "aricaas",
+        "icon": "Shield",
+        "title": "ArICAAAS",
+        "description": "Identity, Context, Authentication, Authorization and Audit as a Service. Enterprise security made composable.",
+        "color": "#f59e0b"
+      },
+      {
+        "id": "pilaros",
+        "icon": "Lock",
+        "title": "PilarOS / AFEX",
+        "description": "Domestic Turkish mobile OS built on Android AOSP + AFEX security framework. Full device sovereignty — your devices, your data.",
+        "color": "#dc2626"
+      }
+    ]
+  },
+  "networkFlow": {
+    "title": "The Network in Action",
+    "subtitle": "Three layers. One living intelligence.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Collect",
+        "platform": "IoT-Ignite",
+        "description": "Edge computing collects data from every sensor, machine, and line — protocol-agnostic, at scale."
+      },
+      {
+        "number": "02",
+        "title": "Contextualize",
+        "platform": "ArMES",
+        "description": "11 interconnected modules orchestrate, contextualize, and integrate your entire operational reality."
+      },
+      {
+        "number": "03",
+        "title": "Converse",
+        "platform": "ArAI + CWF",
+        "description": "Natural language insights delivered in seconds, not hours. Your factory finally has a voice."
       }
     ]
   },
   "stats": {
-    "title": "Trusted by Teams Just Like Yours",
+    "title": "Proven at Scale",
     "items": [
-      {
-        "value": "500+",
-        "label": "Enterprise Customers",
-        "sublabel": "Across 30 countries"
-      },
-      {
-        "value": "40%",
-        "label": "Average Efficiency Gain",
-        "sublabel": "In the first 90 days"
-      },
-      {
-        "value": "9 mo",
-        "label": "Average Payback Period",
-        "sublabel": "Full ROI"
-      },
-      {
-        "value": "99.9%",
-        "label": "Platform Uptime",
-        "sublabel": "SLA guaranteed"
-      }
+      { "value": "40%", "label": "Efficiency Gains", "sublabel": "Proven at scale" },
+      { "value": "16+", "label": "Factories Digitalized", "sublabel": "& growing" },
+      { "value": "11", "label": "ArMES Modules", "sublabel": "Fully integrated" },
+      { "value": "2012", "label": "Founded", "sublabel": "Istanbul, Turkey" }
     ]
   },
+  "sentientFactory": {
+    "title": "The Sentient Factory.",
+    "subtitle": "A Circle of Continuous Becoming.",
+    "body": "Your factory is more than just a collection of machines. We bridge the gap between raw industrial data and digital consciousness — turning every sensor into a voice, every anomaly into an insight, and every insight into action.",
+    "cta": "See the Simulation"
+  },
   "cta": {
-    "headline": "Ready to Transform Your Operations?",
-    "subtitle": "Join hundreds of enterprise teams who replaced spreadsheets and siloed tools with a single, intelligent platform.",
-    "button": "Book Your Free Demo"
+    "headline": "Ready to Join the Network?",
+    "subtitle": "Let's map your factory floor and identify the first node of intelligence to activate.",
+    "button": "Book Your Free Workshop"
   },
   "contact": {
-    "title": "Book Your Demo",
-    "subtitle": "Fill out the form and our team will reach out within 24 hours to schedule a personalized walkthrough.",
+    "title": "Connect With Us",
+    "subtitle": "Tell us about your factory and we'll show you exactly where the mycelium takes root.",
     "fields": {
       "fullName": "Full Name",
       "email": "Business Email",
       "company": "Company Name",
       "phone": "Phone Number",
-      "message": "Tell us about your challenges"
+      "message": "Tell us about your industrial challenge"
     },
     "submit": "Send Message",
     "success": "Thank you! Our team will reach out within 24 hours.",
@@ -108,7 +192,7 @@
     "privacy": "By submitting this form, you agree to our Privacy Policy. We respect your data and comply with GDPR and applicable privacy laws."
   },
   "newsletter": {
-    "title": "Stay Ahead of the Curve",
+    "title": "Stay Connected",
     "placeholder": "Your business email",
     "subscribe": "Subscribe",
     "success": "You're subscribed! Check your inbox for a confirmation link.",
@@ -116,13 +200,13 @@
     "consent": "I agree to receive email updates. Unsubscribe anytime."
   },
   "footer": {
-    "tagline": "Enterprise software solutions for the modern, data-driven business.",
-    "location": "YOUR_CITY, YOUR_COUNTRY",
+    "tagline": "The Digital Mycelium of Industry — connecting machines, data, and decisions.",
+    "location": "Istanbul, Turkey",
     "quickLinks": "Quick Links",
     "legal": "Legal",
     "links": {
-      "about": "About Us",
-      "platform": "Our Solution",
+      "about": "About ARDIC",
+      "platform": "Products & Services",
       "caseStudies": "Case Studies",
       "contact": "Contact Us",
       "careers": "Careers"
@@ -138,24 +222,15 @@
       "subscribe": "Subscribe",
       "gdpr": "I agree to receive email updates. Unsubscribe anytime."
     },
-    "copyright": "© 2026 YOUR_COMPANY_NAME. All rights reserved."
+    "copyright": "© 2026 ARDICTECH. All rights reserved."
   },
   "cookieConsent": {
     "title": "Cookie Preferences",
     "description": "We use cookies to improve your experience and analyze site traffic. Under GDPR and applicable privacy laws, we require your explicit consent before setting non-essential cookies.",
     "categories": {
-      "necessary": {
-        "label": "Necessary",
-        "description": "Required for the website to function. Cannot be disabled."
-      },
-      "analytics": {
-        "label": "Analytics",
-        "description": "Help us understand how visitors use the site to improve performance."
-      },
-      "marketing": {
-        "label": "Marketing",
-        "description": "Used to deliver relevant content and measure campaign effectiveness."
-      }
+      "necessary": { "label": "Necessary", "description": "Required for the website to function. Cannot be disabled." },
+      "analytics": { "label": "Analytics", "description": "Help us understand how visitors use the site to improve performance." },
+      "marketing": { "label": "Marketing", "description": "Used to deliver relevant content and measure campaign effectiveness." }
     },
     "buttons": {
       "acceptAll": "Accept All",
@@ -163,31 +238,20 @@
       "customize": "Customize",
       "savePreferences": "Save Preferences"
     },
-    "links": {
-      "privacyPolicy": "Privacy Policy",
-      "cookiePolicy": "Cookie Policy"
-    }
+    "links": { "privacyPolicy": "Privacy Policy", "cookiePolicy": "Cookie Policy" }
   },
   "errors": {
-    "notFound": {
-      "title": "Page Not Found",
-      "description": "The page you're looking for doesn't exist or has been moved.",
-      "back": "Go Back Home"
-    },
-    "serverError": {
-      "title": "Something Went Wrong",
-      "description": "An unexpected error occurred. Our team has been notified.",
-      "reset": "Try Again"
-    }
+    "notFound": { "title": "Page Not Found", "description": "The page you're looking for doesn't exist or has been moved.", "back": "Go Back Home" },
+    "serverError": { "title": "Something Went Wrong", "description": "An unexpected error occurred. Our team has been notified.", "reset": "Try Again" }
   },
   "chatAgent": {
-    "title": "AI Assistant",
-    "subtitle": "Online · Powered by AI",
-    "placeholder": "Ask me anything...",
+    "title": "ARDY Assistant",
+    "subtitle": "Online · Powered by ArAI",
+    "placeholder": "Ask me anything about ARDICTECH...",
     "send": "Send",
-    "greeting": "👋 Hi! I'm your AI assistant. How can I help you today?",
+    "greeting": "👋 Hi! I'm ARDY, your ARDICTECH AI assistant. How can I help you today?",
     "thinking": "Thinking...",
     "error": "Sorry, something went wrong. Please try again.",
-    "poweredBy": "Powered by AI · Responses may not always be accurate"
+    "poweredBy": "Powered by ArAI · Responses may not always be accurate"
   }
 }

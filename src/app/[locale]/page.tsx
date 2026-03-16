@@ -1,53 +1,27 @@
-/**
- * ============================================================================
- * src/app/[locale]/page.tsx — Homepage (Template Demo Page)
- * ============================================================================
- *
- * This is the main homepage that composes all section components.
- *
- * HOW TO CUSTOMIZE:
- *   1. Reorder, add, or remove section components by editing this file.
- *   2. To add a new section: create a new component in src/components/sections/
- *      and import it here.
- *   3. All text content is controlled via src/lib/dictionaries/en.json (and tr.json).
- *      You will NOT need to edit this file to change copy — edit the dictionary instead.
- *   4. Each section component has its own id="" attribute for anchor-link navigation.
- *
- * SECTION ORDER (top → bottom):
- *   1. HeroSection — Above-the-fold hero with headline and CTA buttons
- *   2. FeaturesSection — 3-column feature grid
- *   3. StatsSection — 4-metric social proof band
- *   4. CTASection — Full-width conversion CTA banner
- *   5. ContactSection — Contact form wired to /api/contact
- * ============================================================================
- */
-
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/types";
-import HeroSection from "@/components/sections/HeroSection";
-import FeaturesSection from "@/components/sections/FeaturesSection";
+import HeroSlider from "@/components/sections/HeroSlider";
+import ProductsGrid from "@/components/sections/ProductsGrid";
+import NetworkFlow from "@/components/sections/NetworkFlow";
+import TechPlatforms from "@/components/sections/TechPlatforms";
+import SentientFactory from "@/components/sections/SentientFactory";
 import StatsSection from "@/components/sections/StatsSection";
 import CTASection from "@/components/sections/CTASection";
 import ContactSection from "@/components/sections/ContactSection";
+import FactoryTreeSection from "@/components/sections/FactoryTreeSection";
+import HeroFollowSection from "@/components/sections/HeroFollowSection";
 
-/** Page props provided by Next.js dynamic routing (locale segment). */
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
 export default async function HomePage({ params }: PageProps) {
-  /* Await the locale from the route params (Next.js App Router pattern). */
   const { locale } = await params;
-
-  /* Load the locale-specific dictionary server-side.
-     The dictionary provides all text content for every section. */
   const dict = await getDictionary(locale as Locale);
 
-  /* If the locale is not supported, getDictionary returns null.
-     The middleware should prevent this case, but we guard defensively. */
   if (!dict) {
     return (
-      <main className="min-h-screen flex items-center justify-center text-white">
+      <main className="min-h-screen flex items-center justify-center text-[#1c2b2b]">
         Page not found.
       </main>
     );
@@ -55,24 +29,35 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <main>
-      {/* ── Hero Section ─────────────────────────────────────────────────── */}
-      {/* Full-viewport hero with headline, subheadline, and two CTA buttons */}
-      <HeroSection dict={dict} />
+      {/* ── Hero — 3-slide peek carousel ───────────────────────────────── */}
+      <HeroSlider />
 
-      {/* ── Features Section ─────────────────────────────────────────────── */}
-      {/* 3-column grid of feature cards (icon + title + description)       */}
-      <FeaturesSection dict={dict} />
+      {/* ── Hero Follow — 2-panel sticky image section after hero ────────── */}
+      <HeroFollowSection />
 
-      {/* ── Stats Section ─────────────────────────────────────────────────── */}
-      {/* 4-metric horizontal band with key proof-points                    */}
+      {/* ── Factory Tree — commented out; HeroFollowSection now covers this ──
+      <FactoryTreeSection />
+      ── */}
+
+      {/* ── Products & Services — 5 glassmorphism product cards ────────── */}
+      <ProductsGrid dict={dict} locale={locale} />
+
+      {/* ── How It Works — Collect → Contextualize → Converse ──────────── */}
+      <NetworkFlow dict={dict} />
+
+      {/* ── Technologies & Platforms — 6 color-coded tech nodes ─────────── */}
+      <TechPlatforms dict={dict} locale={locale} />
+
+      {/* ── The Sentient Factory — Operational Ensō visual ──────────────── */}
+      <SentientFactory dict={dict} />
+
+      {/* ── Stats — 4 key proof metrics ─────────────────────────────────── */}
       <StatsSection dict={dict} />
 
-      {/* ── CTA Section ───────────────────────────────────────────────────── */}
-      {/* Dark banner encouraging visitors to book a demo                   */}
+      {/* ── CTA — Full-width conversion banner ──────────────────────────── */}
       <CTASection dict={dict} />
 
-      {/* ── Contact Section ───────────────────────────────────────────────── */}
-      {/* Contact form wired to /api/contact with Turnstile CAPTCHA         */}
+      {/* ── Contact — Form wired to /api/contact ────────────────────────── */}
       <ContactSection dict={dict} />
     </main>
   );
