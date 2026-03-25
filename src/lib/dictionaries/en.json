@@ -42,6 +42,22 @@
     "ctaPrimary": "Explore the Network",
     "ctaSecondary": "See the Demo"
   },
+  "heroSlider": {
+    "slide1": {
+      "headline": "INTELLIGENCE INTEGRATED",
+      "subheadline": "Artificial Intelligence of Things"
+    },
+    "slide2": {
+      "headline": "The AI Heart of Your Factory",
+      "subheadline": "At the center of every high-performing plant is a pulse of data. We provide the AI-native core that pumps real-time insights across your floor.",
+      "feature1": "Turn static operations into intelligent systems.",
+      "feature2": "Enable features like Chat With Your Factory to make machinery a responsive, living partner in your success."
+    },
+    "slide3": {
+      "headline": "The Transformation Bridge",
+      "subheadline": "From Legacy Assets to AI-Native Power."
+    }
+  },
   "products": {
     "title": "Products & Services",
     "subtitle": "Five interconnected nodes in the ARDICTECH network — each solving a distinct industrial challenge.",

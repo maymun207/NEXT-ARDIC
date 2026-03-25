@@ -80,10 +80,10 @@ export default function Header({ dict, locale }: HeaderProps) {
 
   const otherLocale: Locale = locale === "en" ? "tr" : "en";
 
-  const textColor = scrolled ? "text-[#1c2b2b]" : "text-[#1c2b2b]";
+  const textColor = scrolled ? "text-[#1c2b2b]" : "text-white";
   const headerBg = scrolled
-    ? "bg-white/90 border-b border-[#e8e8e0] backdrop-blur-md shadow-sm"
-    : "bg-white/80 backdrop-blur-sm";
+    ? "bg-white/95 border-b border-[#e8e8e0] backdrop-blur-md shadow-sm"
+    : "bg-transparent";
 
   return (
     <header ref={headerRef} className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${headerBg}`}>
@@ -97,12 +97,16 @@ export default function Header({ dict, locale }: HeaderProps) {
               width={44}
               height={44}
               className="h-full w-full object-contain"
+              style={{ mixBlendMode: scrolled ? "normal" : "screen" }}
               priority
               unoptimized
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-[#1a4d3a] text-lg leading-tight" style={{ fontFamily: "'DM Serif Display', serif" }}>
+            <span
+              className="font-bold text-lg leading-tight"
+              style={{ fontFamily: "'DM Serif Display', serif", color: scrolled ? "#1a4d3a" : "white" }}
+            >
               ARDICTECH
             </span>
             <span className="text-[10px] font-bold leading-tight tracking-wide" style={{ color: "#4a8fdb" }}>
@@ -120,7 +124,7 @@ export default function Header({ dict, locale }: HeaderProps) {
                   <button
                     onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
                     onMouseEnter={() => setOpenDropdown(item.label)}
-                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] ${textColor}`}
+                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${scrolled ? "hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a]" : "hover:bg-white/10"} ${textColor}`}
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {item.label}
@@ -163,7 +167,7 @@ export default function Header({ dict, locale }: HeaderProps) {
           {/* Language switcher */}
           <a
             href={`/${otherLocale}`}
-            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] ${textColor}`}
+            className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${scrolled ? "hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a]" : "hover:bg-white/10"} ${textColor}`}
             aria-label={`Switch to ${otherLocale === "en" ? "English" : "Turkish"}`}
           >
             <Globe className="h-4 w-4" />

@@ -1,6 +1,7 @@
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import type { Locale } from "@/types";
-import HeroSlider from "@/components/sections/HeroSlider";
+
+import HeroSection from "@/components/sections/HeroSection";
 import ProductsGrid from "@/components/sections/ProductsGrid";
 import NetworkFlow from "@/components/sections/NetworkFlow";
 import TechPlatforms from "@/components/sections/TechPlatforms";
@@ -29,8 +30,8 @@ export default async function HomePage({ params }: PageProps) {
 
   return (
     <main>
-      {/* ── Hero — 3-slide peek carousel ───────────────────────────────── */}
-      <HeroSlider />
+      {/* ── Hero ── */}
+      <HeroSection dict={dict} />
 
       {/* ── Hero Follow — 2-panel sticky image section after hero ────────── */}
       <HeroFollowSection />

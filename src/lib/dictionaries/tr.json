@@ -25,6 +25,22 @@
     "ctaPrimary": "Demo Talep Et",
     "ctaSecondary": "Daha Fazla Bilgi"
   },
+  "heroSlider": {
+    "slide1": {
+      "headline": "ENTEGRE ZEKİ SİSTEM",
+      "subheadline": "Nesnelerin Yapay Zekası"
+    },
+    "slide2": {
+      "headline": "Fabrikanızın AI Kalbi",
+      "subheadline": "Her yüksek performanslı tesisin merkezinde bir veri nabzı atar. Üretim zekâsını gerçek zamanlı olarak yayan AI-native çekirdeği sunuyoruz.",
+      "feature1": "Statik operasyonları akıllı sistemlere dönüştürün.",
+      "feature2": "Fabrikanızla Sohbet gibi özelliklerle makinelerinizi sürecinizin canlı ve duyarlı bir ortağı haline getirin."
+    },
+    "slide3": {
+      "headline": "Dönüşüm Köprüsü",
+      "subheadline": "Eski Varlıklardan AI-Native Güce."
+    }
+  },
   "features": {
     "title": "Ölçekli Operasyon İçin İhtiyacınız Olan Her Şey",
     "subtitle": "İşletmenizi hızlandırmak için birlikte çalışan altı temel yetenek.",

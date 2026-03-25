@@ -7,6 +7,7 @@ interface SlideData {
   id: number;
   badge: string;
   headline: string;
+  taglines?: string[];
   subheadline: string;
   ctaPrimary: { label: string; href: string };
   ctaSecondary: { label: string; href: string };
@@ -20,7 +21,7 @@ const SLIDES: SlideData[] = [
   {
     id: 0,
     badge: "The Digital Mycelium of Industry",
-    headline: "AIoT: We Not Only Connect Things, but Also Connect Intelligence.",
+    headline: "AIoT - Intelligence Integrated",
     subheadline:
       "At ARDIC, we bring nature's most advanced network structure together with industrial intelligence to build decentralized, living, and learning ecosystems.",
     ctaPrimary: { label: "Explore the Ecosystem", href: "#products" },
@@ -34,8 +35,13 @@ const SLIDES: SlideData[] = [
     id: 1,
     badge: "Manufacturing Intelligence",
     headline: "What if Machines Could Understand Their Own Data?",
+    taglines: [
+      "Intelligence is emerging",
+      "But It's Fragmented",
+      "What is Missing?",
+    ],
     subheadline:
-      "Talk to your Data. Bridge the gap between raw industrial data and manufacturing intelligence — OEE uplift, energy optimization, delivered.",
+      "Bridge the gap between raw industrial data and manufacturing intelligence.",
     ctaPrimary: { label: "Calculate Your ROI", href: "#roi" },
     ctaSecondary: { label: "Case Studies", href: "#case-studies" },
     image: "/images/slide 2 .jpeg",
@@ -147,6 +153,7 @@ export default function HeroSlider() {
   return (
     <section
       id="hero"
+      lang="en"
       className="relative pt-16 flex flex-col justify-start bg-black"
       style={{ overflowX: "hidden" }}
       onMouseEnter={() => setIsPaused(true)}
@@ -168,7 +175,7 @@ export default function HeroSlider() {
         <div className="text-center mb-4">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#a0a098]">
             <span className="h-px w-8 bg-[#00c4a0]" />
-            ARDICTECH Platform
+            ARDICTECH AIoT SERVICES
             <span className="h-px w-8 bg-[#00c4a0]" />
           </span>
         </div>
@@ -222,7 +229,7 @@ export default function HeroSlider() {
                     }}
                   >
                     {/* Split: image LEFT | content RIGHT */}
-                    <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] h-full min-h-[440px]">
+                    <div className="grid grid-cols-1 lg:grid-cols-[50%_50%] h-full min-h-[440px]">
 
                       {/* LEFT — image panel */}
                       {idx === 2 ? (
@@ -286,7 +293,7 @@ export default function HeroSlider() {
                       )}
 
                       {/* RIGHT — content */}
-                      <div className="flex flex-col justify-center p-6 lg:p-8 bg-white">
+                      <div className="flex flex-col justify-center p-6 lg:p-8" style={{ background: "#0a0a0a" }}>
                         {/* Badge — with mycelium tooltip for slide 0 */}
                         <div className="relative self-start mb-3">
                           <div
@@ -322,8 +329,8 @@ export default function HeroSlider() {
                                   <span className="text-xs font-bold uppercase tracking-widest text-[#4a8fdb]">What is Digital Mycelium?</span>
                                 </div>
                               </div>
-                              {/* Card body */}
-                              <div className="px-5 py-4 space-y-3">
+                              {/* Card body — scrollable so nothing is clipped */}
+                              <div className="px-5 py-4 space-y-3" style={{ maxHeight: "260px", overflowY: "auto" }}>
                                 <p className="text-[13px] text-[#3a3a38] leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
                                   In nature, <strong>mycelium</strong> is the vast underground fungal network that silently connects trees and plants — sharing nutrients, distress signals, and resources across an entire forest ecosystem.
                                 </p>
@@ -346,7 +353,7 @@ export default function HeroSlider() {
                         </div>
 
                         <h1
-                          className="text-2xl md:text-3xl xl:text-4xl font-bold text-[#1c2b2b] leading-tight mb-2"
+                          className="text-2xl md:text-3xl xl:text-4xl font-bold text-white leading-tight mb-2"
                           style={{ fontFamily: "'DM Serif Display', serif" }}
                         >
                           {s.headline}
@@ -357,125 +364,69 @@ export default function HeroSlider() {
                           style={{ background: `linear-gradient(90deg, ${s.accentColor}, #c8a96e)` }}
                         />
 
+                        {/* Taglines — only for slides that have them */}
+                        {s.taglines && s.taglines.length > 0 && (
+                          <div className="mb-3 space-y-0.5">
+                            {s.taglines.map((line, i) => (
+                              <p
+                                key={i}
+                                className="text-white font-semibold text-sm leading-relaxed"
+                                style={{ fontFamily: "'Inter', sans-serif" }}
+                              >
+                                {line}
+                              </p>
+                            ))}
+                          </div>
+                        )}
+
                         <p
-                          className="text-[#505048] leading-relaxed mb-4 text-sm max-w-md"
+                          className="text-[#a0a098] leading-relaxed mb-4 text-sm max-w-md"
                           style={{ fontFamily: "'Inter', sans-serif" }}
                         >
                           {s.subheadline}
                         </p>
 
-                        <div className="flex flex-wrap gap-3 mb-5">
-                          {/* Primary CTA */}
+                        {/* CTAs row — left-aligned in content panel */}
+                        <div className="flex items-center gap-2 mt-4">
                           <a
                             href={s.ctaPrimary.href}
-                            className="inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-[#111111] transition-all duration-200 hover:-translate-y-0.5"
-                            style={{
-                              background: "transparent",
-                              border: "1.5px solid #1a4d3a",
-                            }}
+                            className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-widest text-white transition-all duration-200 hover:-translate-y-0.5"
+                            style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.25)", whiteSpace: "nowrap" }}
                             onMouseEnter={e => {
                               e.currentTarget.style.border = "1.5px solid #4a8fdb";
                               e.currentTarget.style.color = "#4a8fdb";
-                              e.currentTarget.style.boxShadow = "0 0 16px rgba(74,143,219,0.2)";
+                              e.currentTarget.style.boxShadow = "0 0 12px rgba(74,143,219,0.25)";
                             }}
                             onMouseLeave={e => {
-                              e.currentTarget.style.border = "1.5px solid #1a4d3a";
-                              e.currentTarget.style.color = "#111111";
+                              e.currentTarget.style.border = "1.5px solid rgba(255,255,255,0.25)";
+                              e.currentTarget.style.color = "white";
                               e.currentTarget.style.boxShadow = "none";
                             }}
                           >
                             {s.ctaPrimary.label}
-                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                             </svg>
                           </a>
-                          {/* Secondary CTA */}
                           <a
                             href={s.ctaSecondary.href}
                             target={s.ctaSecondary.href.startsWith("http") ? "_blank" : undefined}
                             rel={s.ctaSecondary.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                            className="inline-flex items-center gap-2 rounded-lg px-7 py-3.5 text-sm font-bold uppercase tracking-widest text-[#111111] transition-all duration-200 hover:-translate-y-0.5"
-                            style={{
-                              background: "transparent",
-                              border: "1.5px solid #1a4d3a",
-                            }}
+                            className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-widest text-white transition-all duration-200 hover:-translate-y-0.5"
+                            style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.25)", whiteSpace: "nowrap" }}
                             onMouseEnter={e => {
                               e.currentTarget.style.border = "1.5px solid #4a8fdb";
                               e.currentTarget.style.color = "#4a8fdb";
-                              e.currentTarget.style.boxShadow = "0 0 16px rgba(74,143,219,0.2)";
+                              e.currentTarget.style.boxShadow = "0 0 12px rgba(74,143,219,0.25)";
                             }}
                             onMouseLeave={e => {
-                              e.currentTarget.style.border = "1.5px solid #1a4d3a";
-                              e.currentTarget.style.color = "#111111";
+                              e.currentTarget.style.border = "1.5px solid rgba(255,255,255,0.25)";
+                              e.currentTarget.style.color = "white";
                               e.currentTarget.style.boxShadow = "none";
                             }}
                           >
                             {s.ctaSecondary.label}
                           </a>
-                        </div>
-
-                        {/* Nav: arrows + dots */}
-                        <div className="flex items-center gap-4">
-                          <button
-                            onClick={(e) => { e.stopPropagation(); goPrev(); }}
-                            className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200"
-                            style={{ background: "transparent", border: "1.5px solid #1a4d3a" }}
-                            aria-label="Previous slide"
-                            onMouseEnter={e => {
-                              e.currentTarget.style.border = "1.5px solid #4a8fdb";
-                              e.currentTarget.style.boxShadow = "0 0 12px rgba(74,143,219,0.2)";
-                              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "#4a8fdb";
-                            }}
-                            onMouseLeave={e => {
-                              e.currentTarget.style.border = "1.5px solid #1a4d3a";
-                              e.currentTarget.style.boxShadow = "none";
-                              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "#111111";
-                            }}
-                          >
-                            <svg className="h-4 w-4" style={{ color: "#111111" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                            </svg>
-                          </button>
-
-                          <div className="flex gap-2">
-                            {SLIDES.map((_, i) => (
-                              <button
-                                key={i}
-                                onClick={(e) => { e.stopPropagation(); goTo(i); }}
-                                className="h-2 rounded-full transition-all duration-300"
-                                style={{
-                                  width: i === current ? "28px" : "8px",
-                                  background: i === current ? slide.accentColor : "#b0b0a8",
-                                }}
-                                aria-label={`Go to slide ${i + 1}`}
-                              />
-                            ))}
-                          </div>
-
-                          <button
-                            onClick={(e) => { e.stopPropagation(); goNext(); }}
-                            className="flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200"
-                            style={{ background: "transparent", border: "1.5px solid #1a4d3a" }}
-                            aria-label="Next slide"
-                            onMouseEnter={e => {
-                              e.currentTarget.style.border = "1.5px solid #4a8fdb";
-                              e.currentTarget.style.boxShadow = "0 0 12px rgba(74,143,219,0.2)";
-                              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "#4a8fdb";
-                            }}
-                            onMouseLeave={e => {
-                              e.currentTarget.style.border = "1.5px solid #1a4d3a";
-                              e.currentTarget.style.boxShadow = "none";
-                              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "#111111";
-                            }}
-                          >
-                            <svg className="h-4 w-4" style={{ color: "#111111" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                          </button>
-
-                          <span className="text-xs text-[#a0a098]" style={{ fontFamily: "'Inter', sans-serif" }}>
-                            {current + 1} / {SLIDES.length}
-                          </span>
                         </div>
                       </div>
                     </div>
@@ -484,6 +435,70 @@ export default function HeroSlider() {
               </div>
             );
           })}
+        </div>
+
+        {/* Below-card nav: ← dots → counter — centered */}
+        <div className="flex items-center justify-center gap-4 mt-5 mx-auto" style={{ maxWidth: "1200px" }}>
+          <button
+            onClick={goPrev}
+            className="flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200"
+            style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.25)" }}
+            aria-label="Previous slide"
+            onMouseEnter={e => {
+              e.currentTarget.style.border = "1.5px solid #4a8fdb";
+              e.currentTarget.style.boxShadow = "0 0 12px rgba(74,143,219,0.2)";
+              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "#4a8fdb";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.border = "1.5px solid rgba(255,255,255,0.25)";
+              e.currentTarget.style.boxShadow = "none";
+              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "white";
+            }}
+          >
+            <svg className="h-3.5 w-3.5" style={{ color: "white" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <div className="flex items-center gap-2">
+            {SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="h-1.5 rounded-full transition-all duration-300"
+                style={{
+                  width: i === current ? "28px" : "7px",
+                  background: i === current ? slide.accentColor : "rgba(255,255,255,0.3)",
+                }}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={goNext}
+            className="flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200"
+            style={{ background: "transparent", border: "1.5px solid rgba(255,255,255,0.25)" }}
+            aria-label="Next slide"
+            onMouseEnter={e => {
+              e.currentTarget.style.border = "1.5px solid #4a8fdb";
+              e.currentTarget.style.boxShadow = "0 0 12px rgba(74,143,219,0.2)";
+              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "#4a8fdb";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.border = "1.5px solid rgba(255,255,255,0.25)";
+              e.currentTarget.style.boxShadow = "none";
+              (e.currentTarget.querySelector("svg") as unknown as HTMLElement).style.color = "white";
+            }}
+          >
+            <svg className="h-3.5 w-3.5" style={{ color: "white" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <span className="text-xs text-[#a0a098]" style={{ fontFamily: "'Inter', sans-serif" }}>
+            {current + 1} / {SLIDES.length}
+          </span>
         </div>
 
         {/* Progress bar */}

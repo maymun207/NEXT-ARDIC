@@ -150,34 +150,38 @@ const nextConfig: NextConfig = {
 };
 
 /**
- * Wrap the Next.js config with Sentry for automatic source map upload.
- * Source maps are uploaded during `next build` so Sentry can de-minify
- * stack traces. They are NOT served to the browser.
+ * In development, skip the Sentry wrapper entirely — it runs webpack transforms
+ * on every file and is the primary cause of slow cold-start compilation.
+ * In production builds, Sentry wraps the config for source map upload.
  */
-export default withSentryConfig(nextConfig, {
-    /* Suppress noisy source map upload logs in CI */
-    silent: true,
+const isDev = process.env.NODE_ENV === "development";
 
-    /* Use the org and project from Sentry environment or .sentryclirc */
-    org: process.env.SENTRY_ORG,
-    project: process.env.SENTRY_PROJECT,
+export default isDev
+    ? nextConfig
+    : withSentryConfig(nextConfig, {
+          /* Suppress noisy source map upload logs in CI */
+          silent: true,
 
-    /**
-     * Automatically instrument API routes and data fetchers
-     * for Sentry performance monitoring.
-     */
-    widenClientFileUpload: true,
+          /* Use the org and project from Sentry environment or .sentryclirc */
+          org: process.env.SENTRY_ORG,
+          project: process.env.SENTRY_PROJECT,
 
-    /**
-     * Source maps: upload to Sentry for de-minified stack traces,
-     * then delete from the build output so they are not served.
-     */
-    sourcemaps: {
-        deleteSourcemapsAfterUpload: true,
-    },
+          /**
+           * Automatically instrument API routes and data fetchers
+           * for Sentry performance monitoring.
+           */
+          widenClientFileUpload: true,
 
-    /**
-     * Automatically tree-shake unused Sentry code from the bundle.
-     */
-    disableLogger: true,
-});
+          /**
+           * Source maps: upload to Sentry for de-minified stack traces,
+           * then delete from the build output so they are not served.
+           */
+          sourcemaps: {
+              deleteSourcemapsAfterUpload: true,
+          },
+
+          /**
+           * Automatically tree-shake unused Sentry code from the bundle.
+           */
+          disableLogger: true,
+      });

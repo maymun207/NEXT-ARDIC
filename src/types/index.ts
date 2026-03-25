@@ -83,6 +83,12 @@ export interface Dictionary {
     ctaSecondary: string;
   };
 
+  heroSlider: {
+    slide1: { headline: string; subheadline: string };
+    slide2: { headline: string; subheadline: string; feature1: string; feature2: string };
+    slide3: { headline: string; subheadline: string };
+  };
+
   /** Content for the FeaturesSection component. */
   features: {
     /** Section h2 heading. */
