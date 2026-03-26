@@ -92,7 +92,7 @@ export default function Header({ dict, locale }: HeaderProps) {
         <a href={`/${locale}`} className="flex items-center gap-3 shrink-0">
           <div className="relative h-10 w-10 shrink-0">
             <Image
-              src="/images/Logo Social Light.png"
+              src="/images/Logo Social Transparent.png"
               alt="ARDICTECH"
               width={44}
               height={44}
@@ -118,12 +118,16 @@ export default function Header({ dict, locale }: HeaderProps) {
         {/* Desktop Nav */}
         <div className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
-            <div key={item.label} className="relative">
+            <div
+              key={item.label}
+              className="relative"
+              onMouseEnter={() => setOpenDropdown(item.label)}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
               {item.children ? (
                 <>
                   <button
                     onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
-                    onMouseEnter={() => setOpenDropdown(item.label)}
                     className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${scrolled ? "hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a]" : "hover:bg-white/10"} ${textColor}`}
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
@@ -137,7 +141,6 @@ export default function Header({ dict, locale }: HeaderProps) {
                   {openDropdown === item.label && (
                     <div
                       className="absolute top-full left-0 mt-1 min-w-[220px] rounded-xl border border-[#e8e8e0] bg-white shadow-xl py-2 z-50"
-                      onMouseLeave={() => setOpenDropdown(null)}
                     >
                       {item.children.map((child) => (
                         <a

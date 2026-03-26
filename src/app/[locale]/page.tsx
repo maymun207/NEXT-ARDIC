@@ -11,6 +11,7 @@ import CTASection from "@/components/sections/CTASection";
 import ContactSection from "@/components/sections/ContactSection";
 import FactoryTreeSection from "@/components/sections/FactoryTreeSection";
 import HeroFollowSection from "@/components/sections/HeroFollowSection";
+import Pillar1Page from "@/components/sections/Pillar1Page";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -35,6 +36,9 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ── Hero Follow — 2-panel sticky image section after hero ────────── */}
       <HeroFollowSection />
+
+      {/* ── Building the Digital Foundation — Pillar 1 sticky sidebar ── */}
+      <Pillar1Page />
 
       {/* ── Factory Tree — commented out; HeroFollowSection now covers this ──
       <FactoryTreeSection />

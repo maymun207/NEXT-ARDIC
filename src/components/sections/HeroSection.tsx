@@ -32,7 +32,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
       image: "/images/LOGO AI ARDIC.jpeg",
       imageAlt: "ARDIC AI Logo",
       objectFit: "contain",
-      overlay: "rgba(0,0,0,0.58)",
+      overlay: "rgba(0,0,0,0.15)",
       layout: "centered",
       headline: h.slide1.headline,
       subheadline: h.slide1.subheadline,
@@ -43,6 +43,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
       image: "/images/Heart of Factory .jpeg",
       imageAlt: "Heart of Factory",
       objectFit: "contain",
+      overlay: "linear-gradient(to right, rgba(0,0,0,0.45) 30%, rgba(0,0,0,0.15) 100%)",
       headline: h.slide2.headline,
       subheadline: h.slide2.subheadline,
       features: [h.slide2.feature1, h.slide2.feature2],
@@ -157,7 +158,6 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                     style={{
                       objectFit: s.objectFit ?? "cover",
                       objectPosition: "center",
-                      mixBlendMode: s.layout === "centered" ? "screen" : "normal",
                     }}
                     priority={idx === 0}
                   />
@@ -196,7 +196,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
 
               {/* ── DEFAULT layout ───────────────────────────────────── */}
               {s.layout !== "centered" && (
-                <div className="absolute inset-0 flex items-center">
+                <div className={`absolute inset-0 flex ${s.id === 1 ? "items-start pt-28 sm:pt-36" : "items-center"}`}>
                   <div className="px-8 sm:px-16 lg:px-28 max-w-3xl">
                     <div className="w-12 h-0.5 mb-6 rounded-full" style={{ background: s.accentColor }} />
                     {s.headline && (
@@ -224,28 +224,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                         {s.subheadline}
                       </p>
                     )}
-                    {s.features && s.features.length > 0 && (
-                      <div className="mb-8 space-y-3 max-w-xs">
-                        {s.features.filter((_,i) => i > 0).map((feat, i) => (
-                          <div
-                            key={i}
-                            className="rounded-xl px-5 py-4"
-                            style={{
-                              border: "1px solid rgba(255,255,255,0.2)",
-                              background: "rgba(255,255,255,0.05)",
-                              backdropFilter: "blur(8px)",
-                              fontFamily: "'Inter', sans-serif",
-                              color: "rgba(255,255,255,0.9)",
-                              fontSize: "0.875rem",
-                              fontWeight: "400",
-                              lineHeight: "1.6",
-                            }}
-                          >
-                            {feat}
-                          </div>
-                        ))}
-                      </div>
-                    )}
+
                     {(s.ctaPrimary || s.ctaSecondary) && (
                       <div className="flex flex-wrap gap-4">
                         {s.ctaPrimary && (
@@ -281,34 +260,55 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 </div>
               )}
 
-              {/* ── Feature[0] — text sits on the factory plate bottom-right ── */}
+              {/* ── Feature[0] — always sits on the factory plate (responsive) ── */}
+              {/*
+                Image: 2882×1472 (ratio 1.9579).
+                The wrapper below is the same size/position as the rendered
+                object-contain image at any aspect ratio, so any child with
+                position:absolute uses image-relative coordinates.
+              */}
               {s.layout !== "centered" && s.features && s.features[0] && (
                 <div
-                  className="absolute"
                   style={{
-                    bottom: "26%",
-                    left: "31%",
-                    width: "38%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "0 2.5rem",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    /* match rendered image size: whichever is smaller — full width or full height × ratio */
+                    width: "min(100%, calc(100vh * 2882 / 1472))",
+                    aspectRatio: "2882 / 1472",
+                    pointerEvents: "none",
                     zIndex: 20,
                   }}
                 >
-                  <p
+                  <div
                     style={{
-                      fontFamily: "'Inter', sans-serif",
-                      color: "#d4b578",
-                      fontSize: "clamp(0.85rem, 1.4vw, 1.05rem)",
-                      fontWeight: "600",
-                      lineHeight: "1.5",
-                      letterSpacing: "0.02em",
-                      textAlign: "center",
+                      position: "absolute",
+                      /* plate center at 84% X, 87.1% Y of the IMAGE (measured at 1977×1101) */
+                      left: "84%",
+                      top: "87.1%",
+                      transform: "translate(-50%, -50%)",
+                      width: "24%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: "0 1rem",
                     }}
                   >
-                    {s.features[0]}
-                  </p>
+                    <p
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        color: "#d4b578",
+                        fontSize: "clamp(0.75rem, 1.1vw, 0.95rem)",
+                        fontWeight: "600",
+                        lineHeight: "1.4",
+                        letterSpacing: "0.02em",
+                        textAlign: "center",
+                      }}
+                    >
+                      {s.features[0]}
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
