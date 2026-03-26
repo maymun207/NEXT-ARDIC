@@ -90,23 +90,35 @@ export interface Dictionary {
   };
 
   /** Content for the FeaturesSection component. */
-  features: {
-    /** Section h2 heading. */
+  features?: {
     title: string;
-    /** Section subheading paragraph. */
     subtitle: string;
-    /**
-     * Array of feature cards. Each card maps to one grid cell.
-     * icon: must be a key in the ICON_MAP in FeaturesSection.tsx (e.g. "Zap").
-     */
-    items: {
-      /** Lucide icon name string. See ICON_MAP in FeaturesSection.tsx. */
-      icon: string;
-      /** Feature card title. */
-      title: string;
-      /** Feature card description (1–2 sentences). */
-      description: string;
-    }[];
+    items: { icon: string; title: string; description: string; }[];
+  };
+
+  products?: {
+    title: string;
+    subtitle: string;
+    items: { id: string; icon: string; title: string; description: string; tag: string; }[];
+  };
+
+  technologies?: {
+    title: string;
+    subtitle: string;
+    items: { id: string; icon: string; title: string; description: string; color: string; }[];
+  };
+
+  networkFlow?: {
+    title: string;
+    subtitle: string;
+    steps: { number: string; title: string; platform: string; description: string; }[];
+  };
+
+  sentientFactory?: {
+    title: string;
+    subtitle: string;
+    body: string;
+    cta: string;
   };
 
   /** Content for the StatsSection component. */

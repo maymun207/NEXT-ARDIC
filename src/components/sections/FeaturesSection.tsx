@@ -62,8 +62,10 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Layers: Layers,
 };
 
-export default function FeaturesSection({ dict }: FeaturesSectionProps) {
+export default function FeaturesSection({ dict }: { dict: Dictionary }) {
   const { features } = dict;
+
+  if (!features) return null;
 
   return (
     /* Features section with a slight dark background to contrast with the hero. */

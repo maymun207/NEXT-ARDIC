@@ -31,6 +31,8 @@ const featureIcons = [
 export default function FeaturesGrid({ dict }: FeaturesGridProps) {
   const { features } = dict;
 
+  if (!features) return null;
+
   return (
     <SectionWrapper id="features">
       <SectionHeading title={features.title} subtitle={features.subtitle} />
