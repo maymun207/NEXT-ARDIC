@@ -15,25 +15,34 @@ const PILLARS = [
   {
     number: 1,
     accent: "#7ab8f5",
+    textAccent: "#2565a3",
     label: "Building the Digital Foundation",
     tagline: "Secure. Connect. Integrate.",
-    href: "/en/services/building-foundation",
+    href: "/en#digital-foundation",
     services: ["Secure Edge & Devices", "Connect Systems & Assets", "Integrate Infrastructure"],
   },
   {
     number: 2,
     accent: "#8ecae6",
+    textAccent: "#297291",
     label: "Activate AI-Driven Intelligence",
     tagline: "Collect. Analyze. Precision.",
-    href: "/en/services/ai-intelligence",
-    services: ["Capture Real-Time Data", "Gain Operational Visibility", "Apply AI Insights"],
+    href: "/en#ai-intelligence",
+    services: [
+      "Real-Time Ingestion",
+      "Data Discovery",
+      "Core Processing",
+      "Operational Visibility",
+      "Prescriptive AI & Interfaces"
+    ],
   },
   {
     number: 3,
     accent: "#a8d5e2",
+    textAccent: "#4d9daf",
     label: "Orchestrate & Operate",
     tagline: "Automate. Orchestrate. Optimize.",
-    href: "/en/services/orchestrate-operate",
+    href: "/en#orchestrate-operate",
     services: ["Automate Workflows", "Orchestrate Systems", "Optimize in Real Time"],
   },
 ];
@@ -53,16 +62,50 @@ export default function HeroFollowSection() {
     <section
       style={{
         display: "flex",
-        flexDirection: isMobile ? "column" : "row",
-        alignItems: "flex-start",
-        background: "#000000",
-        paddingTop: isMobile ? "4vh" : "8vh",
+        flexDirection: "column",
+        background: "#ffffff",
+        paddingTop: isMobile ? "2vh" : "3vh",
+        paddingBottom: isMobile ? "2vh" : "3vh",
         overflow: "hidden",
         position: "relative",
         zIndex: 1,
         isolation: "isolate",
       }}
     >
+      {/* ── Page Title ── */}
+      <div 
+        style={{ 
+          width: isMobile ? "100%" : "50%", 
+          marginLeft: isMobile ? "0" : "auto", 
+          textAlign: isMobile ? "center" : "left", 
+          marginBottom: "2vh", 
+          padding: isMobile ? "0 2rem" : "0 2rem 0 8rem",
+          position: "relative",
+          zIndex: 20
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: "'DM Serif Display', serif",
+            fontSize: "clamp(2.2rem, 4.5vw, 4.2rem)",
+            color: "#050505",
+            letterSpacing: "-0.01em",
+            fontWeight: "bold",
+          }}
+        >
+          AIoT ADOPTION
+        </h2>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          width: "100%",
+          flexDirection: isMobile ? "column" : "row",
+          alignItems: "flex-start",
+          position: "relative",
+        }}
+      >
       {/* ── Image column ── */}
       <div
         style={{
@@ -70,13 +113,18 @@ export default function HeroFollowSection() {
           flexShrink: 0,
           overflow: "visible",
           position: "relative",
-          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 82%, transparent 100%)",
-          maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 82%, transparent 100%)",
+          marginTop: isMobile ? "0" : "-10vh", /* Pull tree UP next to the title */
+          marginLeft: isMobile ? "0" : "-2vw", /* Slight left shift for scaling naturally */
+          transform: isMobile ? "none" : "scale(1.2)", /* Scale up by ~20% */
+          transformOrigin: "top left",
+          zIndex: 0,
+          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 3%, black 96%, transparent 100%)",
+          maskImage: "linear-gradient(to bottom, transparent 0%, black 3%, black 96%, transparent 100%)",
         }}
       >
         <div style={{ position: "relative", width: "100%" }}>
           <Image
-            src="/images/digital tree.jpeg"
+            src="/images/digital tree white.jpeg"
             alt="ARDICTECH Digital Tree — Three service pillars"
             width={1499}
             height={1536}
@@ -85,7 +133,7 @@ export default function HeroFollowSection() {
               width: "100%",
               height: "auto",
               display: "block",
-              filter: "brightness(0.82)",
+              /* filter: brightness removed for light mode */
               /* On mobile constrain height so image doesn't dominate */
               maxHeight: isMobile ? "55vw" : undefined,
               objectFit: isMobile ? "cover" : undefined,
@@ -101,7 +149,7 @@ export default function HeroFollowSection() {
                 right: 0,
                 bottom: 0,
                 width: "12%",
-                background: "linear-gradient(to left, rgba(0,0,0,0.7) 0%, transparent 100%)",
+                background: "linear-gradient(to left, rgba(255,255,255,1) 0%, transparent 100%)",
                 pointerEvents: "none",
               }}
             />
@@ -114,7 +162,9 @@ export default function HeroFollowSection() {
         <div
           style={{
             width: "50%",
-            height: "calc(62.5vw * 1536 / 1499)",
+            height: "calc(50vw * 1536 / 1499)",
+            position: "relative",
+            zIndex: 10, /* Keep text ABOVE the scaled tree and its fade layer */
             display: "grid",
             /*
               Branch centers: Pillar1=12%, Pillar2=35%, Pillar3=64% of grid height.
@@ -150,6 +200,7 @@ export default function HeroFollowSection() {
           ))}
         </div>
       )}
+      </div>
     </section>
   );
 }
@@ -174,10 +225,11 @@ function PillarRow({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        padding: desktop ? "0 4rem" : "1rem 1.25rem",
-        borderTop: desktop ? "1px solid rgba(255,255,255,0.06)" : "none",
+        marginLeft: desktop ? "8rem" : "0", /* Push the actual bounding box right */
+        padding: desktop ? "0 2rem 0 0" : "1rem 1.25rem", /* Text flush with new border edge */
+        borderTop: desktop ? "1px solid rgba(0,0,0,0.08)" : "none",
         borderRadius: desktop ? undefined : "12px",
-        background: desktop ? undefined : "rgba(255,255,255,0.04)",
+        background: desktop ? undefined : "rgba(0,0,0,0.02)",
         border: desktop ? undefined : `1px solid ${p.accent}25`,
         position: "relative",
         cursor: "default",
@@ -188,9 +240,9 @@ function PillarRow({
         <div
           style={{
             position: "absolute",
-            left: 0,
+            left: "-5.5rem", /* Reach back outside the left margin */
             top: "50%",
-            width: "2.5rem",
+            width: "3.5rem",
             height: "1.5px",
             background: `linear-gradient(to right, ${p.accent}80, transparent)`,
             transform: "translateY(-50%)",
@@ -207,13 +259,13 @@ function PillarRow({
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "26px",
-            height: "26px",
+            width: "28px",
+            height: "28px",
             borderRadius: "50%",
             background: `${p.accent}20`,
             border: `1px solid ${p.accent}50`,
-            color: p.accent,
-            fontSize: "13px",
+            color: p.textAccent || p.accent,
+            fontSize: "14px",
             fontWeight: 700,
             fontFamily: "'Inter', sans-serif",
           }}
@@ -222,9 +274,9 @@ function PillarRow({
         </span>
         <span
           style={{
-            color: p.accent,
-            fontSize: "13px",
-            fontWeight: 700,
+            color: p.textAccent || p.accent,
+            fontSize: "14px",
+            fontWeight: 800,
             letterSpacing: "0.16em",
             fontFamily: "'Inter', sans-serif",
           }}
@@ -243,7 +295,7 @@ function PillarRow({
       >
         <h2
           style={{
-            color: "#ffffff",
+            color: "#050505",
             fontSize: "clamp(1.4rem, 2.1vw, 1.9rem)",
             fontWeight: 600,
             lineHeight: 1.3,
@@ -253,7 +305,7 @@ function PillarRow({
             transition: "color 0.2s",
           }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLHeadingElement).style.color = p.accent; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLHeadingElement).style.color = "#ffffff"; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLHeadingElement).style.color = "#050505"; }}
         >
           {p.label} →
         </h2>
@@ -262,10 +314,10 @@ function PillarRow({
       {/* Tagline */}
       <p
         style={{
-          color: p.accent,
-          fontSize: "14px",
-          fontWeight: 600,
-          letterSpacing: "0.06em",
+          color: "#1c2b2b",
+          fontSize: "16px",
+          fontWeight: 800,
+          letterSpacing: "0.04em",
           marginBottom: "0.6rem",
           fontFamily: "'Inter', sans-serif",
         }}
@@ -290,7 +342,7 @@ function PillarRow({
             style={{
               background: `${p.accent}12`,
               border: `1px solid ${p.accent}30`,
-              color: "rgba(255,255,255,0.75)",
+              color: "rgba(0,0,0,0.85)",
               borderRadius: "6px",
               padding: "2px 10px",
               fontSize: "13px",

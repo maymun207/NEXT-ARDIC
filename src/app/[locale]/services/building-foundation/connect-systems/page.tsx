@@ -8,7 +8,7 @@ const DATA = {
   image: "/images/ConnectS.jpeg",
   objectFit: "contain" as "contain",
   pillarTitle: "Building the Digital Foundation",
-  pillarHref: "/en/services/building-foundation",
+  pillarHref: "/en#digital-foundation",
   whatWeDo: {
     intro: "IoT connectivity | API integrations | Real-time data streaming | Device-to-cloud communication",
     items: [

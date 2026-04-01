@@ -8,7 +8,7 @@ const DATA = {
   image: "/images/Integrate Infrasturture.jpeg",
   objectFit: "contain" as "contain",
   pillarTitle: "Building the Digital Foundation",
-  pillarHref: "/en/services/building-foundation",
+  pillarHref: "/en#digital-foundation",
   whatWeDo: {
     intro: "Core Targets: ERP systems | CRM systems | Production systems | IoT platforms | (Cloud + On-premise environments)",
     items: [

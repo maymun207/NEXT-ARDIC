@@ -5,66 +5,98 @@ import Image from "next/image";
 import Link from "next/link";
 
 const PILLAR = {
-  number: 1,
-  title: "Building the\nDigital Foundation",
-  tagline: "Secure. Connect. Integrate.",
-  accent: "#7ab8f5",
-  textAccent: "#2565a3",
-  image: "/images/BuildingF white .jpeg",
+  number: 2,
+  title: "Activate AI-Driven\nIntelligence",
+  tagline: "Collect. Analyze. Precision.",
+  accent: "#8ecae6",
+  textAccent: "#297291",
+  image: "/images/HALF GLASS FACTORY .jpeg",
 };
 
 const SUB_SERVICES = [
   {
-    id: "secure-edge",
-    slug: "secure-edge",
-    title: "Secure Edge & Devices",
-    tagline: "Trust starts at the physical boundary.",
-    image: "/images/pilaros image .jpeg",
-    accent: "#7ab8f5",
-    description:
-      "Every intelligent operation begins at the edge. We secure every endpoint — from industrial gateways to mobile devices — with PilarOS and AFEX, an industrial Android OS with deep-system security hooks that give enterprises root-level control over the edge devices, gateways and mobile devices.",
-    bullets: [
-      "PilarOS & AFEX: domestic industrial Android with AFEX security engine",
-      "Remote monitoring, encryption, and device wipe across all endpoints",
-      "Mobile Device Management (MDM)",
-      "Protocol-agnostic edge gateway security",
-    ],
-  },
-  {
-    id: "connect-systems",
-    slug: "connect-systems",
-    title: "Connect Systems & Assets",
-    tagline: "Bridge every machine, protocol, and data stream.",
-    image: "/images/ConnectS.jpeg",
+    id: "real-time-ingestion",
+    slug: "real-time-ingestion",
+    title: "Real-Time Ingestion",
+    tagline: "The surface level of data extraction.",
+    image: "/images/HALF GLASS FACTORY .jpeg",
     accent: "#8ecae6",
     description:
-      "Isolated machines produce isolated insights. We connect every asset — OT, IT, and everything in between — using IoT-Ignite's protocol-agnostic edge computing layer. Whether it's a PLC, SCADA, MQTT sensor, or cloud API, all data flows into a single, unified intelligence stream.",
+      "Your factory generates millions of data points every second at the surface level. We capture this fast-moving data from machines, sensors, and legacy systems reliably, avoiding silent data loss to establish a secure foundation for everything underneath.",
     bullets: [
-      "IoT-Ignite: PaaS platform with smart edge computing",
-      "Protocol-agnostic: MQTT, OPC-UA, Modbus, REST, and custom",
-      "Scalable overlay network across plant, field, and cloud",
-      "Real-time asset telemetry at industrial scale",
+      "High-frequency data ingestion securely at scale",
+      "Unified telemetry streaming from all assets",
+      "Immediate synchronization with local databases",
+      "Elimination of proprietary hardware silos",
     ],
   },
   {
-    id: "integrate-infrastructure",
-    slug: "integrate-infrastructure",
-    title: "Integrate the Infrastructure",
-    tagline: "One data substrate. Total operational coherence.",
-    image: "/images/Integrate Infrasturture.jpeg",
-    accent: "#a8d5e2",
+    id: "data-discovery",
+    slug: "data-discovery",
+    title: "Data Discovery & Logging",
+    tagline: "Finding the needle in the data haystack.",
+    image: "/images/HALF GLASS FACTORY .jpeg",
+    accent: "#76b7d1",
     description:
-      "Data without a home is noise. ArCloud provides the geographically distributed, enterprise-grade managed infrastructure that underpins the entire ARDICTECH ecosystem — giving you a secure, resilient, and cost-effective foundation to host your industrial intelligence platform at any scale.",
+      "As data drops into the first subterranean layer, we index and catalog massive operational logs. This document-level discovery phase ensures that every data point is instantly searchable, auditable, and traceable back to its origin.",
     bullets: [
-      "ArCloud: managed cloud infrastructure, enterprise grade",
-      "Geographically distributed for resilience and compliance",
-      "Secure, cost-effective large-scale platform hosting",
-      "Seamless integration with ArMES, IoT-Ignite, and ArAI",
+      "High-speed semantic search across factory logs",
+      "Automated documentation and metadata tagging",
+      "Traceability for compliance and quality control",
+      "Historical data archiving without performance loss",
+    ],
+  },
+  {
+    id: "core-processing",
+    slug: "core-processing",
+    title: "Core Processing & Normalization",
+    tagline: "The mechanical gears of the operation.",
+    image: "/images/HALF GLASS FACTORY .jpeg",
+    accent: "#66a8c2",
+    description:
+      "Raw data has no meaning until it is processed. In the third layer, the 'gears' of our system clean, parse, and normalize varying edge protocols into a single, unified operational data model, preparing the fuel that powers advanced analytics.",
+    bullets: [
+      "Real-time protocol translation and normalization",
+      "Data cleansing and noise reduction at the edge",
+      "Seamless integration with ERP, MES, and SCADA",
+      "Automated data pipeline health monitoring",
+    ],
+  },
+  {
+    id: "operational-visibility",
+    slug: "operational-visibility",
+    title: "Deep Operational Visibility",
+    tagline: "See every process, everywhere.",
+    image: "/images/HALF GLASS FACTORY .jpeg",
+    accent: "#539ab5",
+    description:
+      "In the fourth layer, we place a magnifying glass over your contextualized data streams. We transform these streams into interactive observability dashboards and digital twins that visualize bottlenecks, performance degradation, and yield tracking across the enterprise.",
+    bullets: [
+      "Live Digital Twin monitoring and interaction",
+      "Unified operational dashboards with role-based views",
+      "Historical trend analysis and threshold alerts",
+      "Multi-site visibility from a single pane of glass",
+    ],
+  },
+  {
+    id: "predictive-ai-engine",
+    slug: "prescriptive-ai",
+    title: "Prescriptive AI & Interfaces",
+    tagline: "The enterprise, accessible from anywhere.",
+    image: "/images/H3-ENTERPRISE AI .jpeg",
+    accent: "#438ca8",
+    description:
+      "At the deepest architectural layer lies our cognitive core. Far beyond merely predicting failures, it operates prescriptively—recommending exact actions and automating resolutions. Designed for complete accessibility, your entire factory is now at your fingertips through natural language.",
+    bullets: [
+      "Prescriptive root-cause analysis and automated resolution",
+      "Omnichannel reach: Desktop Web Dashboards and Mobile Apps",
+      "WhatsApp Integration: Chat with your factory on the go",
+      "ARDY Copilot: Intuitive natural language interactions",
     ],
   },
 ];
 
-export default function Pillar1Page({ standalone = false }: { standalone?: boolean }) {
+export default function Pillar2Page({ standalone = false }: { standalone?: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredCTA, setHoveredCTA] = useState<string | null>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -85,7 +117,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
 
   return (
     <section
-      id="digital-foundation"
+      id="ai-intelligence"
       style={{
         background: "#ffffff",
         fontFamily: "'Inter', sans-serif",
@@ -117,7 +149,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
           width: "42%",
           flexShrink: 0,
           position: "sticky",
-          top: "4rem",           /* align to bottom of fixed header */
+          top: "4rem",
           height: "calc(100vh - 4rem)",
           overflow: "hidden",
         }}
@@ -137,7 +169,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.40) 60%, rgba(255,255,255,0.55) 100%)",
+              "linear-gradient(135deg, rgba(255,255,255,0.83) 0%, rgba(255,255,255,0.35) 60%, rgba(255,255,255,0.50) 100%)",
           }}
         />
         {/* Right fade into main content */}
@@ -308,8 +340,6 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
               borderBottom: "1px solid rgba(0,0,0,0.06)",
             }}
           >
-
-
             {/* Text content */}
             <div
               style={{
@@ -450,7 +480,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
 
                 {/* The actual CTA link */}
                 <Link
-                  href={`/en/services/building-foundation/${sub.slug}`}
+                  href={`/en/services/ai-intelligence/${sub.slug}`}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",

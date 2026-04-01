@@ -85,7 +85,7 @@ export interface Dictionary {
 
   heroSlider: {
     slide1: { headline: string; subheadline: string };
-    slide2: { headline: string; subheadline: string; feature1: string; feature2: string };
+    slide2: { headline: string; subheadline: string };
     slide3: { headline: string; subheadline: string };
   };
 

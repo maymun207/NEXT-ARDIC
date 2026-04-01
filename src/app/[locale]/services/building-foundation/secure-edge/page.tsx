@@ -7,7 +7,7 @@ const DATA = {
   accent: "#7ab8f5",
   image: "/images/pilaros image .jpeg",
   pillarTitle: "Building the Digital Foundation",
-  pillarHref: "/en/services/building-foundation",
+  pillarHref: "/en#digital-foundation",
   whatWeDo: {
     intro:
       "We secure every endpoint across your industrial environment — from factory-floor PLCs and IoT sensors to mobile devices and edge gateways. Our approach combines device-level OS security with enterprise-grade management to give you full visibility and control over every connected asset.",

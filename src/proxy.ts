@@ -28,7 +28,7 @@ import type { NextRequest } from 'next/server';
  * @param request - The incoming HTTP request object
  * @returns NextResponse — either a redirect (for /) or passthrough
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   /* Extract the pathname from the incoming request URL */
   const pathname = request.nextUrl.pathname;
 
