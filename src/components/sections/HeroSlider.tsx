@@ -14,6 +14,7 @@ interface SlideData {
   imageAlt: string;
   accentColor: string;
   bgColor: string;
+  imageScale?: number;
 }
 
 const SLIDES: SlideData[] = [
@@ -22,7 +23,7 @@ const SLIDES: SlideData[] = [
     headline: "INTELLIGENCE INTEGRATED",
     subheadline: "Artificial Intelligence of Things",
     footerText: "ARDICTECH 2026",
-    image: "/images/H1-A HERO.jpeg",
+    image: "/images/H1.jpeg",
     imageAlt: "ARDIC Intelligence Integrated — AIoT Platform",
     accentColor: "#8b5cf6",
     bgColor: "#ffffff",
@@ -49,10 +50,11 @@ const SLIDES: SlideData[] = [
     subheadline:
       "Your Data. Your Rules. Your AI. A comprehensive, secure architecture that transforms raw enterprise data into high-value production applications without compromising sovereignty.",
     ctaPrimary: { label: "AI Assessment", href: "#contact" },
-    image: "/images/H3-ENTERPRISE AI .jpeg",
+    image: "/images/hero3 .jpeg",
     imageAlt: "Enterprise Agentic AI Platform — secure data sovereignty",
     accentColor: "#7c3aed",
     bgColor: "#ffffff",
+    imageScale: 0.95,
   },
 ];
 
@@ -273,7 +275,10 @@ export default function HeroSlider() {
                         className="relative flex items-center justify-center p-8 lg:p-10"
                         style={{ background: s.bgColor, minHeight: "280px" }}
                       >
-                        <div className="relative w-full h-[300px] lg:h-[360px]">
+                        <div 
+                          className="relative w-full h-[300px] lg:h-[360px]"
+                          style={s.imageScale ? { transform: `scale(${s.imageScale})` } : undefined}
+                        >
                           <Image
                             src={s.image}
                             alt={s.imageAlt}

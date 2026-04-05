@@ -4,49 +4,164 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-/**
- * HeroFollowSection — Digital Tree image with 3 service pillars.
- * Desktop: side-by-side, pillars aligned to tree branches via CSS grid.
- * Mobile (<768px): image on top, pillar cards stacked below.
- */
-
 const PILLARS = [
-  // Top branch → Bottom branch
   {
     number: 1,
     accent: "#7ab8f5",
     textAccent: "#2565a3",
-    label: "Building the Digital Foundation",
+    label: "Build the Digital Foundation",
     tagline: "Secure. Connect. Integrate.",
     href: "/en#digital-foundation",
-    services: ["Secure Edge & Devices", "Connect Systems & Assets", "Integrate Infrastructure"],
+    services: ["Secure Edge & Devices", "Connect Systems", "Integrate Infrastructure"],
   },
   {
     number: 2,
     accent: "#8ecae6",
     textAccent: "#297291",
     label: "Activate AI-Driven Intelligence",
-    tagline: "Collect. Analyze. Precision.",
+    tagline: "Capture. Analyze. Decide.",
     href: "/en#ai-intelligence",
-    services: [
-      "Real-Time Ingestion",
-      "Data Discovery",
-      "Core Processing",
-      "Operational Visibility",
-      "Prescriptive AI & Interfaces"
-    ],
+    services: ["Real-Time Ingestion", "Data Discovery", "Operational Visibility"],
   },
   {
     number: 3,
     accent: "#a8d5e2",
     textAccent: "#4d9daf",
-    label: "Orchestrate & Operate",
+    label: "Operate and Optimize",
     tagline: "Automate. Orchestrate. Optimize.",
     href: "/en#orchestrate-operate",
     services: ["Automate Workflows", "Orchestrate Systems", "Optimize in Real Time"],
   },
 ];
 
+/* ── Pillar card — horizontal rectangle ── */
+function PillarCard({
+  p, i, hovered, setHovered,
+}: {
+  p: typeof PILLARS[number];
+  i: number;
+  hovered: number | null;
+  setHovered: (v: number | null) => void;
+}) {
+  const isHov = hovered === i;
+
+  return (
+    <Link href={p.href} style={{ textDecoration: "none", display: "block", width: "100%" }}>
+      <div
+        onMouseEnter={() => setHovered(i)}
+        onMouseLeave={() => setHovered(null)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1.5rem",
+          padding: "1.2rem 1.6rem",
+          borderRadius: "14px",
+          border: `1.5px solid ${isHov ? p.accent : p.accent + "40"}`,
+          borderLeft: `5px solid ${p.accent}`,
+          background: isHov ? `${p.accent}0d` : "#ffffff",
+          cursor: "pointer",
+          transform: isHov ? "translateX(5px)" : "translateX(0)",
+          transition: "transform 0.22s ease, box-shadow 0.22s ease, background 0.22s",
+          boxShadow: isHov ? `0 8px 28px ${p.accent}44` : "0 2px 10px rgba(0,0,0,0.05)",
+        }}
+      >
+        {/* Number badge */}
+        <div
+          style={{
+            minWidth: "48px",
+            height: "48px",
+            borderRadius: "50%",
+            background: `${p.accent}20`,
+            border: `1.5px solid ${p.accent}60`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontFamily: "'DM Serif Display', serif",
+            fontSize: "1.4rem",
+            fontWeight: 700,
+            color: p.textAccent,
+            flexShrink: 0,
+          }}
+        >
+          {p.number}
+        </div>
+
+        {/* Title + tagline */}
+        <div style={{ flex: 1 }}>
+          <div
+            style={{
+              fontSize: "11px",
+              fontWeight: 800,
+              letterSpacing: "0.18em",
+              color: p.textAccent,
+              fontFamily: "'Inter', sans-serif",
+              textTransform: "uppercase",
+              marginBottom: "0.25rem",
+            }}
+          >
+            PILLAR {p.number}
+          </div>
+          <h3
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: "clamp(1rem, 1.4vw, 1.2rem)",
+              fontWeight: 700,
+              color: "#050505",
+              lineHeight: 1.3,
+              margin: "0 0 0.2rem",
+            }}
+          >
+            {p.label}
+          </h3>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.72rem",
+              fontWeight: 700,
+              color: p.textAccent,
+              letterSpacing: "0.05em",
+              margin: 0,
+            }}
+          >
+            {p.tagline}
+          </p>
+        </div>
+
+        {/* Service chips — fills the right side */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.35rem",
+            alignItems: "flex-end",
+            flexShrink: 0,
+          }}
+        >
+          {p.services.map((s, si) => (
+            <span
+              key={si}
+              style={{
+                background: `${p.accent}14`,
+                border: `1px solid ${p.accent}35`,
+                color: "rgba(0,0,0,0.75)",
+                borderRadius: "6px",
+                padding: "3px 10px",
+                fontSize: "11.5px",
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 500,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ── Main section ── */
 export default function HeroFollowSection() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -61,308 +176,144 @@ export default function HeroFollowSection() {
   return (
     <section
       style={{
-        display: "flex",
-        flexDirection: "column",
         background: "#ffffff",
-        paddingTop: isMobile ? "2vh" : "3vh",
-        paddingBottom: isMobile ? "2vh" : "3vh",
         overflow: "hidden",
         position: "relative",
         zIndex: 1,
-        isolation: "isolate",
+        minHeight: isMobile ? "auto" : "75vh",
+        padding: isMobile ? "3rem 1.5rem 4rem" : "0",
       }}
     >
-      {/* ── Page Title ── */}
-      <div 
-        style={{ 
-          width: isMobile ? "100%" : "50%", 
-          marginLeft: isMobile ? "0" : "auto", 
-          textAlign: isMobile ? "center" : "left", 
-          marginBottom: "2vh", 
-          padding: isMobile ? "0 2rem" : "0 2rem 0 8rem",
-          position: "relative",
-          zIndex: 20
-        }}
-      >
-        <h2
+      {isMobile ? (
+        /* ─ Mobile ─ */
+        <div style={{ textAlign: "center" }}>
+          <h2
+            style={{
+              fontFamily: "'DM Serif Display', serif",
+              fontSize: "2.4rem",
+              color: "#050505",
+              marginBottom: "0.75rem",
+            }}
+          >
+            AIoT ADOPTION
+          </h2>
+          <p
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.9rem",
+              color: "rgba(0,0,0,0.65)",
+              lineHeight: 1.65,
+              marginBottom: "2.5rem",
+            }}
+          >
+            Transform your business operations with AIoT.
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {PILLARS.map((p, i) => (
+              <PillarCard key={i} p={p} i={i} hovered={hovered} setHovered={setHovered} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        /* ─ Desktop: tree left · content right ─ */
+        <div
           style={{
-            fontFamily: "'DM Serif Display', serif",
-            fontSize: "clamp(2.2rem, 4.5vw, 4.2rem)",
-            color: "#050505",
-            letterSpacing: "-0.01em",
-            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
+            width: "100%",
+            minHeight: "75vh",
           }}
         >
-          AIoT ADOPTION
-        </h2>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          flexDirection: isMobile ? "column" : "row",
-          alignItems: "flex-start",
-          position: "relative",
-        }}
-      >
-      {/* ── Image column ── */}
-      <div
-        style={{
-          width: isMobile ? "100%" : "50%",
-          flexShrink: 0,
-          overflow: "visible",
-          position: "relative",
-          marginTop: isMobile ? "0" : "-10vh", /* Pull tree UP next to the title */
-          marginLeft: isMobile ? "0" : "-2vw", /* Slight left shift for scaling naturally */
-          transform: isMobile ? "none" : "scale(1.2)", /* Scale up by ~20% */
-          transformOrigin: "top left",
-          zIndex: 0,
-          WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 3%, black 96%, transparent 100%)",
-          maskImage: "linear-gradient(to bottom, transparent 0%, black 3%, black 96%, transparent 100%)",
-        }}
-      >
-        <div style={{ position: "relative", width: "100%" }}>
-          <Image
-            src="/images/digital tree white.jpeg"
-            alt="ARDICTECH Digital Tree — Three service pillars"
-            width={1499}
-            height={1536}
-            priority
+          {/* Left: digital tree — fills height naturally */}
+          <div
             style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
-              /* filter: brightness removed for light mode */
-              /* On mobile constrain height so image doesn't dominate */
-              maxHeight: isMobile ? "55vw" : undefined,
-              objectFit: isMobile ? "cover" : undefined,
-              objectPosition: isMobile ? "center top" : undefined,
+              width: "44%",
+              flexShrink: 0,
+              alignSelf: "stretch",
+              position: "relative",
+              overflow: "hidden",
             }}
-          />
-          {/* Right-edge fade — blends into the right text column */}
-          {!isMobile && (
+          >
+            <Image
+              src="/images/digital tree white.jpeg"
+              alt="ARDICTECH Digital Tree — Three service pillars"
+              fill
+              priority
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+            />
+            {/* Right-edge fade */}
             <div
               style={{
                 position: "absolute",
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: "12%",
-                background: "linear-gradient(to left, rgba(255,255,255,1) 0%, transparent 100%)",
+                top: 0, right: 0, bottom: 0,
+                width: "18%",
+                background: "linear-gradient(to left, #ffffff 0%, transparent 100%)",
                 pointerEvents: "none",
               }}
             />
-          )}
-        </div>
-      </div>
+          </div>
 
-      {/* ── DESKTOP: right grid column ── */}
-      {!isMobile && (
-        <div
-          style={{
-            width: "50%",
-            height: "calc(50vw * 1536 / 1499)",
-            position: "relative",
-            zIndex: 10, /* Keep text ABOVE the scaled tree and its fade layer */
-            display: "grid",
-            /*
-              Branch centers: Pillar1=12%, Pillar2=35%, Pillar3=64% of grid height.
-              Moved 10% up from measured: 22%→12%, 45%→35%, 74%→64%.
-              Grid: 2fr 20fr 26fr 32fr 20fr
-            */
-            gridTemplateRows: "2fr 20fr 26fr 32fr 20fr",
-          }}
-        >
-          {/* Spacer top */}
-          <div />
-          {PILLARS.map((p, i) => (
-            <PillarRow key={i} p={p} i={i} hovered={hovered} setHovered={setHovered} desktop />
-          ))}
-          {/* Spacer bottom */}
-          <div />
-        </div>
-      )}
-
-      {/* ── MOBILE: stacked pillar cards ── */}
-      {isMobile && (
-        <div
-          style={{
-            width: "100%",
-            padding: "2rem 1.5rem 3rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.25rem",
-          }}
-        >
-          {PILLARS.map((p, i) => (
-            <PillarRow key={i} p={p} i={i} hovered={hovered} setHovered={setHovered} desktop={false} />
-          ))}
-        </div>
-      )}
-      </div>
-    </section>
-  );
-}
-
-/* ─── Shared pillar row / card component ─── */
-function PillarRow({
-  p, i, hovered, setHovered, desktop,
-}: {
-  p: typeof PILLARS[number];
-  i: number;
-  hovered: number | null;
-  setHovered: (v: number | null) => void;
-  desktop: boolean;
-}) {
-  const isHovered = hovered === i;
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(i)}
-      onMouseLeave={() => setHovered(null)}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        marginLeft: desktop ? "8rem" : "0", /* Push the actual bounding box right */
-        padding: desktop ? "0 2rem 0 0" : "1rem 1.25rem", /* Text flush with new border edge */
-        borderTop: desktop ? "1px solid rgba(0,0,0,0.08)" : "none",
-        borderRadius: desktop ? undefined : "12px",
-        background: desktop ? undefined : "rgba(0,0,0,0.02)",
-        border: desktop ? undefined : `1px solid ${p.accent}25`,
-        position: "relative",
-        cursor: "default",
-      }}
-    >
-      {/* Connecting line (desktop only) */}
-      {desktop && (
-        <div
-          style={{
-            position: "absolute",
-            left: "-5.5rem", /* Reach back outside the left margin */
-            top: "50%",
-            width: "3.5rem",
-            height: "1.5px",
-            background: `linear-gradient(to right, ${p.accent}80, transparent)`,
-            transform: "translateY(-50%)",
-            opacity: isHovered ? 1 : 0.4,
-            transition: "opacity 0.3s",
-          }}
-        />
-      )}
-
-      {/* Badge row */}
-      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
-        <span
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "28px",
-            height: "28px",
-            borderRadius: "50%",
-            background: `${p.accent}20`,
-            border: `1px solid ${p.accent}50`,
-            color: p.textAccent || p.accent,
-            fontSize: "14px",
-            fontWeight: 700,
-            fontFamily: "'Inter', sans-serif",
-          }}
-        >
-          {p.number}
-        </span>
-        <span
-          style={{
-            color: p.textAccent || p.accent,
-            fontSize: "14px",
-            fontWeight: 800,
-            letterSpacing: "0.16em",
-            fontFamily: "'Inter', sans-serif",
-          }}
-        >
-          PILLAR {p.number}
-        </span>
-      </div>
-
-      {/* Title — clickable if href is set */}
-      <Link
-        href={p.href}
-        style={{
-          display: "inline-block",
-          textDecoration: "none",
-        }}
-      >
-        <h2
-          style={{
-            color: "#050505",
-            fontSize: "clamp(1.4rem, 2.1vw, 1.9rem)",
-            fontWeight: 600,
-            lineHeight: 1.3,
-            marginBottom: "0.35rem",
-            fontFamily: "'DM Serif Display', serif",
-            cursor: "pointer",
-            transition: "color 0.2s",
-          }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLHeadingElement).style.color = p.accent; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLHeadingElement).style.color = "#050505"; }}
-        >
-          {p.label} →
-        </h2>
-      </Link>
-
-      {/* Tagline */}
-      <p
-        style={{
-          color: "#1c2b2b",
-          fontSize: "16px",
-          fontWeight: 800,
-          letterSpacing: "0.04em",
-          marginBottom: "0.6rem",
-          fontFamily: "'Inter', sans-serif",
-        }}
-      >
-        {p.tagline}
-      </p>
-
-      {/* Sub-services — always visible on mobile, hover on desktop */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "0.4rem",
-          opacity: desktop ? (isHovered ? 1 : 0) : 1,
-          transform: desktop ? (isHovered ? "translateY(0)" : "translateY(4px)") : "none",
-          transition: "opacity 0.25s ease, transform 0.25s ease",
-        }}
-      >
-        {p.services.map((s, si) => (
-          <span
-            key={si}
+          {/* Right: title + description + cards */}
+          <div
             style={{
-              background: `${p.accent}12`,
-              border: `1px solid ${p.accent}30`,
-              color: "rgba(0,0,0,0.85)",
-              borderRadius: "6px",
-              padding: "2px 10px",
-              fontSize: "13px",
-              fontFamily: "'Inter', sans-serif",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              padding: "4rem 4vw 4rem 3vw",
             }}
           >
-            {s}
-          </span>
-        ))}
-      </div>
+            {/* Title */}
+            <h2
+              style={{
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: "clamp(2.2rem, 4vw, 3.8rem)",
+                color: "#050505",
+                letterSpacing: "-0.01em",
+                fontWeight: "bold",
+                marginBottom: "0.75rem",
+              }}
+            >
+              AIoT ADOPTION
+            </h2>
 
-      <div
-        style={{
-          marginTop: "0.5rem",
-          width: "28px",
-          height: "2px",
-          background: `linear-gradient(90deg, ${p.accent}, transparent)`,
-          borderRadius: "2px",
-        }}
-      />
-    </div>
+            {/* Description */}
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "clamp(0.85rem, 1.05vw, 0.95rem)",
+                lineHeight: 1.7,
+                color: "rgba(0,0,0,0.6)",
+                maxWidth: "520px",
+                marginBottom: "2rem",
+              }}
+            >
+              Transform your business operations with AIoT: seamlessly connect
+              devices, activate data intelligence, and continuously optimize
+              manufacturing performance.
+            </p>
+
+            {/* 3 horizontal pillar cards — stacked vertically */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.9rem",
+              }}
+            >
+              {PILLARS.map((p, i) => (
+                <PillarCard
+                  key={i}
+                  p={p}
+                  i={i}
+                  hovered={hovered}
+                  setHovered={setHovered}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   );
 }

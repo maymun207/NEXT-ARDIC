@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    DATA
@@ -31,7 +31,7 @@ interface Pillar {
 const PILLARS: Pillar[] = [
   {
     number: 1,
-    title: "Building the Digital Foundation",
+    title: "Build the Digital Foundation",
     subtitle: "Secure. Connect. Integrate.",
     accentColor: "#4a8fdb",
     gradientFrom: "#0a0f1e",
@@ -106,7 +106,7 @@ const PILLARS: Pillar[] = [
   {
     number: 2,
     title: "Activate AI-Driven Intelligence",
-    subtitle: "Collect. Analyze. Precision.",
+    subtitle: "Capture. Analyze. Decide.",
     accentColor: "#a855f7",
     gradientFrom: "#100a1e",
     gradientTo: "#1e0a3c",
@@ -192,7 +192,7 @@ const PILLARS: Pillar[] = [
   },
   {
     number: 3,
-    title: "Orchestrate & Operate",
+    title: "Operate and Optimize",
     subtitle: "Automate. Orchestrate. Optimize.",
     accentColor: "#00c4a0",
     gradientFrom: "#031410",
@@ -271,418 +271,205 @@ const PILLARS: Pillar[] = [
   },
 ];
 
-/* Flatten into a panel list: [intro, sub, sub, sub, intro, sub, sub, sub, ...] */
-interface PanelIntro { type: "intro"; pillarIdx: number }
-interface PanelSub   { type: "sub"; pillarIdx: number; subIdx: number }
-type Panel = PanelIntro | PanelSub;
-
-const PANELS: Panel[] = PILLARS.flatMap((p, pi) => [
-  { type: "intro" as const, pillarIdx: pi },
-  ...p.subServices.map((_, si) => ({ type: "sub" as const, pillarIdx: pi, subIdx: si })),
-]);
-
-const TOTAL = PANELS.length; // 12
-
 /* ─────────────────────────────────────────────────────────────────────────────
-   COMPONENT
+   COMPACT WHITE SECTION — Image left · Pillar cards right
    ───────────────────────────────────────────────────────────────────────────── */
 
 export default function PillarsSection() {
-  const [current, setCurrent] = useState(0);
-  const [prev, setPrev]       = useState<number | null>(null);
-  const [dir, setDir]         = useState<"next" | "prev">("next");
-  const [transitioning, setTransitioning] = useState(false);
-  const transitRef = useRef(false);
-
-  const go = useCallback((idx: number) => {
-    if (transitRef.current || idx === current || idx < 0 || idx >= TOTAL) return;
-    transitRef.current = true;
-    setDir(idx > current ? "next" : "prev");
-    setTransitioning(true);
-    setPrev(current);
-    setCurrent(idx);
-    setTimeout(() => {
-      setPrev(null);
-      setTransitioning(false);
-      transitRef.current = false;
-    }, 550);
-  }, [current]);
-
-  const goNext = useCallback(() => go(current + 1), [go, current]);
-  const goPrev = useCallback(() => go(current - 1), [go, current]);
-
-  /* Keyboard navigation */
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") goNext();
-      if (e.key === "ArrowLeft"  || e.key === "ArrowUp")   goPrev();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [goNext, goPrev]);
-
-  const panel = PANELS[current];
-  const pillar = PILLARS[panel.pillarIdx];
-
-  /* Progress info */
-  const subPanelsForCurrentPillar = PILLARS[panel.pillarIdx].subServices.length;
-  const subIdx = panel.type === "sub" ? panel.subIdx : -1;
-
-  /* Transform helpers */
-  const getTransform = (i: number) => {
-    if (i === current) return "translateX(0%)";
-    if (i === prev)    return dir === "next" ? "translateX(-110%)" : "translateX(110%)";
-    return dir === "next" ? "translateX(110%)" : "translateX(-110%)";
-  };
-  const getTransition = (i: number) =>
-    i === current || i === prev ? "transform 0.55s cubic-bezier(0.4,0,0.2,1)" : "none";
-
   return (
     <section
       id="pillars"
-      className="relative w-full bg-black"
-      style={{ minHeight: "100vh" }}
-      aria-label="Service Pillars"
+      aria-label="AIoT Adoption Pillars"
+      style={{
+        background: "#ffffff",
+        padding: "clamp(3.5rem, 7vw, 5.5rem) 0",
+      }}
     >
-      {/* ── Sticky top progress bar ── */}
       <div
-        className="sticky top-0 z-50 w-full flex items-center justify-between px-6 py-3"
-        style={{ background: "rgba(0,0,0,0.85)", backdropFilter: "blur(16px)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "0 clamp(1.5rem, 4vw, 3rem)",
+        }}
       >
-        {/* Pillar dots */}
-        <div className="flex items-center gap-3">
-          {PILLARS.map((p, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                // Jump to pillar intro
-                const idx = PANELS.findIndex(pan => pan.type === "intro" && pan.pillarIdx === i);
-                go(idx);
-              }}
-              className="flex items-center gap-2 transition-all duration-300"
-              title={p.title}
-            >
-              <div
-                className="rounded-full transition-all duration-300"
-                style={{
-                  width: panel.pillarIdx === i ? "28px" : "8px",
-                  height: "8px",
-                  background: panel.pillarIdx === i ? p.accentColor : "rgba(255,255,255,0.25)",
-                }}
-              />
-              {panel.pillarIdx === i && (
-                <span
-                  className="hidden md:block text-xs font-semibold"
-                  style={{ color: p.accentColor, fontFamily: "'Inter', sans-serif", letterSpacing: "0.04em" }}
-                >
-                  Pillar {p.number}
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "45% 1fr",
+            gap: "clamp(2rem, 5vw, 4rem)",
+            alignItems: "center",
+          }}
+          className="lg:grid-cols-[45%_1fr] grid-cols-1"
+        >
 
-        {/* Sub-service progress */}
-        {panel.type === "sub" && (
-          <div className="flex items-center gap-2">
-            {Array.from({ length: subPanelsForCurrentPillar }).map((_, i) => (
-              <div
-                key={i}
-                className="rounded-full transition-all duration-300"
-                style={{
-                  width: i === subIdx ? "20px" : "6px",
-                  height: "6px",
-                  background: i === subIdx ? pillar.accentColor : "rgba(255,255,255,0.2)",
-                }}
-              />
-            ))}
-            <span
-              className="ml-2 text-xs"
-              style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Inter', sans-serif" }}
-            >
-              {subIdx + 1} / {subPanelsForCurrentPillar}
-            </span>
-          </div>
-        )}
-        {panel.type === "intro" && (
-          <span
-            className="text-xs uppercase tracking-widest"
-            style={{ color: pillar.accentColor, fontFamily: "'Inter', sans-serif" }}
+          {/* ── LEFT: Digital Tree image ── */}
+          <div
+            style={{
+              position: "relative",
+              borderRadius: "24px",
+              overflow: "hidden",
+              height: "clamp(420px, 58vh, 660px)",
+              boxShadow: "0 12px 60px rgba(0,0,0,0.08)",
+            }}
           >
-            {pillar.subtitle}
-          </span>
-        )}
-      </div>
+            <Image
+              src="/images/Digital tree white.jpeg"
+              alt="AIoT Digital Tree — 3 pillars of intelligence"
+              fill
+              style={{ objectFit: "cover", objectPosition: "left center" }}
+              priority
+            />
+          </div>
 
-      {/* ── Slide stage ── */}
-      <div className="relative w-full overflow-hidden" style={{ height: "calc(100vh - 49px)" }}>
-        {PANELS.map((pan, i) => {
-          const pil = PILLARS[pan.pillarIdx];
-          const isVisible = i === current || i === prev;
+          {/* ── RIGHT: Label + title + 3 cards ── */}
+          <div>
+            {/* Section label */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.75rem" }}>
+              <div style={{ width: "32px", height: "2px", background: "#4a8fdb", borderRadius: "2px" }} />
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.7rem",
+                  fontWeight: 700,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  color: "#4a8fdb",
+                }}
+              >
+                AIoT Adoption
+              </span>
+            </div>
 
-          return (
-            <div
-              key={i}
-              className="absolute inset-0"
-              aria-hidden={i !== current}
+            <h2
               style={{
-                transform: getTransform(i),
-                transition: getTransition(i),
-                visibility: isVisible ? "visible" : "hidden",
-                zIndex: i === current ? 10 : i === prev ? 5 : 0,
-                background: `radial-gradient(ellipse at 60% 40%, ${pil.gradientTo} 0%, ${pil.gradientFrom} 70%)`,
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: "clamp(1.8rem, 2.8vw, 2.6rem)",
+                fontWeight: 700,
+                color: "#0f0f0e",
+                lineHeight: 1.15,
+                marginBottom: "0.6rem",
               }}
             >
-              {pan.type === "intro"
-                ? <IntroPanel pillar={pil} />
-                : <SubPanel pillar={pil} sub={pil.subServices[pan.subIdx]} subNum={pan.subIdx + 1} />
-              }
-            </div>
-          );
-        })}
-      </div>
+              Three Pillars of Industrial Intelligence
+            </h2>
+            <p
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.9rem",
+                color: "#666",
+                lineHeight: 1.7,
+                marginBottom: "2rem",
+                maxWidth: "480px",
+              }}
+            >
+              A structured journey from connected devices to autonomous, self-optimizing operations.
+            </p>
 
-      {/* ── Arrow navigation ── */}
-      {current > 0 && (
-        <button
-          onClick={goPrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-50 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)" }}
-          aria-label="Previous"
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.background = `${pillar.accentColor}22`;
-            (e.currentTarget as HTMLElement).style.borderColor = pillar.accentColor;
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)";
-            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)";
-          }}
-        >
-          <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-      )}
-      {current < TOTAL - 1 && (
-        <button
-          onClick={goNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-50 flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)" }}
-          aria-label="Next"
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.background = `${pillar.accentColor}22`;
-            (e.currentTarget as HTMLElement).style.borderColor = pillar.accentColor;
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)";
-            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)";
-          }}
-        >
-          <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      )}
+            {/* ── 3 Pillar Cards ── */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              {PILLARS.map((p) => (
+                <div
+                  key={p.number}
+                  style={{
+                    background: "#fff",
+                    border: "1px solid #ebebeb",
+                    borderLeft: `4px solid ${p.accentColor}`,
+                    borderRadius: "16px",
+                    padding: "1.1rem 1.4rem",
+                    boxShadow: "0 2px 12px rgba(0,0,0,0.04)",
+                    transition: "box-shadow 0.25s, transform 0.25s",
+                    cursor: "default",
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.boxShadow = `0 8px 32px ${p.accentColor}22`;
+                    el.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement;
+                    el.style.boxShadow = "0 2px 12px rgba(0,0,0,0.04)";
+                    el.style.transform = "translateY(0)";
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem" }}>
+
+                    {/* Number badge */}
+                    <div
+                      style={{
+                        minWidth: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                        background: `${p.accentColor}14`,
+                        border: `1.5px solid ${p.accentColor}38`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontFamily: "'DM Serif Display', serif",
+                        fontSize: "1.1rem",
+                        fontWeight: 700,
+                        color: p.accentColor,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {p.number}
+                    </div>
+
+                    <div style={{ flex: 1 }}>
+                      <h3
+                        style={{
+                          fontFamily: "'DM Serif Display', serif",
+                          fontSize: "clamp(0.95rem, 1.4vw, 1.15rem)",
+                          fontWeight: 700,
+                          color: "#0f0f0e",
+                          marginBottom: "0.2rem",
+                        }}
+                      >
+                        {p.title}
+                      </h3>
+                      <p
+                        style={{
+                          fontFamily: "'Inter', sans-serif",
+                          fontSize: "0.68rem",
+                          fontWeight: 700,
+                          color: p.accentColor,
+                          letterSpacing: "0.06em",
+                          textTransform: "uppercase",
+                          marginBottom: "0.65rem",
+                        }}
+                      >
+                        {p.subtitle}
+                      </p>
+
+                      {/* Sub-service chips */}
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                        {p.subServices.map((s, si) => (
+                          <span
+                            key={si}
+                            style={{
+                              fontFamily: "'Inter', sans-serif",
+                              fontSize: "0.67rem",
+                              fontWeight: 600,
+                              color: p.accentColor,
+                              background: `${p.accentColor}0c`,
+                              border: `1px solid ${p.accentColor}28`,
+                              borderRadius: "100px",
+                              padding: "0.22rem 0.7rem",
+                            }}
+                          >
+                            {s.title}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
     </section>
   );
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   INTRO PANEL
-   ───────────────────────────────────────────────────────────────────────────── */
-function IntroPanel({ pillar }: { pillar: Pillar }) {
-  return (
-    <div className="flex h-full w-full flex-col items-center justify-center px-8 text-center">
-      {/* Accent orb */}
-      <div
-        className="mb-8 flex h-20 w-20 items-center justify-center rounded-full text-4xl font-bold"
-        style={{
-          background: `${pillar.accentColor}18`,
-          border: `1.5px solid ${pillar.accentColor}50`,
-          color: pillar.accentColor,
-          fontFamily: "'DM Serif Display', serif",
-          boxShadow: `0 0 60px ${pillar.accentColor}30`,
-        }}
-      >
-        {pillar.number}
-      </div>
-
-      {/* Sub-service chips */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
-        {pillar.subServices.map((s, i) => (
-          <span
-            key={i}
-            className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-widest"
-            style={{
-              background: `${pillar.accentColor}15`,
-              border: `1px solid ${pillar.accentColor}35`,
-              color: pillar.accentColor,
-              fontFamily: "'Inter', sans-serif",
-            }}
-          >
-            {s.title}
-          </span>
-        ))}
-      </div>
-
-      <h2
-        className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 max-w-3xl"
-        style={{ fontFamily: "'DM Serif Display', serif" }}
-      >
-        {pillar.title}
-      </h2>
-
-      <div className="w-16 h-0.5 rounded-full mb-4" style={{ background: `linear-gradient(90deg, ${pillar.accentColor}, transparent)` }} />
-
-      <p
-        className="text-lg sm:text-xl font-semibold tracking-widest"
-        style={{ color: pillar.accentColor, fontFamily: "'Inter', sans-serif" }}
-      >
-        {pillar.subtitle}
-      </p>
-
-      {/* Scroll hint */}
-      <p className="mt-12 text-xs text-white/30" style={{ fontFamily: "'Inter', sans-serif" }}>
-        Use arrow keys or buttons to explore →
-      </p>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────────────────────
-   SUB-SERVICE PANEL
-   ───────────────────────────────────────────────────────────────────────────── */
-function SubPanel({ pillar, sub, subNum }: { pillar: Pillar; sub: SubService; subNum: number }) {
-  return (
-    <div className="flex h-full w-full items-center px-8 sm:px-16 lg:px-24">
-      <div className="mx-auto w-full max-w-6xl">
-        <div className={`grid gap-10 ${sub.extras && sub.layout === "split" ? "lg:grid-cols-2" : "lg:grid-cols-[55%_45%]"} items-center`}>
-
-          {/* LEFT — main content */}
-          <div>
-            {/* Pillar breadcrumb */}
-            <div className="flex items-center gap-2 mb-5">
-              <span
-                className="text-xs font-bold uppercase tracking-widest"
-                style={{ color: pillar.accentColor, fontFamily: "'Inter', sans-serif" }}
-              >
-                Pillar {pillar.number}
-              </span>
-              <span className="text-white/20">›</span>
-              <span
-                className="text-xs font-semibold uppercase tracking-widest text-white/40"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
-                {subNum} / {pillar.subServices.length}
-              </span>
-            </div>
-
-            {/* Accent line */}
-            <div className="w-10 h-0.5 rounded-full mb-5" style={{ background: pillar.accentColor }} />
-
-            <h3
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3"
-              style={{ fontFamily: "'DM Serif Display', serif" }}
-            >
-              {sub.title}
-            </h3>
-
-            {sub.tagline && (
-              <p
-                className="text-base sm:text-lg text-white/60 mb-6 max-w-lg"
-                style={{ fontFamily: "'Inter', sans-serif", lineHeight: "1.7" }}
-              >
-                {sub.tagline}
-              </p>
-            )}
-
-            {sub.coverage && (
-              <div
-                className="mb-6 rounded-xl px-5 py-4"
-                style={{
-                  background: `${pillar.accentColor}10`,
-                  border: `1px solid ${pillar.accentColor}25`,
-                }}
-              >
-                <span
-                  className="text-xs font-bold uppercase tracking-widest block mb-1"
-                  style={{ color: pillar.accentColor, fontFamily: "'Inter', sans-serif" }}
-                >
-                  Coverage
-                </span>
-                <p className="text-sm text-white/70" style={{ fontFamily: "'Inter', sans-serif" }}>
-                  {sub.coverage}
-                </p>
-              </div>
-            )}
-
-            {/* What We Do */}
-            <div>
-              <span
-                className="text-xs font-bold uppercase tracking-widest block mb-3"
-                style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Inter', sans-serif" }}
-              >
-                What We Do
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {sub.whatWeDo.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <svg
-                      className="mt-0.5 shrink-0 h-4 w-4"
-                      style={{ color: pillar.accentColor }}
-                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span
-                      className="text-sm text-white/80"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    >
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT — extras */}
-          {sub.extras && sub.extras.length > 0 && (
-            <div className="flex flex-col gap-4">
-              {sub.extras.map((extra, ei) => (
-                <div
-                  key={ei}
-                  className="rounded-2xl px-6 py-5"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: `1px solid ${pillar.accentColor}20`,
-                    backdropFilter: "blur(8px)",
-                  }}
-                >
-                  <span
-                    className="text-xs font-bold uppercase tracking-widest block mb-3"
-                    style={{ color: pillar.accentColor, fontFamily: "'Inter', sans-serif" }}
-                  >
-                    {extra.label}
-                  </span>
-                  <ul className="space-y-2">
-                    {extra.items.map((item, ii) => (
-                      <li
-                        key={ii}
-                        className="flex items-start gap-2 text-sm text-white/70"
-                        style={{ fontFamily: "'Inter', sans-serif" }}
-                      >
-                        <span style={{ color: pillar.accentColor, marginTop: "1px" }}>·</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}

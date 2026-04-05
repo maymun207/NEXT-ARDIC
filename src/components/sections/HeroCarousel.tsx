@@ -70,7 +70,7 @@ export default function HeroCarousel({ dict }: HeroCarouselProps) {
 
   return (
     <section
-      className="relative flex min-h-screen items-center overflow-hidden bg-black"
+      className="relative flex h-[75vh] items-center overflow-hidden bg-black"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-label="Hero Carousel"

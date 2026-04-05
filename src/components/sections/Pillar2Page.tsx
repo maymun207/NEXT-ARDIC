@@ -327,195 +327,124 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
         </div>
       </div>
 
-      {/* ── RIGHT: Scrolling sub-service sections ────────────────────────── */}
-      <div style={{ flex: 1 }}>
-        {SUB_SERVICES.map((sub, i) => (
-          <section
-            key={sub.id}
-            ref={(el) => { sectionRefs.current[i] = el; }}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              borderLeft: "1px solid rgba(0,0,0,0.06)",
-              borderBottom: "1px solid rgba(0,0,0,0.06)",
-            }}
-          >
-            {/* Text content */}
-            <div
-              style={{
-                flex: 1,
-                padding: "2.5rem 3.5rem 3rem",
-                background: "#ffffff",
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)",
-                  fontWeight: 700,
-                  color: "#050505",
-                  fontFamily: "'DM Serif Display', serif",
-                  lineHeight: 1.25,
-                  marginBottom: "0.5rem",
-                }}
-              >
-                {sub.title}
-              </h2>
-              <p
-                style={{
-                  color: sub.accent,
-                  fontSize: "13.5px",
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                {sub.tagline}
-              </p>
-
-              <div
-                style={{
-                  width: "36px",
-                  height: "2px",
-                  background: `linear-gradient(90deg, ${sub.accent}, transparent)`,
-                  borderRadius: "2px",
-                  marginBottom: "1.5rem",
-                }}
+      {/* ── RIGHT: Scrolling sub-service hover cards grid ────────────────────────── */}
+      <div style={{ flex: 1, padding: "3rem", background: "#f9f9fa", display: "flex", flexDirection: "column" }}>
+        
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "2rem",
+          alignItems: "stretch"
+        }}>
+          {SUB_SERVICES.map((sub, i) => {
+            // Check if this is the 5th item (index 4)
+            const isLast = i === 4;
+            return (
+              <HoverCard 
+                key={sub.id} 
+                sub={sub} 
+                i={i} 
+                isLast={isLast} 
+                sectionRef={(el: HTMLElement | null) => { sectionRefs.current[i] = el; }} 
               />
-
-              <p
-                style={{
-                  color: "rgba(0,0,0,0.75)",
-                  fontSize: "15px",
-                  lineHeight: 1.75,
-                  marginBottom: "2rem",
-                  maxWidth: "600px",
-                }}
-              >
-                {sub.description}
-              </p>
-
-              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {sub.bullets.map((b, bi) => (
-                  <li key={bi} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
-                    <span
-                      style={{
-                        flexShrink: 0,
-                        marginTop: "0.3rem",
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        background: sub.accent,
-                        boxShadow: `0 0 6px ${sub.accent}80`,
-                      }}
-                    />
-                    <span style={{ color: "rgba(0,0,0,0.75)", fontSize: "14px", lineHeight: 1.6 }}>
-                      {b}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* ── WHAT WE DO CTA + hover preview ── */}
-              <div
-                style={{ position: "relative", display: "inline-block", marginTop: "2rem" }}
-                onMouseLeave={() => setHoveredCTA(null)}
-              >
-                {/* Hover preview card */}
-                {hoveredCTA === sub.id && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "calc(100% + 12px)",
-                      left: 0,
-                      width: "320px",
-                      background: "rgba(255,255,255,0.97)",
-                      border: `1px solid ${sub.accent}35`,
-                      borderRadius: "14px",
-                      overflow: "hidden",
-                      boxShadow: `0 24px 48px rgba(0,0,0,0.1), 0 0 0 1px ${sub.accent}15`,
-                      animation: "fadeSlideUp 0.2s ease",
-                      zIndex: 50,
-                      backdropFilter: "blur(16px)",
-                    }}
-                  >
-                    {/* Thumbnail image */}
-                    <div style={{ position: "relative", height: "150px" }}>
-                      <Image
-                        src={sub.image}
-                        alt={sub.title}
-                        fill
-                        style={{ objectFit: "cover", objectPosition: "center" }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute", inset: 0,
-                          background: "linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.85) 100%)",
-                        }}
-                      />
-                      <div style={{ position: "absolute", bottom: "0.75rem", left: "1rem" }}>
-                        <p style={{ color: sub.accent, fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em" }}>
-                          {sub.tagline}
-                        </p>
-                      </div>
-                    </div>
-                    {/* Preview content */}
-                    <div style={{ padding: "1rem 1.25rem 1.25rem" }}>
-                      <p style={{ color: "#050505", fontWeight: 600, fontSize: "13px", marginBottom: "0.75rem", fontFamily: "'DM Serif Display', serif" }}>
-                        {sub.title}
-                      </p>
-                      <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.45rem" }}>
-                        {sub.bullets.slice(0, 2).map((b, bi) => (
-                          <li key={bi} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
-                            <span style={{ flexShrink: 0, marginTop: "0.35rem", width: "5px", height: "5px", borderRadius: "50%", background: sub.accent }} />
-                            <span style={{ color: "rgba(0,0,0,0.6)", fontSize: "12px", lineHeight: 1.5 }}>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p style={{ color: sub.accent, fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", marginTop: "0.85rem" }}>
-                        Click to explore →
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* The actual CTA link */}
-                <Link
-                  href={`/en/services/ai-intelligence/${sub.slug}`}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.6rem",
-                    padding: "0.75rem 1.75rem",
-                    background: `${sub.accent}14`,
-                    border: `1px solid ${sub.accent}50`,
-                    borderRadius: "8px",
-                    color: sub.accent,
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    letterSpacing: "0.18em",
-                    textDecoration: "none",
-                    transition: "all 0.25s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    setHoveredCTA(sub.id);
-                    (e.currentTarget as HTMLAnchorElement).style.background = `${sub.accent}24`;
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = `0 0 16px ${sub.accent}40`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = `${sub.accent}14`;
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none";
-                  }}
-                >
-                  WHAT WE DO
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </section>
-        ))}
+            );
+          })}
+        </div>
       </div>
+      </div>
+    </section>
+  );
+}
+
+// Internal Hover Card Component
+function HoverCard({ sub, i, isLast, sectionRef }: { sub: any, i: number, isLast: boolean, sectionRef: any }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <section
+      ref={sectionRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        gridColumn: isLast ? "1 / -1" : "auto", // The 5th item spans full width
+        width: isLast ? "calc(50% - 1rem)" : "100%", // Constrain 5th item to identical width and center it
+        margin: isLast ? "0 auto" : "0",
+        background: "#ffffff",
+        borderRadius: "20px",
+        padding: "2.5rem 2rem",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: isHovered ? `0 24px 48px ${sub.accent}25` : "0 8px 24px rgba(0,0,0,0.04)",
+        border: `1px solid ${isHovered ? sub.accent : "rgba(0,0,0,0.06)"}`,
+        transform: isHovered ? "translateY(-5px)" : "translateY(0)",
+        transition: "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+        cursor: "default",
+      }}
+    >
+      {/* Number Icon */}
+      <div style={{
+        width: "54px", height: "54px", borderRadius: "14px",
+        background: `${sub.accent}15`, color: sub.accent,
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: "22px", fontWeight: 800, marginBottom: "1.5rem"
+      }}>
+        0{i + 1}
+      </div>
+
+      <h2 style={{
+        fontSize: "1.4rem", fontWeight: 700, color: "#050505",
+        fontFamily: "'DM Serif Display', serif", lineHeight: 1.25, marginBottom: "0.5rem"
+      }}>
+        {sub.title}
+      </h2>
+      <p style={{
+        color: sub.accent, fontSize: "12px", fontWeight: 700,
+        letterSpacing: "0.08em", marginBottom: "1.25rem", textTransform: "uppercase"
+      }}>
+        {sub.tagline}
+      </p>
+
+      <div style={{ width: "24px", height: "2px", background: sub.accent, borderRadius: "2px", marginBottom: "1.25rem" }} />
+
+      <p style={{
+        color: "rgba(0,0,0,0.65)", fontSize: "14px", lineHeight: 1.6, flex: 1, marginBottom: "1.5rem"
+      }}>
+        {sub.description}
+      </p>
+
+      {/* Bullets (compressed for card view) */}
+      <ul style={{ listStyle: "none", padding: 0, margin: "0 0 2rem 0", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+        {sub.bullets.slice(0, 3).map((b: string, bi: number) => (
+          <li key={bi} style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem" }}>
+            <span style={{
+              flexShrink: 0, marginTop: "0.35rem", width: "5px", height: "5px",
+              borderRadius: "50%", background: sub.accent
+            }} />
+            <span style={{ color: "rgba(0,0,0,0.7)", fontSize: "13px", lineHeight: 1.4 }}>
+              {b}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA Button */}
+      <div style={{ marginTop: "auto" }}>
+        <Link
+          href={`/en/services/ai-intelligence/${sub.slug}`}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "0.5rem",
+            padding: "0.6rem 1.25rem", borderRadius: "8px",
+            background: isHovered ? sub.accent : `${sub.accent}12`,
+            color: isHovered ? "#ffffff" : sub.accent,
+            fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textDecoration: "none",
+            transition: "all 0.3s ease"
+          }}
+        >
+          EXPLORE
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
     </section>
   );

@@ -32,7 +32,7 @@ export default function SubServicePage({ data }: { data: SubServiceData }) {
     <div style={{ background: "#000", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
       {/* ── HERO IMAGE ──────────────────────────────────────────────────── */}
-      <div style={{ position: "relative", height: "70vh" }}>
+      <div style={{ position: "relative", height: "75vh" }}>
         <Image
           src={data.image}
           alt={data.title}

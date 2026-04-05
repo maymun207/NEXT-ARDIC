@@ -15,9 +15,10 @@ interface Slide {
   chipText?: string;          // bottom-right dark chip (slides 2 & 3)
   footerText?: string;        // slide 1 only
   accentColor: string;
-  layout: "bottom" | "glass-card";
+  layout: "bottom" | "glass-card" | "horizontal-top";
   cardSide?: "left" | "right"; // glass-card position: left=top-left float, right=right-center float
   imagePosition?: string; // e.g. "45% center" to shift image
+  imageScale?: number; // zoom in/out effect
 }
 
 const AUTO_ADVANCE_MS = 6000;
@@ -29,11 +30,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
     {
       id: 0,
       layout: "bottom",
-      image: "/images/H1-A HERO.jpeg",
+      image: "/images/H1.jpeg",
       imageAlt: "ARDIC — Intelligence Integrated, AIoT Platform",
       headline: h.slide1.headline,
       subheadline: h.slide1.subheadline,
-      footerText: "ARDICTECH 2026",
       accentColor: "#8b5cf6",
     },
     {
@@ -54,16 +54,13 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
     },
     {
       id: 2,
-      layout: "glass-card",
-      image: "/images/H3-ENTERPRISE AI .jpeg",
+      layout: "horizontal-top",
+      image: "/images/hero3 .jpeg",
       imageAlt: "Enterprise Agentic AI Platform — secure data sovereignty",
       badge: "Enterprise AI",
       headline: h.slide3.headline,
       subheadline: h.slide3.subheadline,
-      chipText: "Sovereign AI · No compromises.",
       accentColor: "#6d28d9",
-      cardSide: "right",
-      imagePosition: "45% center",
     },
   ];
 
@@ -138,7 +135,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
       id="hero"
       aria-label="Hero"
       className="relative w-full overflow-hidden bg-white"
-      style={{ height: "100svh" }}
+      style={{ height: "75vh" }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -164,7 +161,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
             {/* ── Full-bleed image (all slides) ── */}
             <div
               className="absolute inset-0"
-              style={s.layout === "bottom" ? { transform: "scale(1.05)", transformOrigin: "center center" } : undefined}
+              style={{
+                transform: s.imageScale ? `scale(${s.imageScale})` : "none",
+                transformOrigin: "center center"
+              }}
             >
               <Image
                 src={s.image}
@@ -183,25 +183,30 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 ════════════════════════════════════════ */}
             {s.layout === "bottom" && (
               <>
-                {/* Bottom fade */}
+                {/* Top-left fade — only covers top half so bottom-left image stays visible */}
                 <div
-                  className="absolute inset-x-0 bottom-0 pointer-events-none"
+                  className="absolute top-0 left-0 pointer-events-none"
                   style={{
-                    height: "60%",
+                    width: "55%",
+                    height: "55%",
                     background:
-                      "linear-gradient(to top, rgba(255,255,255,1) 20%, rgba(255,255,255,0.92) 45%, rgba(255,255,255,0.5) 65%, transparent 100%)",
+                      "linear-gradient(135deg, rgba(255,255,255,0.97) 20%, rgba(255,255,255,0.75) 50%, transparent 80%)",
                   }}
                 />
-                {/* Text block */}
+                {/* Text block — top-left */}
                 <div
-                  className="hero-text-bottom absolute bottom-0 inset-x-0 px-6 sm:px-12 lg:px-20 flex flex-col items-center text-center"
-                  style={{ paddingBottom: "clamp(4.5rem, 9vh, 7rem)" }}
+                  className="hero-text-bottom absolute top-0 left-0 flex flex-col items-start text-left"
+                  style={{
+                    paddingTop: "clamp(2rem, 5vh, 4rem)",
+                    paddingLeft: "clamp(1.5rem, 6vw, 5rem)",
+                    maxWidth: "clamp(280px, 42%, 520px)",
+                  }}
                 >
                   <h1
-                    className="font-bold leading-none mb-3 text-center"
+                    className="font-bold leading-tight mb-3"
                     style={{
                       fontFamily: "'DM Serif Display', serif",
-                      fontSize: "clamp(2.2rem, 5.5vw, 5rem)",
+                      fontSize: "clamp(2rem, 4.5vw, 4.2rem)",
                       color: "#0f0f0e",
                       letterSpacing: "-0.01em",
                     }}
@@ -209,20 +214,19 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                     {s.headline}
                   </h1>
                   <div
-                    className="mb-4 rounded-full mx-auto"
+                    className="mb-4 rounded-full"
                     style={{
-                      width: "48px", height: "3px",
+                      width: "44px", height: "3px",
                       background: `linear-gradient(90deg, ${s.accentColor}, ${s.accentColor}55)`,
                     }}
                   />
                   <p
-                    className="mb-6 leading-relaxed mx-auto text-center"
+                    className="mb-6 leading-relaxed"
                     style={{
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: "clamp(1.3rem, 2.2vw, 1.9rem)",
-                      color: "#000000",
+                      fontSize: "clamp(1rem, 1.6vw, 1.45rem)",
+                      color: "#111",
                       fontWeight: 600,
-                      maxWidth: "540px",
                     }}
                   >
                     {s.subheadline}
@@ -233,7 +237,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         letterSpacing: "0.22em",
-                        color: "rgba(0,0,0,0.22)",
+                        color: "rgba(0,0,0,0.25)",
                       }}
                     >
                       {s.footerText}
@@ -257,8 +261,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                     s.cardSide === "right"
                       ? {
                           right: "clamp(1.5rem, 4vw, 3.5rem)",
-                          top: "35%",
-                          transform: "translateY(-50%)",
+                          top: "clamp(1rem, 3vh, 2.5rem)", /* Matches left card */
                           width: "clamp(260px, 38%, 420px)",
                           background: "rgba(255, 255, 255, 0.55)",
                           backdropFilter: "blur(28px)",
@@ -400,6 +403,116 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 )}
               </>
             )}
+
+            {/* ════════════════════════════════════════
+                LAYOUT C — "horizontal-top"
+                Full-bleed image + wide horizontal
+                frosted glass bar at the top
+                ════════════════════════════════════════ */}
+            {s.layout === "horizontal-top" && (
+              <div
+                className="hero-horiz-card absolute inset-x-0"
+                style={{
+                  top: "clamp(1rem, 3vh, 2.5rem)",
+                  margin: "0 clamp(1.5rem, 4vw, 3.5rem)",
+                  background: "rgba(255, 255, 255, 0.82)",
+                  backdropFilter: "blur(24px)",
+                  WebkitBackdropFilter: "blur(24px)",
+                  border: "1px solid rgba(255,255,255,0.7)",
+                  borderRadius: "20px",
+                  padding: "clamp(1.2rem, 2.5vh, 1.8rem) clamp(1.5rem, 3vw, 2.5rem)",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.8)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "clamp(1.5rem, 4vw, 3rem)",
+                }}
+              >
+                {/* LEFT — badge + headline */}
+                <div style={{ flex: "0 0 auto", maxWidth: "42%" }}>
+                  {s.badge && (
+                    <div
+                      className="inline-flex items-center gap-2 rounded-full border px-3 py-1 mb-3 text-xs font-semibold uppercase tracking-widest"
+                      style={{
+                        borderColor: `${s.accentColor}35`,
+                        color: s.accentColor,
+                        background: `${s.accentColor}0d`,
+                      }}
+                    >
+                      <span
+                        className="h-1.5 w-1.5 rounded-full animate-pulse"
+                        style={{ background: s.accentColor }}
+                      />
+                      {s.badge}
+                    </div>
+                  )}
+                  <h1
+                    style={{
+                      fontFamily: "'DM Serif Display', serif",
+                      fontSize: "clamp(1.5rem, 2.6vw, 2.6rem)",
+                      fontWeight: 700,
+                      color: "#0b0b0b",
+                      lineHeight: 1.15,
+                      letterSpacing: "-0.01em",
+                      margin: 0,
+                    }}
+                  >
+                    {s.headline}
+                  </h1>
+                </div>
+
+                {/* Divider */}
+                <div
+                  style={{
+                    width: "1px",
+                    alignSelf: "stretch",
+                    background: `linear-gradient(to bottom, transparent, ${s.accentColor}40, transparent)`,
+                    flexShrink: 0,
+                  }}
+                />
+
+                {/* RIGHT — subheadline + CTA */}
+                <div style={{ flex: 1 }}>
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
+                      color: "#3a3a38",
+                      lineHeight: 1.65,
+                      marginBottom: s.ctaPrimary ? "1rem" : 0,
+                    }}
+                  >
+                    {s.subheadline}
+                  </p>
+                  {s.ctaPrimary?.label && (
+                    <a
+                      href={s.ctaPrimary.href}
+                      target={s.ctaPrimary.href.startsWith("http") ? "_blank" : undefined}
+                      rel={s.ctaPrimary.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-2 rounded-lg font-bold uppercase tracking-widest transition-all duration-200"
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: "0.7rem",
+                        padding: "0.55rem 1.3rem",
+                        border: `1.5px solid ${s.accentColor}`,
+                        color: s.accentColor,
+                        background: "transparent",
+                        letterSpacing: "0.1em",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = s.accentColor;
+                        e.currentTarget.style.color = "#fff";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.color = s.accentColor;
+                      }}
+                    >
+                      {s.ctaPrimary.label}
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         );
       })}
@@ -516,9 +629,11 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
           .hero-chip {
             display: none !important;
           }
-          /* Slide 1 bottom text */
+          /* Slide 1 top-left text — go full width on mobile */
           .hero-text-bottom {
-            padding-bottom: 5rem !important;
+            max-width: 100% !important;
+            padding-left: 1.25rem !important;
+            padding-top: 1.5rem !important;
           }
         }
       `}</style>

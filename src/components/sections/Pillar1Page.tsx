@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ const PILLAR = {
   tagline: "Secure. Connect. Integrate.",
   accent: "#7ab8f5",
   textAccent: "#2565a3",
-  image: "/images/BuildingF white .jpeg",
+  image: "/images/BuildingF.jpeg",
 };
 
 const SUB_SERVICES = [
@@ -27,8 +27,9 @@ const SUB_SERVICES = [
       "PilarOS & AFEX: domestic industrial Android with AFEX security engine",
       "Remote monitoring, encryption, and device wipe across all endpoints",
       "Mobile Device Management (MDM)",
-      "Protocol-agnostic edge gateway security",
+      "Complete operational visibility and traceability",
     ],
+    buttons: ["PILAROS & AFEX", "MODIVERSE"],
   },
   {
     id: "connect-systems",
@@ -43,8 +44,9 @@ const SUB_SERVICES = [
       "IoT-Ignite: PaaS platform with smart edge computing",
       "Protocol-agnostic: MQTT, OPC-UA, Modbus, REST, and custom",
       "Scalable overlay network across plant, field, and cloud",
-      "Real-time asset telemetry at industrial scale",
+      "Plug-and-play edge deployments with zero coding",
     ],
+    buttons: ["IOT-IGNITE", "ARCLOUD"],
   },
   {
     id: "integrate-infrastructure",
@@ -65,427 +67,217 @@ const SUB_SERVICES = [
 ];
 
 export default function Pillar1Page({ standalone = false }: { standalone?: boolean }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [hoveredCTA, setHoveredCTA] = useState<string | null>(null);
-  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    sectionRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
-        { threshold: 0.4 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
+  // Layout redesigned from sticky scroll to vertical grid with expanding hover cards
   return (
     <section
       id="digital-foundation"
       style={{
-        background: "#ffffff",
+        position: "relative",
+        zIndex: 10,
+        background: "#fdfdfd", // Slight off-white to make the cards pop
         fontFamily: "'Inter', sans-serif",
-        paddingTop: standalone ? "4rem" : "8vh",
+        paddingBottom: "10vh",
       }}
     >
-      {/* ── SECTION HEADER ── */}
-      <div style={{ width: "100%", padding: "0 4%", marginBottom: "4vh", display: "flex", alignItems: "center", gap: "2rem" }}>
-        <h2
-          style={{
-            fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
-            fontWeight: 900,
-            color: PILLAR.textAccent || PILLAR.accent,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            margin: 0,
-            fontFamily: "'Inter', sans-serif",
-          }}
-        >
-          PILLAR {PILLAR.number}
-        </h2>
-        <div style={{ flex: 1, height: "2px", background: `linear-gradient(to right, ${PILLAR.textAccent || PILLAR.accent}40, transparent)` }} />
-      </div>
-
-      <div style={{ display: "flex", minHeight: "100vh" }}>
-      {/* ── LEFT: Sticky sidebar ─────────────────────────────────────────── */}
-      <div
+      {/* ── TOP HEADER HERO ── */}
+      <div 
         style={{
-          width: "42%",
-          flexShrink: 0,
-          position: "sticky",
-          top: "4rem",           /* align to bottom of fixed header */
-          height: "calc(100vh - 4rem)",
-          overflow: "hidden",
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          padding: "5% 5% 0",
+          background: "#ffffff",
+          gap: "3rem"
         }}
       >
-        {/* Background image */}
-        <Image
-          src={PILLAR.image}
-          alt={PILLAR.title}
-          fill
-          priority
-          style={{ objectFit: "cover", objectPosition: "center" }}
-        />
-
-        {/* Gradient overlays */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.40) 60%, rgba(255,255,255,0.55) 100%)",
-          }}
-        />
-        {/* Right fade into main content */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0, right: 0, bottom: 0,
-            width: "25%",
-            background: "linear-gradient(to left, rgba(255,255,255,0.9) 0%, transparent 100%)",
-          }}
-        />
-
-        {/* Content */}
-        <div
-          style={{
-            position: "relative",
-            zIndex: 10,
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "10vh 3rem 3.5rem",
-          }}
-        >
-          {/* Top: Pillar badge */}
-          <div>
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                background: `${PILLAR.accent}18`,
-                border: `1px solid ${PILLAR.accent}40`,
-                borderRadius: "999px",
-                padding: "0.35rem 1rem",
-                color: PILLAR.textAccent,
-                fontSize: "12px",
-                fontWeight: 800,
-                letterSpacing: "0.18em",
-              }}
-            >
-              ● PILLAR {PILLAR.number}
-            </span>
-          </div>
-
-          {/* Middle: Title */}
-          <div>
-            <h1
-              style={{
-                fontSize: "clamp(2rem, 3.2vw, 3rem)",
-                fontWeight: 700,
-                color: "#050505",
-                lineHeight: 1.2,
-                fontFamily: "'DM Serif Display', serif",
-                whiteSpace: "pre-line",
-                marginBottom: "1rem",
-              }}
-            >
-              {PILLAR.title}
-            </h1>
-            <p 
-              style={{ 
-                color: "#1c2b2b", 
-                fontSize: "17px", 
-                fontWeight: 800, 
-                letterSpacing: "0.04em",
-                textShadow: "0 0 12px rgba(255,255,255,0.9)", // White glow completely isolates text from image noise
-              }}
-            >
-              {PILLAR.tagline}
-            </p>
-
-            {/* Divider */}
-            <div
-              style={{
-                width: "40px",
-                height: "2px",
-                background: `linear-gradient(90deg, ${PILLAR.accent}, transparent)`,
-                borderRadius: "2px",
-                margin: "1.5rem 0",
-              }}
-            />
-
-            {/* Sub-service nav dots */}
-            <nav style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-              {SUB_SERVICES.map((s, i) => (
-                <button
-                  key={s.id}
-                  onClick={() =>
-                    sectionRefs.current[i]?.scrollIntoView({ behavior: "smooth", block: "start" })
-                  }
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: 0,
-                    textAlign: "left",
-                  }}
-                >
-                  <span
-                    style={{
-                      width: activeIndex === i ? "10px" : "6px",
-                      height: activeIndex === i ? "10px" : "6px",
-                      borderRadius: "50%",
-                      background: activeIndex === i ? s.accent : "rgba(0,0,0,0.2)",
-                      flexShrink: 0,
-                      transition: "all 0.3s ease",
-                      boxShadow: activeIndex === i ? `0 0 8px ${s.accent}80` : "none",
-                    }}
-                  />
-                  <span
-                    style={{
-                      color: activeIndex === i ? "#050505" : "rgba(0,0,0,0.45)",
-                      fontSize: "12.5px",
-                      fontWeight: activeIndex === i ? 600 : 400,
-                      transition: "all 0.3s ease",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {s.title}
-                  </span>
-                </button>
-              ))}
-            </nav>
-
-            {/* Progress bar (Moved under nav dots) */}
-            <div style={{ marginTop: "2.5rem" }}>
-              <div
-                style={{
-                  width: "100%",
-                  height: "2px",
-                  background: "rgba(0,0,0,0.1)",
-                  borderRadius: "2px",
-                  overflow: "hidden",
-                }}
-              >
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${((activeIndex + 1) / SUB_SERVICES.length) * 100}%`,
-                    background: `linear-gradient(90deg, ${PILLAR.textAccent || PILLAR.accent}, ${SUB_SERVICES[activeIndex].accent})`,
-                    borderRadius: "2px",
-                    transition: "width 0.6s ease",
-                  }}
-                />
-              </div>
-              <p style={{ color: "rgba(0,0,0,0.4)", fontSize: "11px", marginTop: "0.6rem" }}>
-                {activeIndex + 1} / {SUB_SERVICES.length}
-              </p>
-            </div>
-          </div>
+        {/* Top: Text Content */}
+        <div style={{ maxWidth: "800px", marginTop: standalone ? "4rem" : "0" }}>
+          <span style={{
+            display: "inline-flex", alignItems: "center", gap: "0.5rem",
+            background: `${PILLAR.accent}18`, border: `1px solid ${PILLAR.accent}40`,
+            borderRadius: "999px", padding: "0.4rem 1.25rem", color: PILLAR.textAccent,
+            fontSize: "12px", fontWeight: 800, letterSpacing: "0.2em", marginBottom: "1.5rem",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+          }}>
+            ● PILLAR {PILLAR.number}
+          </span>
+          <h2 style={{
+            fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "#050505",
+            lineHeight: 1.1, fontFamily: "'DM Serif Display', serif", whiteSpace: "pre-line", marginBottom: "1rem"
+          }}>
+            {PILLAR.title}
+          </h2>
+          <p style={{
+            color: "#1c2b2b", fontSize: "18px", fontWeight: 600, letterSpacing: "0.03em", opacity: 0.8
+          }}>
+            {PILLAR.tagline}
+          </p>
+        </div>
+        
+        {/* Bottom: Unobscured Image */}
+        <div style={{ position: "relative", minHeight: "450px", width: "100%", maxWidth: "1200px" }}>
+          <Image
+            src={PILLAR.image}
+            alt={PILLAR.title}
+            fill
+            priority
+            style={{ objectFit: "contain", objectPosition: "center", transform: "scale(0.95)" }}
+          />
         </div>
       </div>
 
-      {/* ── RIGHT: Scrolling sub-service sections ────────────────────────── */}
-      <div style={{ flex: 1 }}>
-        {SUB_SERVICES.map((sub, i) => (
-          <section
-            key={sub.id}
-            ref={(el) => { sectionRefs.current[i] = el; }}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              borderLeft: "1px solid rgba(0,0,0,0.06)",
-              borderBottom: "1px solid rgba(0,0,0,0.06)",
-            }}
-          >
-
-
-            {/* Text content */}
+      {/* ── VERTICAL HOVER CARDS (GRID) ── */}
+      <div style={{
+        maxWidth: "1400px", 
+        margin: "0 auto", 
+        padding: "0 2rem",
+        position: "relative", 
+        zIndex: 20, 
+        display: "grid", 
+        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+        gap: "1.5rem", 
+        alignItems: "stretch"
+      }}>
+        {SUB_SERVICES.map((sub) => {
+          const isHovered = hoveredCard === sub.id;
+          return (
             <div
+              key={sub.id}
+              onMouseEnter={() => setHoveredCard(sub.id)}
+              onMouseLeave={() => setHoveredCard(null)}
               style={{
-                flex: 1,
-                padding: "2.5rem 3.5rem 3rem",
                 background: "#ffffff",
+                borderRadius: "20px",
+                padding: "2.5rem 2rem",
+                boxShadow: isHovered 
+                  ? `0 24px 48px rgba(0,0,0,0.06), 0 0 0 1px ${sub.accent}30` 
+                  : "0 8px 24px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.04)",
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+                overflow: "hidden",
+                transform: isHovered ? "translateY(-8px)" : "translateY(0)"
               }}
             >
-              <h2
-                style={{
-                  fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)",
-                  fontWeight: 700,
-                  color: "#050505",
-                  fontFamily: "'DM Serif Display', serif",
-                  lineHeight: 1.25,
-                  marginBottom: "0.5rem",
-                }}
-              >
+              {/* Top Accent Icon/Header */}
+              <div style={{
+                width: "48px", height: "48px", borderRadius: "12px",
+                background: isHovered ? sub.accent : `${sub.accent}15`, 
+                color: isHovered ? "#fff" : sub.accent,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: "1.5rem", transition: "all 0.4s ease"
+              }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  {sub.id === "secure-edge" && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />}
+                  {sub.id === "connect-systems" && <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />}
+                  {sub.id === "integrate-infrastructure" && <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />}
+                </svg>
+              </div>
+
+              <h3 style={{
+                fontSize: "1.6rem", fontWeight: 700, color: "#050505", fontFamily: "'DM Serif Display', serif",
+                marginBottom: "0.5rem", lineHeight: 1.2
+              }}>
                 {sub.title}
-              </h2>
-              <p
-                style={{
-                  color: sub.accent,
-                  fontSize: "13.5px",
-                  fontWeight: 600,
-                  letterSpacing: "0.06em",
-                  marginBottom: "1.5rem",
-                }}
-              >
+              </h3>
+              
+              <p style={{
+                color: sub.accent, fontSize: "13px", fontWeight: 700, letterSpacing: "0.05em",
+                marginBottom: "1.25rem"
+              }}>
                 {sub.tagline}
               </p>
 
-              <div
-                style={{
-                  width: "36px",
-                  height: "2px",
-                  background: `linear-gradient(90deg, ${sub.accent}, transparent)`,
-                  borderRadius: "2px",
-                  marginBottom: "1.5rem",
-                }}
-              />
+              <div style={{
+                width: isHovered ? "100%" : "30px",
+                height: "2px",
+                background: `linear-gradient(90deg, ${sub.accent}, transparent)`,
+                borderRadius: "2px",
+                transition: "width 0.5s ease",
+                marginBottom: "1.5rem"
+              }}/>
 
-              <p
-                style={{
-                  color: "rgba(0,0,0,0.75)",
-                  fontSize: "15px",
-                  lineHeight: 1.75,
-                  marginBottom: "2rem",
-                  maxWidth: "600px",
-                }}
-              >
-                {sub.description}
-              </p>
+              {/* ── VERTICAL EXPANDING CONTENT (CSS Grid Transition) ── */}
+              <div style={{
+                display: "grid",
+                gridTemplateRows: isHovered ? "1fr" : "0fr",
+                opacity: isHovered ? 1 : 0,
+                transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+                marginBottom: isHovered ? "2rem" : "0",
+              }}>
+                <div style={{ overflow: "hidden" }}>
+                  <p style={{ color: "rgba(0,0,0,0.65)", fontSize: "14px", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                    {sub.description}
+                  </p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+                    {sub.bullets.map((b, bi) => (
+                      <li key={bi} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
+                        <span style={{ 
+                          flexShrink: 0, marginTop: "0.35rem", width: "6px", height: "6px", 
+                          borderRadius: "50%", background: sub.accent, boxShadow: `0 0 6px ${sub.accent}60`
+                        }} />
+                        <span style={{ color: "rgba(0,0,0,0.75)", fontSize: "13px", lineHeight: 1.5, fontWeight: 500 }}>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
 
-              <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {sub.bullets.map((b, bi) => (
-                  <li key={bi} style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem" }}>
-                    <span
-                      style={{
-                        flexShrink: 0,
-                        marginTop: "0.3rem",
-                        width: "6px",
-                        height: "6px",
-                        borderRadius: "50%",
-                        background: sub.accent,
-                        boxShadow: `0 0 6px ${sub.accent}80`,
-                      }}
-                    />
-                    <span style={{ color: "rgba(0,0,0,0.75)", fontSize: "14px", lineHeight: 1.6 }}>
-                      {b}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* ── WHAT WE DO CTA + hover preview ── */}
-              <div
-                style={{ position: "relative", display: "inline-block", marginTop: "2rem" }}
-                onMouseLeave={() => setHoveredCTA(null)}
-              >
-                {/* Hover preview card */}
-                {hoveredCTA === sub.id && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: "calc(100% + 12px)",
-                      left: 0,
-                      width: "320px",
-                      background: "rgba(255,255,255,0.97)",
-                      border: `1px solid ${sub.accent}35`,
-                      borderRadius: "14px",
-                      overflow: "hidden",
-                      boxShadow: `0 24px 48px rgba(0,0,0,0.1), 0 0 0 1px ${sub.accent}15`,
-                      animation: "fadeSlideUp 0.2s ease",
-                      zIndex: 50,
-                      backdropFilter: "blur(16px)",
-                    }}
-                  >
-                    {/* Thumbnail image */}
-                    <div style={{ position: "relative", height: "150px" }}>
-                      <Image
-                        src={sub.image}
-                        alt={sub.title}
-                        fill
-                        style={{ objectFit: "cover", objectPosition: "center" }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute", inset: 0,
-                          background: "linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.85) 100%)",
-                        }}
-                      />
-                      <div style={{ position: "absolute", bottom: "0.75rem", left: "1rem" }}>
-                        <p style={{ color: sub.accent, fontSize: "10px", fontWeight: 700, letterSpacing: "0.18em" }}>
-                          {sub.tagline}
-                        </p>
-                      </div>
-                    </div>
-                    {/* Preview content */}
-                    <div style={{ padding: "1rem 1.25rem 1.25rem" }}>
-                      <p style={{ color: "#050505", fontWeight: 600, fontSize: "13px", marginBottom: "0.75rem", fontFamily: "'DM Serif Display', serif" }}>
-                        {sub.title}
-                      </p>
-                      <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: "0.45rem" }}>
-                        {sub.bullets.slice(0, 2).map((b, bi) => (
-                          <li key={bi} style={{ display: "flex", alignItems: "flex-start", gap: "0.5rem" }}>
-                            <span style={{ flexShrink: 0, marginTop: "0.35rem", width: "5px", height: "5px", borderRadius: "50%", background: sub.accent }} />
-                            <span style={{ color: "rgba(0,0,0,0.6)", fontSize: "12px", lineHeight: 1.5 }}>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <p style={{ color: sub.accent, fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", marginTop: "0.85rem" }}>
-                        Click to explore →
-                      </p>
-                    </div>
+              {/* ── CTAs ALWAYS VISIBLE AT BOTTOM ── */}
+              <div style={{
+                marginTop: "auto",
+                paddingTop: "1.5rem",
+                borderTop: "1px solid rgba(0,0,0,0.06)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem"
+              }}>
+                {/* Associated Products Tags */}
+                {sub.buttons && sub.buttons.length > 0 && (
+                  <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "0.5rem" }}>
+                    {sub.buttons.map((btnText: string) => (
+                      <span key={btnText} style={{
+                        padding: "0.35rem 0.75rem", background: isHovered ? `${sub.accent}12` : "rgba(0,0,0,0.04)", 
+                        border: `1px solid ${isHovered ? `${sub.accent}30` : "transparent"}`,
+                        borderRadius: "6px", color: isHovered ? sub.accent : "rgba(0,0,0,0.5)", 
+                        fontSize: "10.5px", fontWeight: 800, letterSpacing: "0.08em",
+                        transition: "all 0.3s ease"
+                      }}>
+                        {btnText}
+                      </span>
+                    ))}
                   </div>
                 )}
-
-                {/* The actual CTA link */}
+                
+                {/* WHAT WE DO Navigation Button */}
                 <Link
                   href={`/en/services/building-foundation/${sub.slug}`}
                   style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.6rem",
-                    padding: "0.75rem 1.75rem",
-                    background: `${sub.accent}14`,
-                    border: `1px solid ${sub.accent}50`,
-                    borderRadius: "8px",
-                    color: sub.accent,
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    letterSpacing: "0.18em",
-                    textDecoration: "none",
-                    transition: "all 0.25s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    setHoveredCTA(sub.id);
-                    (e.currentTarget as HTMLAnchorElement).style.background = `${sub.accent}24`;
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = `0 0 16px ${sub.accent}40`;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = `${sub.accent}14`;
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = "none";
+                    display: "inline-flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "1rem 1.5rem", 
+                    background: isHovered ? sub.accent : `rgba(0,0,0,0.02)`,
+                    border: `1px solid ${isHovered ? sub.accent : `rgba(0,0,0,0.06)`}`,
+                    borderRadius: "10px", 
+                    color: isHovered ? "#fff" : "rgba(0,0,0,0.7)",
+                    fontSize: "12px", fontWeight: 800, letterSpacing: "0.15em", textDecoration: "none",
+                    transition: "all 0.4s ease", width: "100%",
+                    boxShadow: isHovered ? `0 8px 16px ${sub.accent}40` : "none"
                   }}
                 >
                   WHAT WE DO
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
                   </svg>
                 </Link>
               </div>
             </div>
-          </section>
-        ))}
-      </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -13,6 +13,8 @@ import FactoryTreeSection from "@/components/sections/FactoryTreeSection";
 import HeroFollowSection from "@/components/sections/HeroFollowSection";
 import Pillar1Page from "@/components/sections/Pillar1Page";
 import Pillar2Page from "@/components/sections/Pillar2Page";
+import Pillar3Page from "@/components/sections/Pillar3Page";
+import DigitalTransformationPage from "@/components/sections/DigitalTransformationPage";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -43,6 +45,12 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ── Activate AI-Driven Intelligence — Pillar 2 sticky sidebar ── */}
       <Pillar2Page />
+
+      {/* ── Orchestrate & Operate — Pillar 3 full background glass layout ── */}
+      <Pillar3Page />
+
+      {/* ── Digital Transformation For Manufacturing ── */}
+      <DigitalTransformationPage />
 
       {/* ── Factory Tree — commented out; HeroFollowSection now covers this ──
       <FactoryTreeSection />
