@@ -264,7 +264,7 @@ export default function HeroFollowSection() {
             }}
           >
             <Image
-              src="/images/digital tree white.jpeg"
+              src={require("../../../public/images/Digital-tree-white.jpeg")}
               alt="ARDICTECH Digital Tree — Three service pillars"
               fill
               priority
