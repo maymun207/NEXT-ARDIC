@@ -70,8 +70,8 @@ export default function Pillar3Page({ standalone = false }: { standalone?: boole
       style={{
         background: "#ffffff",
         fontFamily: "'Inter', sans-serif",
-        paddingTop: standalone ? "4rem" : "6vh",
-        paddingBottom: "6vh",
+        paddingTop: standalone ? "4rem" : "8vh",
+        paddingBottom: "8vh",
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",

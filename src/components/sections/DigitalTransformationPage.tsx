@@ -38,6 +38,74 @@ export default function DigitalTransformationPage() {
         </p>
       </div>
 
+      {/* ── NEW DIAGRAM & PRODUCT LEGEND ── */}
+      <div style={{ width: "92%", maxWidth: "1200px", marginBottom: "4rem", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+        
+        {/* DigiF.jpeg Image */}
+        <div 
+          style={{ 
+            width: "100%", 
+            position: "relative", 
+            aspectRatio: "1.6 / 1", 
+            marginBottom: "1rem",
+            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)"
+          }}
+        >
+          <Image
+            src="/images/DigiF.jpeg"
+            alt="Digital Architecture"
+            fill
+            priority
+            style={{ objectFit: "contain", objectPosition: "center" }}
+          />
+        </div>
+
+        {/* Product Menu Pill Overlay (Now under image, aligned right) */}
+        <div
+          style={{
+            background: "rgba(255, 255, 255, 0.6)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            borderRadius: "16px",
+            padding: "0.85rem 2rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "1.5rem",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.04), inset 0 2px 0 0 rgba(255, 255, 255, 0.8)",
+            border: "1px solid rgba(0, 0, 0, 0.05)",
+            flexWrap: "nowrap",
+            overflowX: "auto",
+            maxWidth: "100%",
+          }}
+        >
+          {["PilarOS & Modiverse", "IoT-Ignite", "ArMES", "ArAI", "CWF"].map((item, idx, arr) => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: "1.5rem", flexShrink: 0 }}>
+              <button
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "#050505",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  letterSpacing: "0.01em",
+                  whiteSpace: "nowrap",
+                  transition: "color 0.2s"
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#0ab9e6")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#050505")}
+              >
+                {item}
+              </button>
+              {idx < arr.length - 1 && (
+                <div style={{ width: "1px", height: "1.2rem", background: "rgba(0,0,0,0.12)" }} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── STATE LABELS ── */}
       <div
         style={{
@@ -189,7 +257,7 @@ export default function DigitalTransformationPage() {
             }}
           >
             <Image
-              src="/images/DigF2.jpeg"
+              src="/images/DigiF2.jpeg"
               alt="Digitized Factory — After Transformation"
               fill
               priority
@@ -220,51 +288,6 @@ export default function DigitalTransformationPage() {
         </div>
       </div>
 
-      {/* ── BOTTOM CAPTION ── */}
-      {/* ── PRODUCT STACK LEGEND ── */}
-      <div
-        style={{
-          marginTop: "3rem",
-          display: "flex",
-          gap: "0",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-          width: "92%",
-          maxWidth: "1400px",
-        }}
-      >
-        {[
-          { label: "PilarOS & Modiverse", sub: "Device & Digital Layer", color: "#7c4dff" },
-          { label: "IoT-Ignite", sub: "Edge Data Capture", color: "#0ab9e6" },
-          { label: "ArMES", sub: "Production Orchestration", color: "#1a7fc4" },
-          { label: "ArAI", sub: "Artificial Intelligence", color: "#ff6d00" },
-          { label: "CWF", sub: "Conversational UI", color: "#2e7d32" },
-        ].map((item, idx, arr) => (
-          <>
-            <div
-              key={item.label}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: "0.75rem 1.5rem",
-                borderRadius: "12px",
-                background: `${item.color}10`,
-                border: `1px solid ${item.color}30`,
-              }}
-            >
-              <span style={{ fontSize: "13px", fontWeight: 800, color: item.color, letterSpacing: "0.05em" }}>{item.label}</span>
-              <span style={{ fontSize: "11px", color: "rgba(0,0,0,0.45)", marginTop: "2px" }}>{item.sub}</span>
-            </div>
-            {idx < arr.length - 1 && (
-              <svg key={`arrow-${idx}`} width="28" height="16" viewBox="0 0 28 16" fill="none" style={{ flexShrink: 0 }}>
-                <path d="M0 8 H20 M14 3 L22 8 L14 13" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-          </>
-        ))}
-      </div>
       {/* ── 8 CHALLENGES SECTION ── */}
       <div style={{ width: "92%", maxWidth: "1400px", marginTop: "7vh" }}>
         <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>

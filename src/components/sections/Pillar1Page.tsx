@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SubServiceModal, SubServiceData } from "@/components/ui/SubServiceModal";
 
 const PILLAR = {
   number: 1,
@@ -19,7 +20,10 @@ const SUB_SERVICES = [
     slug: "secure-edge",
     title: "Secure Edge & Devices",
     tagline: "Trust starts at the physical boundary.",
-    image: "/images/pilaros image .jpeg",
+    image: "/images/PILAROS Impenetrable Edge.jpeg",
+    imageFit: "contain",
+    imagePadding: "1rem",
+    imageBlend: false,
     accent: "#7ab8f5",
     description:
       "Every intelligent operation begins at the edge. We secure every endpoint — from industrial gateways to mobile devices — with PilarOS and AFEX, an industrial Android OS with deep-system security hooks that give enterprises root-level control over the edge devices, gateways and mobile devices.",
@@ -36,7 +40,10 @@ const SUB_SERVICES = [
     slug: "connect-systems",
     title: "Connect Systems & Assets",
     tagline: "Bridge every machine, protocol, and data stream.",
-    image: "/images/ConnectS.jpeg",
+    image: "/images/modal 2.jpeg",
+    imageFit: "contain",
+    imagePadding: "2.5rem",
+    imageBlend: false,
     accent: "#8ecae6",
     description:
       "Isolated machines produce isolated insights. We connect every asset — OT, IT, and everything in between — using IoT-Ignite's protocol-agnostic edge computing layer. Whether it's a PLC, SCADA, MQTT sensor, or cloud API, all data flows into a single, unified intelligence stream.",
@@ -50,24 +57,36 @@ const SUB_SERVICES = [
   },
   {
     id: "integrate-infrastructure",
-    slug: "integrate-infrastructure",
+    slug: "center-of-excellence",
     title: "Integrate the Infrastructure",
+    modalTitle: "ARDIC Center of Excellence (CoE)",
     tagline: "One data substrate. Total operational coherence.",
-    image: "/images/Integrate Infrasturture.jpeg",
+    modalTagline: "An expert engineering services division dedicated to guiding enterprise deployments through the entire AIoT lifecycle.",
+    image: "/images/coe_abstract_copper.png",
+    imageFit: "cover",
+    imagePosition: "center",
+    imagePadding: "0px",
+    imageBlend: true,
     accent: "#a8d5e2",
     description:
-      "Data without a home is noise. ArCloud provides the geographically distributed, enterprise-grade managed infrastructure that underpins the entire ARDICTECH ecosystem — giving you a secure, resilient, and cost-effective foundation to host your industrial intelligence platform at any scale.",
+      "Our team provides the expert oversight needed to guarantee success. We accelerate your deployments with 2X faster solution launch velocity and achieve 40% lower end-to-end development costs.",
     bullets: [
-      "ArCloud: managed cloud infrastructure, enterprise grade",
-      "Geographically distributed for resilience and compliance",
-      "Secure, cost-effective large-scale platform hosting",
-      "Seamless integration with ArMES, IoT-Ignite, and ArAI",
+      "Strategic Consulting: Aligning AIoT with business roadmaps",
+      "End-to-End Solution Development: Architecture, validation, testing",
+      "Continuous Support: Post-deployment monitoring and optimization"
     ],
   },
 ];
 
 export default function Pillar1Page({ standalone = false }: { standalone?: boolean }) {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [selectedService, setSelectedService] = useState<SubServiceData | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = (sub: any) => {
+    setSelectedService(sub);
+    setIsModalOpen(true);
+  };
 
   // Layout redesigned from sticky scroll to vertical grid with expanding hover cards
   return (
@@ -78,7 +97,8 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
         zIndex: 10,
         background: "#fdfdfd", // Slight off-white to make the cards pop
         fontFamily: "'Inter', sans-serif",
-        paddingBottom: "10vh",
+        paddingTop: standalone ? "4rem" : "8vh",
+        paddingBottom: "8vh",
       }}
     >
       {/* ── TOP HEADER HERO ── */}
@@ -89,13 +109,12 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
-          padding: "5% 5% 0",
+          padding: "0 5%",
           background: "#ffffff",
-          gap: "3rem"
         }}
       >
         {/* Top: Text Content */}
-        <div style={{ maxWidth: "800px", marginTop: standalone ? "4rem" : "0" }}>
+        <div style={{ maxWidth: "800px", marginTop: standalone ? "4rem" : "0", paddingBottom: "3rem" }}>
           <span style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
             background: `${PILLAR.accent}18`, border: `1px solid ${PILLAR.accent}40`,
@@ -117,17 +136,17 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
             {PILLAR.tagline}
           </p>
         </div>
+      </div>
         
-        {/* Bottom: Unobscured Image */}
-        <div style={{ position: "relative", minHeight: "450px", width: "100%", maxWidth: "1200px" }}>
-          <Image
-            src={PILLAR.image}
-            alt={PILLAR.title}
-            fill
-            priority
-            style={{ objectFit: "contain", objectPosition: "center", transform: "scale(0.95)" }}
-          />
-        </div>
+      {/* Bottom: Edge-to-Edge Unobscured Image */}
+      <div style={{ position: "relative", width: "100%", background: "#ffffff", height: "35vh", minHeight: "300px", maxHeight: "400px" }}>
+        <Image
+          src={PILLAR.image}
+          alt={PILLAR.title}
+          fill
+          priority
+          style={{ objectFit: "contain", objectPosition: "center", opacity: 0.85, mixBlendMode: "multiply" }}
+        />
       </div>
 
       {/* ── VERTICAL HOVER CARDS (GRID) ── */}
@@ -164,19 +183,42 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
                 transform: isHovered ? "translateY(-8px)" : "translateY(0)"
               }}
             >
-              {/* Top Accent Icon/Header */}
-              <div style={{
-                width: "48px", height: "48px", borderRadius: "12px",
-                background: isHovered ? sub.accent : `${sub.accent}15`, 
-                color: isHovered ? "#fff" : sub.accent,
-                display: "flex", alignItems: "center", justifyContent: "center",
-                marginBottom: "1.5rem", transition: "all 0.4s ease"
-              }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  {sub.id === "secure-edge" && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />}
-                  {sub.id === "connect-systems" && <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />}
-                  {sub.id === "integrate-infrastructure" && <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />}
-                </svg>
+              {/* Top Accent Icon & CTA Row */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.5rem" }}>
+                <div style={{
+                  width: "48px", height: "48px", borderRadius: "12px",
+                  background: isHovered ? sub.accent : `${sub.accent}15`, 
+                  color: isHovered ? "#fff" : sub.accent,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: "all 0.4s ease", flexShrink: 0
+                }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    {sub.id === "secure-edge" && <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />}
+                    {sub.id === "connect-systems" && <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />}
+                    {sub.id === "integrate-infrastructure" && <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />}
+                  </svg>
+                </div>
+
+                <button
+                  onClick={() => handleOpenModal(sub)}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.5rem",
+                    padding: "0.65rem 1.15rem", 
+                    background: isHovered ? sub.accent : `rgba(0,0,0,0.02)`,
+                    border: `1px solid ${isHovered ? sub.accent : `rgba(0,0,0,0.06)`}`,
+                    borderRadius: "8px", 
+                    color: isHovered ? "#fff" : "rgba(0,0,0,0.8)",
+                    fontSize: "11px", fontWeight: 800, letterSpacing: "0.12em",
+                    transition: "all 0.4s ease",
+                    boxShadow: isHovered ? `0 8px 16px ${sub.accent}40` : "none",
+                    cursor: "pointer"
+                  }}
+                >
+                  WHAT WE DO
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
 
               <h3 style={{
@@ -228,57 +270,37 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
                 </div>
               </div>
 
-              {/* ── CTAs ALWAYS VISIBLE AT BOTTOM ── */}
-              <div style={{
-                marginTop: "auto",
-                paddingTop: "1.5rem",
-                borderTop: "1px solid rgba(0,0,0,0.06)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem"
-              }}>
-                {/* Associated Products Tags */}
-                {sub.buttons && sub.buttons.length > 0 && (
-                  <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "0.5rem" }}>
-                    {sub.buttons.map((btnText: string) => (
-                      <span key={btnText} style={{
-                        padding: "0.35rem 0.75rem", background: isHovered ? `${sub.accent}12` : "rgba(0,0,0,0.04)", 
-                        border: `1px solid ${isHovered ? `${sub.accent}30` : "transparent"}`,
-                        borderRadius: "6px", color: isHovered ? sub.accent : "rgba(0,0,0,0.5)", 
-                        fontSize: "10.5px", fontWeight: 800, letterSpacing: "0.08em",
-                        transition: "all 0.3s ease"
-                      }}>
-                        {btnText}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                
-                {/* WHAT WE DO Navigation Button */}
-                <Link
-                  href={`/en/services/building-foundation/${sub.slug}`}
-                  style={{
-                    display: "inline-flex", alignItems: "center", justifyContent: "space-between",
-                    padding: "1rem 1.5rem", 
-                    background: isHovered ? sub.accent : `rgba(0,0,0,0.02)`,
-                    border: `1px solid ${isHovered ? sub.accent : `rgba(0,0,0,0.06)`}`,
-                    borderRadius: "10px", 
-                    color: isHovered ? "#fff" : "rgba(0,0,0,0.7)",
-                    fontSize: "12px", fontWeight: 800, letterSpacing: "0.15em", textDecoration: "none",
-                    transition: "all 0.4s ease", width: "100%",
-                    boxShadow: isHovered ? `0 8px 16px ${sub.accent}40` : "none"
-                  }}
-                >
-                  WHAT WE DO
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              </div>
+              {/* ── ASSOCIATED PRODUCTS AT BOTTOM ── */}
+              {sub.buttons && sub.buttons.length > 0 && (
+                <div style={{
+                  marginTop: "auto",
+                  paddingTop: "1.5rem",
+                  borderTop: "1px solid rgba(0,0,0,0.06)",
+                  display: "flex", gap: "0.5rem", flexWrap: "wrap"
+                }}>
+                  {sub.buttons.map((btnText: string) => (
+                    <span key={btnText} style={{
+                      padding: "0.35rem 0.75rem", background: isHovered ? `${sub.accent}12` : "rgba(0,0,0,0.04)", 
+                      border: `1px solid ${isHovered ? `${sub.accent}30` : "transparent"}`,
+                      borderRadius: "6px", color: isHovered ? sub.accent : "rgba(0,0,0,0.5)", 
+                      fontSize: "10.5px", fontWeight: 800, letterSpacing: "0.08em",
+                      transition: "all 0.3s ease"
+                    }}>
+                      {btnText}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}
       </div>
+
+      <SubServiceModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        service={selectedService} 
+      />
     </section>
   );
 }

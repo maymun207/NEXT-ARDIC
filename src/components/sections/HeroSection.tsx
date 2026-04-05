@@ -54,13 +54,15 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
     },
     {
       id: 2,
-      layout: "horizontal-top",
+      layout: "bottom",
       image: "/images/hero3 .jpeg",
       imageAlt: "Enterprise Agentic AI Platform — secure data sovereignty",
       badge: "Enterprise AI",
       headline: h.slide3.headline,
       subheadline: h.slide3.subheadline,
       accentColor: "#6d28d9",
+      imageScale: 0.65,
+      imagePosition: "100% 60%",
     },
   ];
 
@@ -158,20 +160,35 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               zIndex: isActive ? 10 : idx === prev ? 5 : 0,
             }}
           >
-            {/* ── Full-bleed image (all slides) ── */}
+            {/* ── Image background (all slides) ── */}
             <div
-              className="absolute inset-0"
-              style={{
-                transform: s.imageScale ? `scale(${s.imageScale})` : "none",
-                transformOrigin: "center center"
-              }}
+              className={s.id === 2 ? "absolute" : "absolute inset-0"}
+              style={
+                s.id === 2
+                  ? {
+                      top: "5%",
+                      bottom: "5%",
+                      right: "3%", /* Moved 5% left */
+                      width: "65%", /* Confine to the right 65% of the screen */
+                    }
+                  : {
+                      transform: s.imageScale ? `scale(${s.imageScale})` : "none",
+                      transformOrigin: "center center",
+                    }
+              }
             >
               <Image
                 src={s.image}
                 alt={s.imageAlt}
                 fill
-                className="object-contain"
-                style={s.imagePosition ? { objectPosition: s.imagePosition } : {}}
+                className={s.id === 2 ? "object-contain" : "object-cover"}
+                style={
+                  s.id === 2
+                    ? { objectPosition: "center", mixBlendMode: "multiply", opacity: 0.85 }
+                    : s.imagePosition
+                    ? { objectPosition: s.imagePosition }
+                    : {}
+                }
                 priority={idx === 0}
                 sizes="100vw"
               />
@@ -199,7 +216,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                   style={{
                     paddingTop: "clamp(2rem, 5vh, 4rem)",
                     paddingLeft: "clamp(1.5rem, 6vw, 5rem)",
-                    maxWidth: "clamp(280px, 42%, 520px)",
+                    maxWidth: "clamp(280px, 42%, 600px)",
                   }}
                 >
                   <h1
@@ -220,17 +237,46 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                       background: `linear-gradient(90deg, ${s.accentColor}, ${s.accentColor}55)`,
                     }}
                   />
-                  <p
-                    className="mb-6 leading-relaxed"
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: "clamp(1rem, 1.6vw, 1.45rem)",
-                      color: "#111",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {s.subheadline}
-                  </p>
+                  {s.subheadline.includes("Your AI. A") ? (
+                    <>
+                      <p
+                        className="mb-2 leading-relaxed"
+                        style={{
+                          fontFamily: "'Inter', sans-serif",
+                          fontSize: "clamp(1rem, 1.6vw, 1.45rem)",
+                          color: "#111",
+                          fontWeight: 600,
+                        }}
+                      >
+                        {s.subheadline.split("Your AI. ")[0]}Your AI.
+                      </p>
+                      <p
+                        className="mb-6 leading-relaxed"
+                        style={{
+                          fontFamily: "'Inter', sans-serif",
+                          fontSize: "clamp(0.82rem, 1.15vw, 0.95rem)",
+                          color: "#3a3a38",
+                          lineHeight: 1.65,
+                          fontWeight: 400,
+                          maxWidth: "280px",
+                        }}
+                      >
+                        {s.subheadline.split("Your AI. ")[1].trim()}
+                      </p>
+                    </>
+                  ) : (
+                    <p
+                      className="mb-6 leading-relaxed"
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: "clamp(1rem, 1.6vw, 1.45rem)",
+                        color: "#111",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {s.subheadline}
+                    </p>
+                  )}
                   {s.footerText && (
                     <p
                       className="text-xs font-semibold uppercase"

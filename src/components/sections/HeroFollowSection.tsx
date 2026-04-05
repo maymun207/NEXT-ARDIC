@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AIReadinessModal } from "../ui/AIReadinessModal";
 
 const PILLARS = [
   {
@@ -161,10 +162,10 @@ function PillarCard({
   );
 }
 
-/* ── Main section ── */
 export default function HeroFollowSection() {
   const [hovered, setHovered] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -181,7 +182,7 @@ export default function HeroFollowSection() {
         position: "relative",
         zIndex: 1,
         minHeight: isMobile ? "auto" : "75vh",
-        padding: isMobile ? "3rem 1.5rem 4rem" : "0",
+        padding: isMobile ? "3rem 1.5rem 4rem" : "8vh 0",
       }}
     >
       {isMobile ? (
@@ -203,11 +204,39 @@ export default function HeroFollowSection() {
               fontSize: "0.9rem",
               color: "rgba(0,0,0,0.65)",
               lineHeight: 1.65,
-              marginBottom: "2.5rem",
+              marginBottom: "1.5rem",
             }}
           >
             Transform your business operations with AIoT.
           </p>
+          <div style={{ marginBottom: "2.5rem" }}>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                background: "#050505",
+                color: "#ffffff",
+                padding: "0.8rem 1.5rem",
+                borderRadius: "8px",
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.85rem",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
+              }}
+            >
+              EVALUATE AI READINESS
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {PILLARS.map((p, i) => (
               <PillarCard key={i} p={p} i={i} hovered={hovered} setHovered={setHovered} />
@@ -285,13 +314,43 @@ export default function HeroFollowSection() {
                 lineHeight: 1.7,
                 color: "rgba(0,0,0,0.6)",
                 maxWidth: "520px",
-                marginBottom: "2rem",
+                marginBottom: "1.5rem",
               }}
             >
               Transform your business operations with AIoT: seamlessly connect
               devices, activate data intelligence, and continuously optimize
               manufacturing performance.
             </p>
+
+            {/* CTA Button */}
+            <div style={{ marginBottom: "2.5rem" }}>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  background: "#050505",
+                  color: "#ffffff",
+                  padding: "0.8rem 1.5rem",
+                  borderRadius: "8px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.85rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
+                }}
+              >
+                EVALUATE AI READINESS
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
 
             {/* 3 horizontal pillar cards — stacked vertically */}
             <div
@@ -314,6 +373,9 @@ export default function HeroFollowSection() {
           </div>
         </div>
       )}
+
+      {/* Settings Modal Overlay */}
+      <AIReadinessModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 }
