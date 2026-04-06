@@ -27,7 +27,7 @@ const SUB_SERVICES = [
     imageBlend: false,
     accent: "#8ecae6",
     description:
-      "Your factory generates millions of data points every second at the surface level. We capture this fast-moving data from machines, sensors, and legacy systems reliably, avoiding silent data loss to establish a secure foundation for everything underneath.",
+      "Enterprises generate millions of data points every second at the surface level. We capture this fast-moving data from machines, sensors, and legacy systems reliably, avoiding silent data loss to establish a secure foundation for everything underneath.",
     bullets: [],
   },
   {
