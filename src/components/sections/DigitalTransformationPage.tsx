@@ -57,6 +57,7 @@ export default function DigitalTransformationPage() {
             alt="Digital Architecture"
             fill
             priority
+            unoptimized={true}
             style={{ objectFit: "contain", objectPosition: "center" }}
           />
         </div>
@@ -192,6 +193,7 @@ export default function DigitalTransformationPage() {
               borderRadius: "24px",
               overflow: "hidden",
               boxShadow: "0 24px 64px rgba(0,0,0,0.12)",
+              transform: "translateZ(0)",
             }}
           >
             <Image
@@ -199,6 +201,7 @@ export default function DigitalTransformationPage() {
               alt="Base Factory — Before Digitization"
               fill
               priority
+              unoptimized={true}
               style={{ objectFit: "contain", objectPosition: "center" }}
             />
             {/* Front label badge */}
@@ -250,7 +253,7 @@ export default function DigitalTransformationPage() {
               inset: 0,
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
-              transform: "rotateY(180deg)",
+              transform: "rotateY(180deg) translateZ(0)",
               borderRadius: "24px",
               overflow: "hidden",
               boxShadow: "0 24px 64px rgba(10,185,230,0.2)",
@@ -261,6 +264,7 @@ export default function DigitalTransformationPage() {
               alt="Digitized Factory — After Transformation"
               fill
               priority
+              unoptimized={true}
               style={{ objectFit: "contain", objectPosition: "center" }}
             />
             {/* Click hint */}
