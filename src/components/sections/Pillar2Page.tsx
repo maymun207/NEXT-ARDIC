@@ -21,6 +21,7 @@ const SUB_SERVICES = [
     title: "Real-Time Ingestion",
     tagline: "The surface level of data extraction.",
     image: "/images/RT1.jpeg",
+    imageBg: "#ffffff",
     imageFit: "contain",
     imagePadding: "2rem",
     imageBlend: false,

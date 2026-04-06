@@ -16,6 +16,7 @@ export interface SubServiceData {
   accent: string;
   buttons?: string[];
   image?: string;
+  imageBg?: string;
   imageFit?: "cover" | "contain";
   imagePosition?: string;
   imagePadding?: string;
@@ -93,7 +94,10 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
           >
             {/* ── LEFT SIDE: IMAGE ── */}
             {service.image && (
-              <div className="w-full md:w-[45%] h-[200px] md:h-full relative flex-shrink-0 bg-[#050505]">
+              <div 
+                className="w-full md:w-[45%] h-[200px] md:h-full relative flex-shrink-0"
+                style={{ background: service.imageBg || "#050505" }}
+              >
                 <Image
                    src={service.image}
                    alt={service.title}
@@ -129,7 +133,9 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
                 <div style={{
                   position: "absolute",
                   inset: 0,
-                  boxShadow: "inset 0 0 40px rgba(5,5,5,0.8)",
+                  boxShadow: service.imageBg === "#ffffff" 
+                    ? "inset 0 0 40px rgba(255,255,255,0.8)"
+                    : "inset 0 0 40px rgba(5,5,5,0.8)",
                   pointerEvents: "none"
                 }} />
                 
