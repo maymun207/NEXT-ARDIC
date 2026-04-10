@@ -11,7 +11,7 @@ const PILLAR = {
   tagline: "Secure. Connect. Integrate.",
   accent: "#7ab8f5",
   textAccent: "#2565a3",
-  image: "/images/BuildingF.jpeg",
+  image: "/images/Integration.jpeg",
 };
 
 const SUB_SERVICES = [
@@ -145,6 +145,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
           alt={PILLAR.title}
           fill
           priority
+          unoptimized={true}
           style={{ objectFit: "contain", objectPosition: "center", opacity: 0.85, mixBlendMode: "multiply" }}
         />
       </div>

@@ -264,11 +264,17 @@ export default function HeroFollowSection() {
             }}
           >
             <Image
-              src={require("../../../public/images/Digital-tree-white.jpeg")}
+              src={require("../../../public/images/DigitalTree2.jpeg")}
               alt="ARDICTECH Digital Tree — Three service pillars"
               fill
               priority
-              style={{ objectFit: "cover", objectPosition: "center top" }}
+              unoptimized={true}
+              style={{ 
+                objectFit: "cover", 
+                objectPosition: "center top",
+                WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 95%, transparent 100%)",
+                maskImage: "linear-gradient(to bottom, transparent 0%, black 8%, black 95%, transparent 100%)"
+              }}
             />
             {/* Right-edge fade */}
             <div

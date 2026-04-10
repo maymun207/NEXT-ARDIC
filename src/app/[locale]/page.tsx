@@ -15,6 +15,9 @@ import Pillar1Page from "@/components/sections/Pillar1Page";
 import Pillar2Page from "@/components/sections/Pillar2Page";
 import Pillar3Page from "@/components/sections/Pillar3Page";
 import DigitalTransformationPage from "@/components/sections/DigitalTransformationPage";
+import EnterpriseAIPlatformPage from "@/components/sections/EnterpriseAIPlatformPage";
+import AIExecutionPage from "@/components/sections/AIExecutionPage";
+import LCOAICalculator from "@/components/sections/LCOAICalculator";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -55,6 +58,15 @@ export default async function HomePage({ params }: PageProps) {
       {/* ── Factory Tree — commented out; HeroFollowSection now covers this ──
       <FactoryTreeSection />
       ── */}
+
+      {/* ── Enterprise AI Platform ── */}
+      <EnterpriseAIPlatformPage />
+
+      {/* ── AI Execution Strategies ── */}
+      <AIExecutionPage />
+
+      {/* ── LCOAI Calculator — inline cost comparison panel ── */}
+      <LCOAICalculator />
 
       {/* ── Products & Services — 5 glassmorphism product cards ────────── */}
       <ProductsGrid dict={dict} locale={locale} />

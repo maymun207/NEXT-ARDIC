@@ -17,8 +17,9 @@ interface Slide {
   accentColor: string;
   layout: "bottom" | "glass-card" | "horizontal-top";
   cardSide?: "left" | "right"; // glass-card position: left=top-left float, right=right-center float
-  imagePosition?: string; // e.g. "45% center" to shift image
-  imageScale?: number; // zoom in/out effect
+  imagePosition?: string;
+  imageScale?: number;
+  imageFlip?: boolean; // mirror horizontally
 }
 
 const AUTO_ADVANCE_MS = 6000;
@@ -35,6 +36,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
       headline: h.slide1.headline,
       subheadline: h.slide1.subheadline,
       accentColor: "#8b5cf6",
+      imagePosition: "center 20%",
     },
     {
       id: 1,
@@ -172,8 +174,11 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                       width: "65%", /* Confine to the right 65% of the screen */
                     }
                   : {
-                      transform: s.imageScale ? `scale(${s.imageScale})` : "none",
-                      transformOrigin: "center center",
+                      transform: [
+                        s.imageScale ? `scale(${s.imageScale})` : '',
+                        s.imageFlip  ? 'scaleX(-1)' : '',
+                      ].filter(Boolean).join(' ') || 'none',
+                      transformOrigin: 'center center',
                     }
               }
             >

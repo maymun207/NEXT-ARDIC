@@ -106,6 +106,7 @@ export default function Pillar3Page({ standalone = false }: { standalone?: boole
           alt={PILLAR.title}
           fill
           priority
+          unoptimized={true}
           style={{ objectFit: "contain", objectPosition: "center" }}
         />
 

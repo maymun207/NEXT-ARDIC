@@ -27,6 +27,7 @@ const SLIDES: SlideData[] = [
     imageAlt: "ARDIC Intelligence Integrated — AIoT Platform",
     accentColor: "#8b5cf6",
     bgColor: "#ffffff",
+    imageScale: 0.75,
   },
   {
     id: 1,

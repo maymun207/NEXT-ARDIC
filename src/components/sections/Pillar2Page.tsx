@@ -25,20 +25,34 @@ const SUB_SERVICES = [
     imageFit: "contain",
     imagePadding: "2rem",
     imageBlend: false,
+    imageMixBlendMode: "multiply",
+    imageFilter: "contrast(1.15) brightness(1.05)",
+    imageInsetShadow: false,
+    imageMask: "radial-gradient(50% 50% at 50% 50%, black 70%, transparent 100%)",
     accent: "#8ecae6",
     description:
       "Enterprises generate millions of data points every second at the surface level. We capture this fast-moving data from machines, sensors, and legacy systems reliably, avoiding silent data loss to establish a secure foundation for everything underneath.",
-    bullets: [],
+    bullets: [
+      "High-Frequency Scale: Captures millions of data points securely at scale.",
+      "Zero Silent Data Loss: Establishes a completely secure foundation.",
+      "Instant Sync: Immediate synchronization with local databases.",
+      "Hardware Agnostic: Total elimination of proprietary hardware silos.",
+    ],
   },
   {
     id: "data-discovery",
     slug: "data-discovery",
     title: "Data Discovery & Logging",
     tagline: "Finding the needle in the data haystack.",
-    image: "/images/pillar2.jpeg",
+    image: "/images/RT2.jpeg",
+    imageBg: "#ffffff",
     imageFit: "contain",
     imagePadding: "2rem",
     imageBlend: false,
+    imageMixBlendMode: "multiply",
+    imageFilter: "contrast(1.15) brightness(1.05)",
+    imageInsetShadow: false,
+    imageMask: "radial-gradient(50% 50% at 50% 50%, black 65%, transparent 100%)",
     accent: "#76b7d1",
     description:
       "As data drops into the first subterranean layer, we index and catalog massive operational logs. This document-level discovery phase ensures that every data point is instantly searchable, auditable, and traceable back to its origin.",
@@ -54,10 +68,15 @@ const SUB_SERVICES = [
     slug: "core-processing",
     title: "Core Processing & Normalization",
     tagline: "The mechanical gears of the operation.",
-    image: "/images/pillar2.jpeg",
+    image: "/images/RT3.jpeg",
+    imageBg: "#ffffff",
     imageFit: "contain",
     imagePadding: "2rem",
     imageBlend: false,
+    imageMixBlendMode: "multiply",
+    imageFilter: "contrast(1.15) brightness(1.05)",
+    imageInsetShadow: false,
+    imageMask: "radial-gradient(50% 50% at 50% 50%, black 65%, transparent 100%)",
     accent: "#66a8c2",
     description:
       "Raw data has no meaning until it is processed. In the third layer, the 'gears' of our system clean, parse, and normalize varying edge protocols into a single, unified operational data model, preparing the fuel that powers advanced analytics.",
@@ -73,10 +92,15 @@ const SUB_SERVICES = [
     slug: "operational-visibility",
     title: "Deep Operational Visibility",
     tagline: "See every process, everywhere.",
-    image: "/images/pillar2.jpeg",
+    image: "/images/RT4.jpeg",
+    imageBg: "#ffffff",
     imageFit: "contain",
     imagePadding: "2rem",
     imageBlend: false,
+    imageMixBlendMode: "multiply",
+    imageFilter: "contrast(1.15) brightness(1.05)",
+    imageInsetShadow: false,
+    imageMask: "radial-gradient(50% 50% at 50% 50%, black 65%, transparent 100%)",
     accent: "#539ab5",
     description:
       "In the fourth layer, we place a magnifying glass over your contextualized data streams. We transform these streams into interactive observability dashboards and digital twins that visualize bottlenecks, performance degradation, and yield tracking across the enterprise.",
@@ -92,10 +116,15 @@ const SUB_SERVICES = [
     slug: "prescriptive-ai",
     title: "Prescriptive AI & Interfaces",
     tagline: "The enterprise, accessible from anywhere.",
-    image: "/images/H3-ENTERPRISE AI .jpeg",
-    imageFit: "cover",
-    imagePadding: "0px",
+    image: "/images/RT5.jpeg",
+    imageBg: "#ffffff",
+    imageFit: "contain",
+    imagePadding: "2rem",
     imageBlend: false,
+    imageMixBlendMode: "multiply",
+    imageFilter: "contrast(1.15) brightness(1.05)",
+    imageInsetShadow: false,
+    imageMask: "radial-gradient(50% 50% at 50% 50%, black 65%, transparent 100%)",
     accent: "#438ca8",
     description:
       "At the deepest architectural layer lies our cognitive core. Far beyond merely predicting failures, it operates prescriptively—recommending exact actions and automating resolutions. Designed for complete accessibility, your entire factory is now at your fingertips through natural language.",
@@ -187,6 +216,7 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
               alt={PILLAR.title}
               fill
               priority
+              unoptimized={true}
               style={{ objectFit: "contain", objectPosition: "center" }}
             />
             {/* Subtle Gradient Overlay so it looks premium */}

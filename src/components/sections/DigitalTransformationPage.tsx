@@ -80,7 +80,7 @@ export default function DigitalTransformationPage() {
             maxWidth: "100%",
           }}
         >
-          {["PilarOS & Modiverse", "IoT-Ignite", "ArMES", "ArAI", "CWF"].map((item, idx, arr) => (
+          {["PilarOS & AFEX", "Modiverse", "IoT-Ignite", "ArMES", "ArAI", "CWF"].map((item, idx, arr) => (
             <div key={item} style={{ display: "flex", alignItems: "center", gap: "1.5rem", flexShrink: 0 }}>
               <button
                 style={{

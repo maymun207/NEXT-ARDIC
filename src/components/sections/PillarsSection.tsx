@@ -313,9 +313,10 @@ export default function PillarsSection() {
             }}
           >
             <Image
-              src={require("../../../public/images/Digital-tree-white.jpeg")}
+              src={require("../../../public/images/DigitalTree.jpeg")}
               alt="AIoT Digital Tree — 3 pillars of intelligence"
               fill
+              unoptimized={true}
               style={{ objectFit: "cover", objectPosition: "left center" }}
               priority
             />

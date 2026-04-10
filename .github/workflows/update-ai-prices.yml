@@ -1,0 +1,37 @@
+name: Monthly AI Pricing Update
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   # Every day at 02:00 UTC
+  workflow_dispatch:        # Allow manual trigger from GitHub Actions tab
+
+jobs:
+  update-ai-prices:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # Needed to commit prices.json back to repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch and update AI prices
+        run: node scripts/update-prices.mjs
+
+      - name: Commit updated prices.json (if changed)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet src/data/prices.json; then
+            echo "✅ No price changes detected — nothing to commit"
+          else
+            git add src/data/prices.json
+            git commit -m "chore: auto-update AI provider pricing [$(date +%Y-%m-%d)]"
+            git push
+            echo "✅ Pushed updated prices.json"
+          fi

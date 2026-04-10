@@ -24,6 +24,10 @@ export interface SubServiceData {
   imageScale?: number;
   imageTranslateY?: string;
   imageHideTopText?: boolean;
+  imageMixBlendMode?: string;
+  imageFilter?: string;
+  imageInsetShadow?: string | false;
+  imageMask?: string;
 }
 
 interface SubServiceModalProps {
@@ -106,7 +110,11 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
                      objectFit: service.imageFit || "contain", 
                      objectPosition: service.imagePosition || "center",
                      padding: service.imagePadding || "1rem",
-                     transform: `scale(${service.imageScale || 1}) translateY(${service.imageTranslateY || "0"})`
+                     transform: `scale(${service.imageScale || 1}) translateY(${service.imageTranslateY || "0"})`,
+                     mixBlendMode: service.imageMixBlendMode as any,
+                     filter: service.imageFilter,
+                     WebkitMaskImage: service.imageMask,
+                     maskImage: service.imageMask
                    }}
                 />
                 
@@ -130,14 +138,16 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
                     pointerEvents: "none"
                   }} />
                 )}
-                <div style={{
-                  position: "absolute",
-                  inset: 0,
-                  boxShadow: service.imageBg === "#ffffff" 
-                    ? "inset 0 0 40px rgba(255,255,255,0.8)"
-                    : "inset 0 0 40px rgba(5,5,5,0.8)",
-                  pointerEvents: "none"
-                }} />
+                {service.imageInsetShadow !== false && (
+                  <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    boxShadow: service.imageInsetShadow || (service.imageBg === "#ffffff" 
+                      ? "inset 0 0 40px rgba(255,255,255,0.8)"
+                      : "inset 0 0 40px rgba(5,5,5,0.8)"),
+                    pointerEvents: "none"
+                  }} />
+                )}
                 
                 {/* ── IMAGE EXPAND BUTTON ── */}
                 <button
