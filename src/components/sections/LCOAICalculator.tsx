@@ -350,12 +350,14 @@ export default function LCOAICalculator() {
 
   // ── Freshness badge ──────────────────────────────────────────────────────────
   const freshness = priceData.freshness ?? 'live';
-  const freshnessConfig = {
+  const freshnessMap: Record<string, { color: string; bg: string; border: string; icon: string; label: string }> = {
     live:     { color: '#16a34a', bg: '#f0fdf4', border: '#bbf7d0', icon: '🟢', label: `Prices verified: ${priceData.last_verified}` },
     stale:    { color: '#d97706', bg: '#fffbeb', border: '#fde68a', icon: '🟡', label: `Prices last verified: ${priceData.last_verified} — may have changed` },
     outdated: { color: '#dc2626', bg: '#fef2f2', border: '#fecaca', icon: '🔴', label: `Prices from ${priceData.last_verified} — please verify` },
     fallback: { color: '#6366f1', bg: '#f0f0ff', border: '#c7d2fe', icon: '🔵', label: `Cached prices (${priceData.last_verified}) — network unavailable` },
-  }[loadState === 'loading' ? 'live' : freshness] ?? freshnessConfig;
+  };
+  const freshnessConfig = freshnessMap[loadState === 'loading' ? 'live' : freshness]
+    ?? freshnessMap['live'];
 
   const providerColor = PROVIDER_COLORS[selectedProvider?.provider ?? 'OpenAI'] ?? '#0284c7';
 
