@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Menu, X, Globe, ChevronDown } from "lucide-react";
 import type { Dictionary, Locale } from "@/types";
+import { useProductModal } from "@/context/ProductModalContext";
 
 interface HeaderProps {
   dict: Dictionary;
@@ -13,7 +14,7 @@ interface HeaderProps {
 interface NavItem {
   label: string;
   href?: string;
-  children?: { label: string; href: string }[];
+  children?: { label: string; href: string; productId?: string }[];
 }
 
 export default function Header({ dict, locale }: HeaderProps) {
@@ -22,6 +23,7 @@ export default function Header({ dict, locale }: HeaderProps) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const nav = (dict as any).nav;
+  const { openProduct } = useProductModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -59,15 +61,15 @@ export default function Header({ dict, locale }: HeaderProps) {
     {
       label: nav?.productsAndTechnologies || "Products & Technologies",
       children: [
-        { label: nav?.arcloud || "ArCloud", href: `/${locale}/products/arcloud` },
-        { label: nav?.aricaas || "ARICAAS", href: `/${locale}/products/aricaas` },
-        { label: nav?.pilaros || "Pilaros & Afex", href: `/${locale}/products/pilaros` },
-        { label: nav?.blockchain || "BlockChain", href: `/${locale}/products/blockchain` },
-        { label: nav?.modiverse || "Modiverse", href: `/${locale}/products/modiverse` },
-        { label: nav?.iotIgnite || "IoT-Ignite", href: `/${locale}/products/iot-ignite` },
-        { label: nav?.armes || "ArMES", href: `/${locale}/products/armes` },
-        { label: nav?.arai || "ArAI", href: `/${locale}/products/arai` },
-        { label: nav?.cwf || "CWF - Conversational UI", href: `/${locale}/products/cwf` },
+        { label: nav?.arcloud || "ArCloud", href: "#", productId: "arcloud" },
+        { label: nav?.aricaas || "ARICAAS", href: "#", productId: "aricaas" },
+        { label: nav?.pilaros || "Pilaros & Afex", href: "#", productId: "pilaros" },
+        { label: nav?.blockchain || "BlockChain", href: "#", productId: "blockchain" },
+        { label: nav?.modiverse || "Modiverse", href: "#", productId: "modiverse" },
+        { label: nav?.iotIgnite || "IoT-Ignite", href: "#", productId: "iot-ignite" },
+        { label: nav?.armes || "ArMES", href: "#", productId: "armes" },
+        { label: nav?.arai || "ArAI", href: "#", productId: "arai" },
+        { label: nav?.cwf || "CWF - Conversational UI", href: "#", productId: "cwf" },
       ],
     },
     {
@@ -144,15 +146,29 @@ export default function Header({ dict, locale }: HeaderProps) {
                       className="absolute top-full left-0 mt-1 min-w-[220px] rounded-xl border border-[#e8e8e0] bg-white shadow-xl py-2 z-50"
                     >
                       {item.children.map((child) => (
-                        <a
-                          key={child.href}
-                          href={child.href}
-                          className="block px-4 py-2.5 text-sm text-[#505048] hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] transition-colors"
-                          style={{ fontFamily: "'Inter', sans-serif" }}
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          {child.label}
-                        </a>
+                        child.productId ? (
+                          <button
+                            key={child.productId}
+                            onClick={() => {
+                              setOpenDropdown(null);
+                              openProduct(child.productId!);
+                            }}
+                            className="block w-full text-left px-4 py-2.5 text-sm text-[#505048] hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] transition-colors"
+                            style={{ fontFamily: "'Inter', sans-serif", background: "none", border: "none", cursor: "pointer" }}
+                          >
+                            {child.label}
+                          </button>
+                        ) : (
+                          <a
+                            key={child.href}
+                            href={child.href}
+                            className="block px-4 py-2.5 text-sm text-[#505048] hover:bg-[#1a4d3a]/5 hover:text-[#1a4d3a] transition-colors"
+                            style={{ fontFamily: "'Inter', sans-serif" }}
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {child.label}
+                          </a>
+                        )
                       ))}
                     </div>
                   )}

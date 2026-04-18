@@ -1,5 +1,8 @@
-import type { Dictionary } from "@/types";
+"use client";
+
 import { Factory, Smartphone, CircleDot, MessageCircle, Users } from "lucide-react";
+import type { Dictionary } from "@/types";
+import { useProductModal } from "@/context/ProductModalContext";
 
 const ICONS: Record<string, React.ElementType> = {
   Factory,
@@ -9,6 +12,15 @@ const ICONS: Record<string, React.ElementType> = {
   Users,
 };
 
+/* Map from the dict item.id to the product modal id */
+const PRODUCT_ID_MAP: Record<string, string> = {
+  modiverse: "modiverse",
+  armes: "armes",
+  "digital-transformation": "", // no modal — keep as link
+  cwf: "cwf",
+  coe: "", // no modal yet — keep as link
+};
+
 interface ProductsGridProps {
   dict: Dictionary;
   locale: string;
@@ -16,6 +28,7 @@ interface ProductsGridProps {
 
 export default function ProductsGrid({ dict, locale }: ProductsGridProps) {
   const section = (dict as any).products;
+  const { openProduct } = useProductModal();
   if (!section) return null;
 
   return (
@@ -36,13 +49,11 @@ export default function ProductsGrid({ dict, locale }: ProductsGridProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {section.items?.map((item: any, idx: number) => {
             const Icon = ICONS[item.icon] || Factory;
-            return (
-              <a
-                key={item.id}
-                href={`/${locale}/products/${item.id}`}
-                className="glass-card p-8 group block"
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
+            const modalId = PRODUCT_ID_MAP[item.id];
+            const hasModal = Boolean(modalId);
+
+            const cardContent = (
+              <>
                 {/* Icon */}
                 <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1a4d3a]/8 group-hover:bg-[#00c4a0]/10 transition-colors duration-300">
                   <Icon className="h-7 w-7 text-[#1a4d3a] group-hover:text-[#00c4a0] transition-colors duration-300" />
@@ -68,11 +79,36 @@ export default function ProductsGrid({ dict, locale }: ProductsGridProps) {
 
                 {/* Arrow */}
                 <div className="mt-6 flex items-center gap-1 text-sm font-medium text-[#1a4d3a] group-hover:text-[#00c4a0] transition-colors">
-                  <span>Learn more</span>
+                  <span>{hasModal ? "View details" : "Learn more"}</span>
                   <svg className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
+              </>
+            );
+
+            if (hasModal) {
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => openProduct(modalId)}
+                  className="glass-card p-8 group block text-left w-full"
+                  style={{ animationDelay: `${idx * 0.1}s`, background: "none", border: "none", cursor: "pointer" }}
+                  aria-label={`Open ${item.title} details`}
+                >
+                  {cardContent}
+                </button>
+              );
+            }
+
+            return (
+              <a
+                key={item.id}
+                href={`/${locale}/products/${item.id}`}
+                className="glass-card p-8 group block"
+                style={{ animationDelay: `${idx * 0.1}s` }}
+              >
+                {cardContent}
               </a>
             );
           })}
