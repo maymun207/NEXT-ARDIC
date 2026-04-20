@@ -44,9 +44,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "Geographically distributed, enterprise-grade cloud at the scale of industry.",
     description:
       "ArCloud is ARDICTECH's managed cloud infrastructure layer — purpose-built for industrial workloads that demand availability, sovereignty, and performance at scale. Host entire platform ecosystems, not just applications.",
-    accentColor: "#c8a96e",
-    gradientFrom: "#1a120a",
-    gradientTo: "#2e1f0f",
+    accentColor: "#3b82f6",
+    gradientFrom: "#050d1a",
+    gradientTo: "#0d254a",
     slides: [
       {
         title: "What Is ArCloud?",
@@ -253,9 +253,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "Turkey's sovereign mobile operating system — built on Android AOSP with enterprise-hardened security.",
     description:
       "PilarOS is a domestically developed mobile OS built on Android AOSP, enhanced by AFEX (Android Framework Extension) — a security framework offering full device sovereignty, deep policy control, and protection from supply chain threats.",
-    accentColor: "#dc2626",
-    gradientFrom: "#1a0000",
-    gradientTo: "#2e0a0a",
+    accentColor: "#1e40af",
+    gradientFrom: "#05091a",
+    gradientTo: "#0a1540",
     slides: [
       {
         title: "What Is PilarOS?",
@@ -361,9 +361,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "Immutable audit trails and trustless data integrity for industrial operations.",
     description:
       "ARDICTECH's Blockchain layer provides factory-grade immutability for operational data — anchoring critical production records, supply chain events, and quality certifications to a tamper-proof distributed ledger.",
-    accentColor: "#6366f1",
-    gradientFrom: "#0a0a1a",
-    gradientTo: "#141440",
+    accentColor: "#06b6d4",
+    gradientFrom: "#031418",
+    gradientTo: "#052530",
     slides: [
       {
         title: "What Is Industrial Blockchain?",
@@ -467,9 +467,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "The Ultimate Mobility Device Management Platform for industrial gateways and Android devices.",
     description:
       "Modiverse is a Mobile Device Management (MDM) service centrally controlling robust PilarOS/Android industrial gateways. Manage, secure, and monitor every device — utilizing AFEX for hardware-level control — from a single pane of glass.",
-    accentColor: "#4a8fdb",
-    gradientFrom: "#050d1a",
-    gradientTo: "#0d2240",
+    accentColor: "#8b5cf6",
+    gradientFrom: "#0e0920",
+    gradientTo: "#1a1040",
     slides: [
       {
         title: "What Is Modiverse?",
@@ -572,9 +572,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "Protocol-agnostic IoT platform with smart edge computing and enterprise-grade connectivity.",
     description:
       "IoT-Ignite is ARDICTECH's PaaS backbone for connecting every machine, sensor, and edge device across the industrial operation. It handles data collection, normalization, and streaming at scale — so AI and analytics layers always have clean, real-time signal.",
-    accentColor: "#00c4a0",
-    gradientFrom: "#031410",
-    gradientTo: "#072820",
+    accentColor: "#22c55e",
+    gradientFrom: "#031409",
+    gradientTo: "#072814",
     slides: [
       {
         title: "What Is IoT-Ignite?",
@@ -678,9 +678,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "11-module Manufacturing Execution System for total factory floor intelligence and control.",
     description:
       "ArMES is ARDICTECH's flagship Manufacturing Execution System — a tightly integrated suite of 11 modules that contextualize, orchestrate, and optimize every aspect of factory floor operations, from work orders to quality management to energy consumption.",
-    accentColor: "#1a4d3a",
-    gradientFrom: "#0a1a10",
-    gradientTo: "#152b1e",
+    accentColor: "#f97316",
+    gradientFrom: "#1a0c00",
+    gradientTo: "#2e1800",
     slides: [
       {
         title: "What Is ArMES?",
@@ -789,9 +789,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "Advanced reasoning, predictive analytics, and the proprietary data moat that makes your AI competitive.",
     description:
       "ArAI is ARDICTECH's industrial AI engine — delivering machine learning models, predictive analytics, anomaly detection, and recommendation systems purpose-built for manufacturing and operational technology environments.",
-    accentColor: "#a855f7",
-    gradientFrom: "#0f081c",
-    gradientTo: "#1e0c3a",
+    accentColor: "#d946ef",
+    gradientFrom: "#1a0520",
+    gradientTo: "#2e0a40",
     slides: [
       {
         title: "What Is ArAI?",
@@ -896,9 +896,9 @@ const PRODUCTS_DATA: ProductData[] = [
     tagline: "Chat With Your Factory. Natural language insights from your production floor — in seconds.",
     description:
       "CWF (Chat With Your Factory) is ARDICTECH's conversational intelligence layer — enabling operators, managers, and executives to query their entire factory's data using plain language. If your factory could speak, what would it say?",
-    accentColor: "#0ea5e9",
-    gradientFrom: "#040e1a",
-    gradientTo: "#0a1e30",
+    accentColor: "#14b8a6",
+    gradientFrom: "#031814",
+    gradientTo: "#072c28",
     slides: [
       {
         title: "What Is CWF?",
@@ -1010,7 +1010,7 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const [hoveredSlide, setHoveredSlide] = useState<number | null>(null);
-  const [expandedImage, setExpandedImage] = useState<string | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const goTo = (idx: number) => {
     setDirection(idx > current ? 1 : -1);
@@ -1022,14 +1022,48 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
   const slide = slides[current];
   const typeColor = accentColor;
 
-  const getImagePath = () => {
+  const getImagePath = (idx: number = current) => {
     if (!productId) return undefined;
-    if (productId === "pilaros") return `/images/products/pilaros/slide_${current + 1}.png`;
-    if (productId === "modiverse") return `/images/products/modiverse/slide_${current + 1}.png`;
-    if (productId === "iot-ignite") return `/images/products/iot_ignite/slide_${current + 1}.png`;
+    
+    if (productId === "arcloud") {
+      if (idx === 2) return `/images/products/arcloud_chip_to_cloud/slide_10.jpg`;
+      const arcloudMap = [1, 2, 5, 8, 7, 12, 14];
+      return `/images/products/arcloud/slide_${arcloudMap[Math.min(idx, arcloudMap.length - 1)]}.jpg`;
+    }
+    
+    if (productId === "arai") {
+      const araiMap = [1, 2, 4, 6, 8, 11, 15];
+      return `/images/products/arai_placeholder/slide_${araiMap[Math.min(idx, araiMap.length - 1)]}.jpg`;
+    }
+    
+    if (productId === "armes") {
+      const armesMap = [1, 2, 4, 6, 8, 11, 13];
+      return `/images/products/armes_illuminated/slide_${armesMap[Math.min(idx, armesMap.length - 1)]}.jpg`;
+    }
+
+    if (productId === "cwf") {
+      const cwfMap = [1, 3, 5, 7, 9, 12, 14];
+      return `/images/products/cwf/slide_${cwfMap[Math.min(idx, cwfMap.length - 1)]}.png`;
+    }
+
+    if (productId === "pilaros") return `/images/products/pilaros/slide_${idx + 1}.png`;
+    if (productId === "modiverse") return `/images/products/modiverse/slide_${idx + 1}.png`;
+    if (productId === "iot-ignite") return `/images/products/iot_ignite/slide_${idx + 1}.png`;
     return undefined;
   };
-  const imagePath = getImagePath();
+  const imagePath = getImagePath(current);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (expandedIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") setExpandedIndex(i => i !== null ? Math.min(slides.length - 1, i + 1) : null);
+      if (e.key === "ArrowLeft")  setExpandedIndex(i => i !== null ? Math.max(0, i - 1) : null);
+      if (e.key === "Escape")     setExpandedIndex(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [expandedIndex, slides.length]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
@@ -1176,7 +1210,7 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
                   justifyContent: "center",
                   cursor: "zoom-in"
                 }}
-                onClick={() => setExpandedImage(imagePath)}
+                onClick={() => setExpandedIndex(current)}
               >
                 <img 
                   src={imagePath} 
@@ -1309,8 +1343,24 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
           const isHovered = hoveredSlide === i;
           const tc = accentColor;
           
-          let thumbPath = undefined;
-          if (productId === "pilaros") thumbPath = `/images/products/pilaros/slide_${i + 1}.png`;
+          let thumbPath: string | undefined = undefined;
+          if (productId === "arcloud") {
+            if (i === 2) {
+              thumbPath = `/images/products/arcloud_chip_to_cloud/slide_10.jpg`;
+            } else {
+              const arcloudMap = [1, 2, 5, 8, 7, 12, 14];
+              thumbPath = `/images/products/arcloud/slide_${arcloudMap[Math.min(i, arcloudMap.length - 1)]}.jpg`;
+            }
+          } else if (productId === "arai") {
+            const araiMap = [1, 2, 4, 6, 8, 11, 15];
+            thumbPath = `/images/products/arai_placeholder/slide_${araiMap[Math.min(i, araiMap.length - 1)]}.jpg`;
+          } else if (productId === "armes") {
+            const armesMap = [1, 2, 4, 6, 8, 11, 13];
+            thumbPath = `/images/products/armes_illuminated/slide_${armesMap[Math.min(i, armesMap.length - 1)]}.jpg`;
+          } else if (productId === "cwf") {
+            const cwfMap = [1, 3, 5, 7, 9, 12, 14];
+            thumbPath = `/images/products/cwf/slide_${cwfMap[Math.min(i, cwfMap.length - 1)]}.png`;
+          } else if (productId === "pilaros") thumbPath = `/images/products/pilaros/slide_${i + 1}.png`;
           else if (productId === "modiverse") thumbPath = `/images/products/modiverse/slide_${i + 1}.png`;
           else if (productId === "iot-ignite") thumbPath = `/images/products/iot_ignite/slide_${i + 1}.png`;
 
@@ -1427,65 +1477,135 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
         </button>
       </div>
 
-      {/* FULLSCREEN IMAGE LIGHTBOX */}
+      {/* FULLSCREEN SLIDE LIGHTBOX — navigable */}
       <AnimatePresence>
-        {expandedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setExpandedImage(null)}
-            style={{
-              position: "fixed",
-              inset: 0,
-              zIndex: 99999,
-              background: "rgba(0,0,0,0.95)",
-              backdropFilter: "blur(10px)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "2rem",
-              cursor: "zoom-out"
-            }}
-          >
-            <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              src={expandedImage}
-              alt="Expanded Slide"
+        {expandedIndex !== null && (() => {
+          const expImg = getImagePath(expandedIndex);
+          const hasPrev = expandedIndex > 0;
+          const hasNext = expandedIndex < slides.length - 1;
+          return (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setExpandedIndex(null)}
               style={{
-                maxWidth: "100%",
-                maxHeight: "100%",
-                objectFit: "contain",
-                borderRadius: "12px",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.8)"
-              }}
-            />
-            <button
-              onClick={(e) => { e.stopPropagation(); setExpandedImage(null); }}
-              style={{
-                position: "absolute",
-                top: "2rem",
-                right: "2rem",
-                background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                color: "#fff",
-                width: "48px",
-                height: "48px",
-                borderRadius: "50%",
+                position: "fixed",
+                inset: 0,
+                zIndex: 99999,
+                background: "rgba(0,0,0,0.95)",
+                backdropFilter: "blur(10px)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                cursor: "pointer",
-                fontSize: "1.2rem"
+                padding: "2rem",
+                cursor: "zoom-out",
               }}
             >
-              ✕
-            </button>
-          </motion.div>
-        )}
+              {/* Image */}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.img
+                  key={expandedIndex}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.22, ease: "easeInOut" }}
+                  src={expImg}
+                  alt={`Slide ${expandedIndex + 1}`}
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    maxWidth: "88vw",
+                    maxHeight: "82vh",
+                    objectFit: "contain",
+                    borderRadius: "12px",
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.8)",
+                    cursor: "default",
+                  }}
+                />
+              </AnimatePresence>
+
+              {/* Close */}
+              <button
+                onClick={(e) => { e.stopPropagation(); setExpandedIndex(null); }}
+                style={{
+                  position: "absolute", top: "1.5rem", right: "1.5rem",
+                  background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)",
+                  color: "#fff", width: "44px", height: "44px", borderRadius: "50%",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  cursor: "pointer", fontSize: "1.1rem",
+                }}
+              >✕</button>
+
+              {/* Slide counter */}
+              <div style={{
+                position: "absolute", bottom: "1.5rem", left: "50%", transform: "translateX(-50%)",
+                display: "flex", alignItems: "center", gap: "1rem",
+              }}>
+                {/* Prev arrow */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); if (hasPrev) setExpandedIndex(i => i !== null ? i - 1 : i); }}
+                  disabled={!hasPrev}
+                  style={{
+                    width: "44px", height: "44px", borderRadius: "50%",
+                    border: `1px solid ${hasPrev ? accentColor + "80" : "rgba(255,255,255,0.1)"}`,
+                    background: hasPrev ? `${accentColor}22` : "transparent",
+                    color: hasPrev ? accentColor : "rgba(255,255,255,0.2)",
+                    cursor: hasPrev ? "pointer" : "not-allowed",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.1rem", transition: "all 0.2s",
+                  }}
+                  aria-label="Previous slide"
+                >←</button>
+
+                {/* Dot indicators */}
+                <div style={{ display: "flex", gap: "0.35rem", alignItems: "center" }}>
+                  {slides.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={(e) => { e.stopPropagation(); setExpandedIndex(i); }}
+                      style={{
+                        width: i === expandedIndex ? "20px" : "7px",
+                        height: "7px", borderRadius: "4px", border: "none", padding: 0,
+                        background: i === expandedIndex ? accentColor : "rgba(255,255,255,0.25)",
+                        cursor: "pointer", transition: "all 0.25s",
+                      }}
+                      aria-label={`Slide ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Next arrow */}
+                <button
+                  onClick={(e) => { e.stopPropagation(); if (hasNext) setExpandedIndex(i => i !== null ? i + 1 : i); }}
+                  disabled={!hasNext}
+                  style={{
+                    width: "44px", height: "44px", borderRadius: "50%",
+                    border: `1px solid ${hasNext ? accentColor + "80" : "rgba(255,255,255,0.1)"}`,
+                    background: hasNext ? `${accentColor}22` : "transparent",
+                    color: hasNext ? accentColor : "rgba(255,255,255,0.2)",
+                    cursor: hasNext ? "pointer" : "not-allowed",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.1rem", transition: "all 0.2s",
+                  }}
+                  aria-label="Next slide"
+                >→</button>
+              </div>
+
+              {/* Slide title */}
+              <div style={{
+                position: "absolute", top: "1.5rem", left: "50%", transform: "translateX(-50%)",
+                color: "rgba(255,255,255,0.7)", fontFamily: "'Inter', sans-serif",
+                fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em",
+                background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)",
+                padding: "0.4rem 1rem", borderRadius: "999px",
+                border: `1px solid ${accentColor}30`, color: accentColor,
+                whiteSpace: "nowrap",
+              }}>
+                {slides[expandedIndex]?.title} &nbsp;·&nbsp; {expandedIndex + 1} / {slides.length}
+              </div>
+            </motion.div>
+          );
+        })()}
       </AnimatePresence>
     </div>
   );

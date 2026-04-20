@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SubServiceModal, SubServiceData } from "@/components/ui/SubServiceModal";
+import { useProductModal } from "@/context/ProductModalContext";
 
 const PILLAR = {
   number: 1,
@@ -81,6 +82,7 @@ const SUB_SERVICES = [
 export default function Pillar1Page({ standalone = false }: { standalone?: boolean }) {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [selectedService, setSelectedService] = useState<SubServiceData | null>(null);
+  const { openProduct } = useProductModal();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = (sub: any) => {
@@ -279,17 +281,47 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
                   borderTop: "1px solid rgba(0,0,0,0.06)",
                   display: "flex", gap: "0.5rem", flexWrap: "wrap"
                 }}>
-                  {sub.buttons.map((btnText: string) => (
-                    <span key={btnText} style={{
-                      padding: "0.35rem 0.75rem", background: isHovered ? `${sub.accent}12` : "rgba(0,0,0,0.04)", 
-                      border: `1px solid ${isHovered ? `${sub.accent}30` : "transparent"}`,
-                      borderRadius: "6px", color: isHovered ? sub.accent : "rgba(0,0,0,0.5)", 
-                      fontSize: "10.5px", fontWeight: 800, letterSpacing: "0.08em",
-                      transition: "all 0.3s ease"
-                    }}>
-                      {btnText}
-                    </span>
-                  ))}
+                  {sub.buttons.map((btnText: string) => {
+                    return (
+                      <button 
+                        key={btnText} 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const n = btnText.toUpperCase();
+                          if (n.includes("PILAROS")) openProduct("pilaros");
+                          else if (n.includes("MODIVERSE")) openProduct("modiverse");
+                          else if (n.includes("IGNITE")) openProduct("iot-ignite");
+                          else if (n.includes("ARCLOUD")) openProduct("arcloud");
+                          else if (n.includes("ARMES")) openProduct("armes");
+                          else if (n.includes("ARAI")) openProduct("arai");
+                          else if (n.includes("CWF")) openProduct("cwf");
+                        }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.03)";
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+                        }}
+                        style={{
+                          padding: "0.35rem 0.75rem", 
+                          background: isHovered ? `${sub.accent}12` : "rgba(0,0,0,0.04)", 
+                          border: `1px solid ${isHovered ? `${sub.accent}30` : "transparent"}`,
+                          borderRadius: "6px", 
+                          color: isHovered ? sub.accent : "rgba(0,0,0,0.5)", 
+                          fontSize: "10.5px", 
+                          fontWeight: 800, 
+                          letterSpacing: "0.08em",
+                          transition: "all 0.3s ease",
+                          cursor: "pointer",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          height: "fit-content"
+                        }}
+                      >
+                        {btnText}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>

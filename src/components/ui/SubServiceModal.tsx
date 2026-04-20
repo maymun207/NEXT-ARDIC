@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useProductModal } from "@/context/ProductModalContext";
 
 export interface SubServiceData {
   id: string;
@@ -39,6 +40,7 @@ interface SubServiceModalProps {
 export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalProps) {
   const [mounted, setMounted] = useState(false);
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
+  const { openProduct } = useProductModal();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -286,20 +288,56 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
                       Powered By
                     </h4>
                     <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                      {service.buttons.map((btnText: string) => (
-                        <span key={btnText} style={{
-                          padding: "0.5rem 1rem", 
-                          background: `${service.accent}12`, 
-                          border: `1px solid ${service.accent}25`,
-                          borderRadius: "8px", 
-                          color: service.accent, 
-                          fontSize: "0.8rem", 
-                          fontWeight: 800, 
-                          letterSpacing: "0.08em"
-                        }}>
-                          {btnText}
-                        </span>
-                      ))}
+                      {service.buttons.map((btnText: string) => {
+                        const getProductId = (name: string) => {
+                          const n = name.toUpperCase();
+                          if (n.includes("PILAROS")) return "pilaros";
+                          if (n.includes("MODIVERSE")) return "modiverse";
+                          if (n.includes("IGNITE")) return "iot-ignite";
+                          if (n.includes("ARMES")) return "armes";
+                          if (n.includes("ARAI")) return "arai";
+                          if (n.includes("CWF")) return "cwf";
+                          if (n.includes("CLOUD")) return "arcloud";
+                          if (n.includes("ARICAAS")) return "aricaas";
+                          if (n.includes("BLOCKCHAIN")) return "blockchain";
+                          return null;
+                        };
+                        const pId = getProductId(btnText);
+                        
+                        return (
+                          <button 
+                            key={btnText} 
+                            onClick={() => {
+                              if (pId) {
+                                onClose();
+                                setTimeout(() => openProduct(pId), 100);
+                              }
+                            }}
+                            style={{
+                              padding: "0.5rem 1rem", 
+                              background: `${service.accent}12`, 
+                              border: `1px solid ${service.accent}25`,
+                              borderRadius: "8px", 
+                              color: service.accent, 
+                              fontSize: "0.8rem", 
+                              fontWeight: 800, 
+                              letterSpacing: "0.08em",
+                              cursor: pId ? "pointer" : "default",
+                              transition: "all 0.2s"
+                            }}
+                            onMouseEnter={pId ? (e) => {
+                              e.currentTarget.style.background = `${service.accent}22`;
+                              e.currentTarget.style.transform = "translateY(-1px)";
+                            } : undefined}
+                            onMouseLeave={pId ? (e) => {
+                              e.currentTarget.style.background = `${service.accent}12`;
+                              e.currentTarget.style.transform = "translateY(0)";
+                            } : undefined}
+                          >
+                            {btnText} {pId && "↗"}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 )}

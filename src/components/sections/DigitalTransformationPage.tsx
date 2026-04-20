@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useProductModal } from "@/context/ProductModalContext";
 
 export default function DigitalTransformationPage() {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { openProduct } = useProductModal();
 
   return (
     <section
@@ -96,6 +98,17 @@ export default function DigitalTransformationPage() {
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#0ab9e6")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "#050505")}
+                onClick={() => {
+                  const map: Record<string, string> = {
+                    "PilarOS & AFEX": "pilaros",
+                    "Modiverse": "modiverse",
+                    "IoT-Ignite": "iot-ignite",
+                    "ArMES": "armes",
+                    "ArAI": "arai",
+                    "CWF": "cwf"
+                  };
+                  if (map[item]) openProduct(map[item]);
+                }}
               >
                 {item}
               </button>

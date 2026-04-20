@@ -37,6 +37,7 @@ const DATA = {
         "An industrial-grade Android OS with the AFEX security engine — providing deep system-level control, encryption, and policy enforcement across edge devices and gateways.",
       website: "www.pilaros.net",
       presentationHref: "#", // replace with presentation file link when ready
+      productId: "pilaros",
       accent: "#7ab8f5",
     },
     {
@@ -45,6 +46,7 @@ const DATA = {
         "Enterprise Mobile Device Management (MDM) built for industrial scale. Manage, monitor, and secure your entire mobile and IoT device portfolio from a single platform.",
       website: "www.modiverse.com",
       presentationHref: "#", // replace with presentation file link when ready
+      productId: "modiverse",
       accent: "#8ecae6",
     },
   ],

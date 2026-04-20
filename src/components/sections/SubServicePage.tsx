@@ -2,12 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useProductModal } from "@/context/ProductModalContext";
 
 export interface SubServiceProduct {
   name: string;
   description: string;
   website?: string;         // e.g. "www.pilaros.net"
-  presentationHref?: string; // link to PDF/presentation — "#" until file is ready
+  presentationHref?: string; // fallback link
+  productId?: string;        // ID of the product for ProductModal
   accent: string;
 }
 
@@ -28,6 +30,8 @@ export interface SubServiceData {
 }
 
 export default function SubServicePage({ data }: { data: SubServiceData }) {
+  const { openProduct } = useProductModal();
+  
   return (
     <div style={{ background: "#000", minHeight: "100vh", fontFamily: "'Inter', sans-serif" }}>
 
@@ -212,31 +216,67 @@ export default function SubServicePage({ data }: { data: SubServiceData }) {
                 </div>
 
                 {/* CTA */}
-                {product.presentationHref && (
-                  <Link
-                    href={product.presentationHref}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                      padding: "0.75rem 1.5rem",
-                      background: `${product.accent}18`,
-                      border: `1px solid ${product.accent}60`,
-                      borderRadius: "8px",
-                      color: product.accent,
-                      fontSize: "12px",
-                      fontWeight: 700,
-                      letterSpacing: "0.16em",
-                      textDecoration: "none",
-                      whiteSpace: "nowrap",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {product.name}
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </Link>
+                {(product.productId || product.presentationHref) && (
+                  product.productId ? (
+                    <button
+                      onClick={() => openProduct(product.productId!)}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        padding: "0.75rem 1.5rem",
+                        background: `${product.accent}18`,
+                        border: `1px solid ${product.accent}60`,
+                        borderRadius: "8px",
+                        color: product.accent,
+                        fontSize: "12px",
+                        fontWeight: 700,
+                        letterSpacing: "0.16em",
+                        whiteSpace: "nowrap",
+                        flexShrink: 0,
+                        cursor: "pointer",
+                        transition: "all 0.2s"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = `${product.accent}30`;
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = `${product.accent}18`;
+                        e.currentTarget.style.transform = "translateY(0)";
+                      }}
+                    >
+                      {product.name}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+                  ) : (
+                    <Link
+                      href={product.presentationHref!}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.5rem",
+                        padding: "0.75rem 1.5rem",
+                        background: `${product.accent}18`,
+                        border: `1px solid ${product.accent}60`,
+                        borderRadius: "8px",
+                        color: product.accent,
+                        fontSize: "12px",
+                        fontWeight: 700,
+                        letterSpacing: "0.16em",
+                        textDecoration: "none",
+                        whiteSpace: "nowrap",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {product.name}
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </Link>
+                  )
                 )}
               </div>
             ))}

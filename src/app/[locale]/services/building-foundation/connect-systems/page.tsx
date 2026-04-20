@@ -33,11 +33,14 @@ const DATA = {
         "IoT-Ignite shifts intelligence from the distant cloud to the localized edge, transforming hardware service building into a process as streamlined as app creation. Enterprise-grade IoT connectivity platform enabling robust API integrations, real-time data streaming, and seamless device-to-cloud communication.",
       website: "www.iot-ignite.com",
       presentationHref: "#", // replace with presentation file link when ready
+      productId: "iot-ignite",
       accent: "#8ecae6",
     },
     {
       name: "ArCloud",
+      name: "ArCloud",
       description: "Hyper-cloud of ARDICTECH",
+      productId: "arcloud",
       accent: "#7ab8f5",
     },
   ],
