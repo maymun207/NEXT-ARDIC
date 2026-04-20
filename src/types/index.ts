@@ -87,6 +87,7 @@ export interface Dictionary {
     slide1: { headline: string; subheadline: string };
     slide2: { headline: string; subheadline: string };
     slide3: { headline: string; subheadline: string };
+    slide4: { headline: string; subheadline: string };
   };
 
   /** Content for the FeaturesSection component. */

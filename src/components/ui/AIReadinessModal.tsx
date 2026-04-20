@@ -56,12 +56,14 @@ export function AIReadinessModal({ isOpen, onClose }: AIReadinessModalProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
   // Reset state when opened
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCurrentStep(0);
       setAnswers({});
       setIsCalculating(false);

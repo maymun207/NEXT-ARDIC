@@ -54,8 +54,12 @@
       "subheadline": "Her yüksek performanslı tesisin merkezinde bir veri nabzı vardır. Üretim tabanınızda gerçek zamanlı içgörüler sunan yapay zeka destekli çekirdeği sunuyoruz."
     },
     "slide3": {
-      "headline": "Kurumsal Ajanlık Yapay Zeka Platformu",
+      "headline": "Ajanlık Yapay Zeka Platformu",
       "subheadline": "Veriniz. Kurallarınız. Yapay Zekanız. Egemenliği tehlikeye atmadan ham kurumsal veriyi yüksek değerli üretim uygulamalarına dönüştüren kapsamlı ve güvenli bir mimari."
+    },
+    "slide4": {
+      "headline": "IoT nesneleri bağlar. AIoT onları zeki kılar.",
+      "subheadline": ""
     }
   },
   "features": {

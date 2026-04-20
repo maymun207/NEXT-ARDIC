@@ -41,6 +41,7 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -64,7 +65,7 @@ export function SubServiceModal({ isOpen, onClose, service }: SubServiceModalPro
       document.body.style.overflow = "";
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, expandedImage]);
 
   if (!service || !mounted) return null;
 

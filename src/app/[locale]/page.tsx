@@ -18,6 +18,8 @@ import DigitalTransformationPage from "@/components/sections/DigitalTransformati
 import EnterpriseAIPlatformPage from "@/components/sections/EnterpriseAIPlatformPage";
 import AIExecutionPage from "@/components/sections/AIExecutionPage";
 import LCOAICalculator from "@/components/sections/LCOAICalculator";
+import LastSilentWorld from "@/components/sections/LastSilentWorld";
+import GlassCardsTransition from "@/components/sections/GlassCardsTransition";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -39,6 +41,12 @@ export default async function HomePage({ params }: PageProps) {
     <main>
       {/* ── Hero ── */}
       <HeroSection dict={dict} />
+
+      {/* ── The Last Silent World — AIoT introduction ── */}
+      <LastSilentWorld />
+
+      {/* ── Glass Cards — dark transition band ── */}
+      <GlassCardsTransition />
 
       {/* ── Hero Follow — 2-panel sticky image section after hero ────────── */}
       <HeroFollowSection />

@@ -82,7 +82,7 @@ export default function FactoryTreeSection() {
           </h2>
           <div style={{ width: "40px", height: "2px", background: "linear-gradient(90deg, #4a8fdb, #1a4d3a)", borderRadius: "2px", marginBottom: "1.5rem" }} />
           <p style={{ color: "#a0a098", lineHeight: 1.7, fontSize: "1rem", maxWidth: "420px", fontFamily: "'Inter', sans-serif" }}>
-            Like the mycelium network beneath a forest, ARDICTECH's intelligence
+            Like the mycelium network beneath a forest, ARDICTECH&apos;s intelligence
             layer connects every machine, every sensor, every data stream —
             silently and continuously — so your factory can sense, decide, and
             act in real time.
@@ -109,7 +109,7 @@ export default function FactoryTreeSection() {
           <div style={{ width: "40px", height: "2px", background: "linear-gradient(90deg, #00c4a0, #1a4d3a)", borderRadius: "2px", marginBottom: "1.5rem" }} />
           <p style={{ color: "#a0a098", lineHeight: 1.7, fontSize: "1rem", maxWidth: "420px", fontFamily: "'Inter', sans-serif" }}>
             From secure hardware at the edge to conversational AI at the surface
-            — ARDICTECH's five-layer ecosystem is the missing intelligence stack
+            — ARDICTECH&apos;s five-layer ecosystem is the missing intelligence stack
             your manufacturing operation has been waiting for.
           </p>
           <div style={{ display: "flex", gap: "1rem", marginTop: "2.5rem" }}>

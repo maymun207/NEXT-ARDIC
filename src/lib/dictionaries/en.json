@@ -54,8 +54,12 @@
       "subheadline": "At the center of every high-performing plant is a pulse of data. We provide the AI-native core that pumps real-time insights across your floor."
     },
     "slide3": {
-      "headline": "Enterprise Agentic AI Platform",
+      "headline": "Agentic AI Platform",
       "subheadline": "Your Data. Your Rules. Your AI. A comprehensive, secure architecture that transforms raw enterprise data into high-value production applications without compromising sovereignty."
+    },
+    "slide4": {
+      "headline": "IoT connects things. AIoT makes them intelligent.",
+      "subheadline": ""
     }
   },
   "products": {

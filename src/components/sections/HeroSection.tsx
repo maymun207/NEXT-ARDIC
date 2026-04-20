@@ -15,7 +15,7 @@ interface Slide {
   chipText?: string;          // bottom-right dark chip (slides 2 & 3)
   footerText?: string;        // slide 1 only
   accentColor: string;
-  layout: "bottom" | "glass-card" | "horizontal-top";
+  layout: "bottom" | "glass-card" | "horizontal-top" | "editorial";
   cardSide?: "left" | "right"; // glass-card position: left=top-left float, right=right-center float
   imagePosition?: string;
   imageScale?: number;
@@ -23,6 +23,7 @@ interface Slide {
 }
 
 const AUTO_ADVANCE_MS = 6000;
+const SLIDES_COUNT = 3; // must match the SLIDES array length below
 
 export default function HeroSection({ dict }: { dict: Dictionary }) {
   const h = dict.heroSlider;
@@ -31,19 +32,18 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
     {
       id: 0,
       layout: "bottom",
-      image: "/images/H1.jpeg",
-      imageAlt: "ARDIC — Intelligence Integrated, AIoT Platform",
+      image: "/images/H1-A HERO.jpeg",
+      imageAlt: "ARDIC — AIoT Intelligence, predictive maintenance on industrial assets",
       headline: h.slide1.headline,
       subheadline: h.slide1.subheadline,
       accentColor: "#8b5cf6",
-      imagePosition: "center 20%",
+      imagePosition: "center 50%",
     },
     {
       id: 1,
       layout: "glass-card",
       image: "/images/H2-Digital tr .jpeg",
       imageAlt: "Digital Transformation for Manufacturing",
-      badge: "Manufacturing Intelligence",
       headline: h.slide2.headline,
       subheadline: h.slide2.subheadline,
       ctaPrimary: {
@@ -83,8 +83,8 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
       setCurrent((c) => {
         setPrev(c);
         return direction === "next"
-          ? (c + 1) % SLIDES.length
-          : (c - 1 + SLIDES.length) % SLIDES.length;
+          ? (c + 1) % SLIDES_COUNT
+          : (c - 1 + SLIDES_COUNT) % SLIDES_COUNT;
       });
       setTimeout(() => { setPrev(null); setTransitioning(false); }, 700);
     },
@@ -162,42 +162,36 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               zIndex: isActive ? 10 : idx === prev ? 5 : 0,
             }}
           >
-            {/* ── Image background (all slides) ── */}
-            <div
-              className={s.id === 2 ? "absolute" : "absolute inset-0"}
-              style={
-                s.id === 2
-                  ? {
-                      top: "5%",
-                      bottom: "5%",
-                      right: "3%", /* Moved 5% left */
-                      width: "65%", /* Confine to the right 65% of the screen */
-                    }
-                  : {
-                      transform: [
-                        s.imageScale ? `scale(${s.imageScale})` : '',
-                        s.imageFlip  ? 'scaleX(-1)' : '',
-                      ].filter(Boolean).join(' ') || 'none',
-                      transformOrigin: 'center center',
-                    }
-              }
-            >
-              <Image
-                src={s.image}
-                alt={s.imageAlt}
-                fill
-                className={s.id === 2 ? "object-contain" : "object-cover"}
+            {/* ── Image background (image-based slides only) ── */}
+            {s.layout !== "editorial" && (
+              <div
+                className={`absolute${s.id === 2 ? " hero-s3-img-wrap" : ""}`}
                 style={
                   s.id === 2
-                    ? { objectPosition: "center", mixBlendMode: "multiply", opacity: 0.85 }
-                    : s.imagePosition
-                    ? { objectPosition: s.imagePosition }
-                    : {}
+                    ? { top: 0, bottom: 0, right: 0, left: "28%" }
+                    : { inset: 0 }
                 }
-                priority={idx === 0}
-                sizes="100vw"
-              />
-            </div>
+              >
+                <Image
+                  src={s.image}
+                  alt={s.imageAlt}
+                  fill
+                  quality={90}
+                  className={s.id === 2 ? "object-contain" : "object-cover"}
+                  style={
+                    s.id === 2
+                      ? { objectPosition: "left 40%", mixBlendMode: "multiply", opacity: 0.9 }
+                      : s.id === 0
+                      ? { objectPosition: s.imagePosition || "center", filter: "contrast(1.1) saturate(1.05)" }
+                      : s.imagePosition
+                      ? { objectPosition: s.imagePosition }
+                      : {}
+                  }
+                  priority={idx === 0}
+                  sizes="100vw"
+                />
+              </div>
+            )}
 
             {/* ════════════════════════════════════════
                 LAYOUT A — "bottom" (Slide 1)
@@ -205,14 +199,15 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 ════════════════════════════════════════ */}
             {s.layout === "bottom" && (
               <>
-                {/* Top-left fade — only covers top half so bottom-left image stays visible */}
+                {/* Left fade — strong white for slide 3 to keep heading clean */}
                 <div
                   className="absolute top-0 left-0 pointer-events-none"
                   style={{
-                    width: "55%",
-                    height: "55%",
-                    background:
-                      "linear-gradient(135deg, rgba(255,255,255,0.97) 20%, rgba(255,255,255,0.75) 50%, transparent 80%)",
+                    width: s.id === 2 ? "42%" : "55%",
+                    height: s.id === 2 ? "100%" : "55%",
+                    background: s.id === 2
+                      ? "linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 65%, rgba(255,255,255,0.5) 85%, transparent 100%)"
+                      : "linear-gradient(135deg, rgba(255,255,255,0.97) 20%, rgba(255,255,255,0.75) 50%, transparent 80%)",
                   }}
                 />
                 {/* Text block — top-left */}
@@ -269,7 +264,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                         {s.subheadline.split("Your AI. ")[1].trim()}
                       </p>
                     </>
-                  ) : (
+                  ) : s.subheadline ? (
                     <p
                       className="mb-6 leading-relaxed"
                       style={{
@@ -281,7 +276,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                     >
                       {s.subheadline}
                     </p>
-                  )}
+                  ) : null}
                   {s.footerText && (
                     <p
                       className="text-xs font-semibold uppercase"
@@ -564,6 +559,188 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 </div>
               </div>
             )}
+            {/* ════════════════════════════════════════
+                LAYOUT D — "editorial" (Slide 4)
+                Pure white, no image — two-panel:
+                Left: headline + tagline
+                Right: 3-column IoT / AI / AIoT comparison
+                ════════════════════════════════════════ */}
+            {s.layout === "editorial" && (
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "#ffffff",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0 clamp(2rem, 6vw, 6rem)",
+                  gap: "clamp(2rem, 4vw, 5rem)",
+                }}
+              >
+                {/* ── LEFT: Headline + tagline ── */}
+                <div
+                  style={{
+                    flex: "0 0 auto",
+                    maxWidth: "clamp(180px, 28%, 340px)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "1rem",
+                  }}
+                >
+                  <h1
+                    style={{
+                      fontFamily: "'DM Serif Display', serif",
+                      fontSize: "clamp(1.6rem, 3.2vw, 3.4rem)",
+                      fontWeight: 700,
+                      color: "#0b0b0b",
+                      lineHeight: 1.1,
+                      letterSpacing: "-0.02em",
+                      margin: 0,
+                    }}
+                  >
+                    {s.headline}
+                  </h1>
+                  <div
+                    style={{
+                      width: "36px",
+                      height: "3px",
+                      background: `linear-gradient(90deg, ${s.accentColor}, ${s.accentColor}55)`,
+                      borderRadius: "2px",
+                    }}
+                  />
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: "clamp(0.78rem, 1.05vw, 0.92rem)",
+                      color: "rgba(0,0,0,0.55)",
+                      lineHeight: 1.6,
+                      margin: 0,
+                      maxWidth: "280px",
+                    }}
+                  >
+                    {s.subheadline}
+                  </p>
+                </div>
+
+                {/* Vertical divider */}
+                <div
+                  style={{
+                    width: "1px",
+                    alignSelf: "stretch",
+                    background: "rgba(0,0,0,0.08)",
+                    flexShrink: 0,
+                    margin: "6vh 0",
+                  }}
+                />
+
+                {/* ── RIGHT: image if set, else 3-column comparison ── */}
+                {s.image ? (
+                  /* ── Glass cards image panel ── */
+                  <div
+                    style={{
+                      flex: 1,
+                      position: "relative",
+                      overflow: "visible",
+                      alignSelf: "stretch",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      minWidth: 0,
+                    }}
+                  >
+                    <Image
+                      src={s.image}
+                      alt={s.imageAlt}
+                      fill
+                      quality={90}
+                      className="object-contain"
+                      style={{ objectPosition: "center center", objectFit: "contain" }}
+                      sizes="70vw"
+                    />
+                  </div>
+                ) : (
+                  /* ── 3-column text comparison (fallback / no image) ── */
+                  <div
+                    style={{
+                      flex: 1,
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr 1fr",
+                      gap: "0",
+                    }}
+                  >
+                    {([
+                      { label: "IoT",  verb: "makes things",      value: "visible",            highlight: false },
+                      { label: "AI",   verb: "makes data",         value: "understandable",     highlight: false },
+                      { label: "AIoT", verb: "makes operations",   value: "adaptive",           highlight: true  },
+                    ] as const).map((col, ci) => (
+                      <div
+                        key={col.label}
+                        style={{
+                          padding: "0 clamp(1rem, 2.5vw, 2.5rem)",
+                          borderLeft: ci === 0 ? "none" : "1px solid rgba(0,0,0,0.07)",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.75rem",
+                          position: "relative",
+                        }}
+                      >
+                        {/* Top accent bar — only on AIoT column */}
+                        {col.highlight && (
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: "-2rem",
+                              left: "clamp(1rem, 2.5vw, 2.5rem)",
+                              right: "0",
+                              height: "3px",
+                              background: s.accentColor,
+                              borderRadius: "2px",
+                            }}
+                          />
+                        )}
+                        {/* Column label */}
+                        <span
+                          style={{
+                            fontFamily: "'DM Serif Display', serif",
+                            fontSize: "clamp(1.6rem, 2.8vw, 2.8rem)",
+                            fontWeight: 700,
+                            color: col.highlight ? s.accentColor : "#0b0b0b",
+                            letterSpacing: "-0.01em",
+                            lineHeight: 1,
+                          }}
+                        >
+                          {col.label}
+                        </span>
+                        {/* Verb */}
+                        <span
+                          style={{
+                            fontFamily: "'Inter', sans-serif",
+                            fontSize: "clamp(0.65rem, 0.9vw, 0.8rem)",
+                            fontWeight: 500,
+                            color: "rgba(0,0,0,0.38)",
+                            letterSpacing: "0.14em",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {col.verb}
+                        </span>
+                        {/* Value */}
+                        <span
+                          style={{
+                            fontFamily: "'DM Serif Display', serif",
+                            fontSize: "clamp(1rem, 1.8vw, 1.9rem)",
+                            fontWeight: 700,
+                            color: col.highlight ? s.accentColor : "#0b0b0b",
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {col.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         );
       })}
@@ -680,7 +857,14 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
           .hero-chip {
             display: none !important;
           }
-          /* Slide 1 top-left text — go full width on mobile */
+          /* Slide 3 image — full-bleed on mobile, faded behind text */
+          .hero-s3-img-wrap {
+            left: 0 !important;
+            right: 0 !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            opacity: 0.18 !important;
+          }
           .hero-text-bottom {
             max-width: 100% !important;
             padding-left: 1.25rem !important;

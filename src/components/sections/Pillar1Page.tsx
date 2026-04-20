@@ -11,7 +11,7 @@ const PILLAR = {
   tagline: "Secure. Connect. Integrate.",
   accent: "#7ab8f5",
   textAccent: "#2565a3",
-  image: "/images/Integration.jpeg",
+  image: "/images/BuildingF.jpeg",
 };
 
 const SUB_SERVICES = [
