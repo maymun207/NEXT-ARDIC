@@ -67,14 +67,17 @@ export default async function HomePage({ params }: PageProps) {
       <FactoryTreeSection />
       ── */}
 
-      {/* ── Enterprise AI Platform ── */}
-      <EnterpriseAIPlatformPage />
+      {/* ── Enterprise AI Platform ──
+      <EnterpriseAIPlatformPage /> 
+      ── */}
 
-      {/* ── AI Execution Strategies ── */}
-      <AIExecutionPage />
+      {/* ── AI Execution Strategies ── 
+      <AIExecutionPage /> 
+      ── */}
 
-      {/* ── LCOAI Calculator — inline cost comparison panel ── */}
-      <LCOAICalculator />
+      {/* ── LCOAI Calculator — inline cost comparison panel ── 
+      <LCOAICalculator /> 
+      ── */}
 
       {/* ── Products & Services — 5 glassmorphism product cards ────────── */}
       <ProductsGrid dict={dict} locale={locale} />
