@@ -122,6 +122,16 @@ const securityHeaders = [
 
 /* ── Next.js Configuration ──────────────────────────────────────────────── */
 const nextConfig: NextConfig = {
+    /**
+     * Explicitly set Turbopack's root to this project directory.
+     * Without this, Turbopack detects the stray package-lock.json at
+     * /Users/tunckahveci/ and resolves node_modules from the wrong location,
+     * causing "@tailwindcss/postcss" (and other deps) to not be found.
+     */
+    turbopack: {
+        root: __dirname,
+    },
+
     /* Image optimization settings */
     images: {
         deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
