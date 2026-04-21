@@ -62,41 +62,124 @@
       "subheadline": ""
     }
   },
-  "features": {
-    "title": "Ölçekli Operasyon İçin İhtiyacınız Olan Her Şey",
-    "subtitle": "İşletmenizi hızlandırmak için birlikte çalışan altı temel yetenek.",
+  "products": {
+    "title": "Ürünler & Hizmetler",
+    "subtitle": "ARDICTECH ağındaki beş birbirine bağlı düğüm — her biri farklı bir endüstriyel zorluğu çözer.",
     "items": [
       {
-        "icon": "Zap",
-        "title": "Gerçek Zamanlı Operasyonlar",
-        "description": "Her süreci, iş akışını ve KPI'yı anlık olarak izleyin. Performans hedeflerden saptığında anında uyarı alın."
+        "id": "modiverse",
+        "icon": "Smartphone",
+        "title": "Modiverse",
+        "description": "Nihai Mobilite Cihaz Yönetimi. Kurumsal mobil cihazlarınızı SaaS kolaylığıyla yönetin — Essential veya Premium.",
+        "tag": "MDM SaaS"
       },
       {
-        "icon": "Shield",
-        "title": "Kurumsal Güvenlik",
-        "description": "Banka düzeyinde şifreleme, rol tabanlı erişim kontrolü ve SOC 2 Tip II uyumluluğu başlangıçtan itibaren dahil edilmiştir."
+        "id": "armes",
+        "icon": "Factory",
+        "title": "ArMES",
+        "description": "Tam operasyonel kontrol için 11 modüllü Üretim Yürütme Sistemi. Tüm fabrika zemininizi bağlayın, yönetin ve entegre edin.",
+        "tag": "MES Platformu"
       },
       {
-        "icon": "Globe",
-        "title": "Küresel ve Çok Konumlu",
-        "description": "Farklı saat dilimlerindeki ekipleri ve lokasyonları tek bir birleşik panodan yönetin. Lokasyon başına lisans yok."
+        "id": "digital-transformation",
+        "icon": "CircleDot",
+        "title": "Dijital Dönüşüm",
+        "description": "Operasyonel Ensō — sürekli gelişimin çemberi. Karanlık veriden bilinçli fabrikaya, tam dijitalleşme yolculuğunuzda rehberiniz.",
+        "tag": "Danışmanlık"
       },
       {
-        "icon": "BarChart3",
-        "title": "Gelişmiş Analitik",
-        "description": "Ham veriyi eyleme geçirilebilir içgörüye dönüştürün. Özelleştirilebilir panolar, zamanlanmış raporlar ve yapay zeka destekli öneriler."
+        "id": "cwf",
+        "icon": "MessageCircle",
+        "title": "CWF: Veri Zekası",
+        "description": "Fabrikanızla Sohbet Edin. Üretim zemininizden doğal dil içgörüleri. Fabrikanız konuşabilseydi ne söylerdi?",
+        "tag": "YZ Analitiği"
       },
       {
-        "icon": "Code2",
-        "title": "API-First Entegrasyon",
-        "description": "Mevcut ERP, CRM veya herhangi bir üçüncü taraf sistemi REST API'miz aracılığıyla bağlayın. Sistem değişikliği gerekmez."
-      },
-      {
+        "id": "coe",
         "icon": "Users",
-        "title": "İşbirliği Araçları",
-        "description": "Paylaşılan çalışma alanları, gerçek zamanlı yorumlar ve sahadan üst yönetime kadar her ekip üyesi için izin bazlı görünümler."
+        "title": "Mükemmellik Merkezi",
+        "description": "Yazılım geliştirme dış kaynak kullanımı ve yönetilen hizmetler. En yüksek veri hacimlerinde ölçeklenebilir platform entegrasyonu.",
+        "tag": "Dış Kaynak"
       }
     ]
+  },
+  "technologies": {
+    "title": "Teknolojiler & Platformlar",
+    "subtitle": "ARDICTECH ekosistemini besleyen ağ düğümleri.",
+    "items": [
+      {
+        "id": "iot-ignite",
+        "icon": "Wifi",
+        "title": "IoT-Ignite",
+        "description": "Akıllı uç bilişim, protokolden bağımsız bağlantı ve güvenli kaplama ile PaaS IoT platformu. Veri toplama omurgası.",
+        "color": "#00c4a0"
+      },
+      {
+        "id": "arai",
+        "icon": "Brain",
+        "title": "ArAI",
+        "description": "Gelişmiş akıl yürütme ve anlambilim. Öngörücü kalite, enerji optimizasyonu ve zekanızı tescilli kılan veri avantajı.",
+        "color": "#1a4d3a"
+      },
+      {
+        "id": "arcloud",
+        "icon": "Cloud",
+        "title": "ArCloud",
+        "description": "Coğrafi olarak dağıtılmış, yönetilen bulut altyapısı. Kurumsal düzeyde büyük ölçekli platform barındırma — uygun maliyetle.",
+        "color": "#c8a96e"
+      },
+      {
+        "id": "blockchain",
+        "icon": "Link",
+        "title": "Blockchain",
+        "description": "Endüstriyel operasyonlar için değiştirilemez denetim izleri ve güvensiz veri bütünlüğü. İspatlayabileceğiniz şeffaflık.",
+        "color": "#6366f1"
+      },
+      {
+        "id": "aricaas",
+        "icon": "Shield",
+        "title": "ArICAAAS",
+        "description": "Hizmet Olarak Kimlik, Bağlam, Kimlik Doğrulama, Yetkilendirme ve Denetim. Kurumsal güvenlik artık bileşensel.",
+        "color": "#f59e0b"
+      },
+      {
+        "id": "pilaros",
+        "icon": "Lock",
+        "title": "PilarOS / AFEX",
+        "description": "Android AOSP + AFEX güvenlik çerçevesi üzerine inşa edilmiş yerli Türk mobil işletim sistemi. Tam cihaz egemenliği — cihazlarınız, veriniz.",
+        "color": "#1e40af"
+      }
+    ]
+  },
+  "networkFlow": {
+    "title": "Ağ Devrede",
+    "subtitle": "Üç katman. Tek bir yaşayan zeka.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Topla",
+        "platform": "IoT-Ignite",
+        "description": "Uç bilişim, protokolden bağımsız biçimde ve ölçekte her sensörden, makineden ve üretim hattından veri toplar."
+      },
+      {
+        "number": "02",
+        "title": "Bağlamsallaştır",
+        "platform": "ArMES",
+        "description": "11 birbirine bağlı modül, tüm operasyonel gerçekliğinizi düzenler, bağlamsallaştırır ve entegre eder."
+      },
+      {
+        "number": "03",
+        "title": "Konuş",
+        "platform": "ArAI + CWF",
+        "description": "Saatler değil, saniyeler içinde sunulan doğal dil içgörüleri. Fabrikanız artık bir sese kavuştu."
+      }
+    ]
+  },
+  "sentientFactory": {
+    "title": "Bilinçli Fabrika.",
+    "subtitle": "Sürekli Gelişimin Çemberi.",
+    "body": "Fabrikanız yalnızca bir makine topluluğundan ibaret değildir. Ham endüstriyel veri ile dijital bilinç arasındaki boşluğu kapatıyoruz — her sensörü bir sese, her anomaliyi bir içgörüye, her içgörüyü eyleme dönüştürüyoruz.",
+    "cta": "Simülasyonu İzle"
   },
   "stats": {
     "title": "Sizin Gibi Ekiplerin Güveni",
