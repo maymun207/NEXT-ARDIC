@@ -1594,7 +1594,7 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
               {/* Slide title */}
               <div style={{
                 position: "absolute", top: "1.5rem", left: "50%", transform: "translateX(-50%)",
-                color: "rgba(255,255,255,0.7)", fontFamily: "'Inter', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.1em",
                 background: "rgba(0,0,0,0.4)", backdropFilter: "blur(4px)",
                 padding: "0.4rem 1rem", borderRadius: "999px",

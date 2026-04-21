@@ -38,7 +38,6 @@ const DATA = {
     },
     {
       name: "ArCloud",
-      name: "ArCloud",
       description: "Hyper-cloud of ARDICTECH",
       productId: "arcloud",
       accent: "#7ab8f5",
