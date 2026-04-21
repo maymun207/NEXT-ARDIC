@@ -22,6 +22,7 @@
 
 import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
+import path from "path";
 
 /* ── Content Security Policy Directives ─────────────────────────────────── */
 /* Each directive on its own line for readability and easy maintenance.     */
@@ -129,7 +130,7 @@ const nextConfig: NextConfig = {
      * causing "@tailwindcss/postcss" (and other deps) to not be found.
      */
     turbopack: {
-        root: __dirname,
+        root: path.resolve(__dirname),
     },
 
     /* Image optimization settings */
