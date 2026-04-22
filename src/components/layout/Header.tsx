@@ -54,18 +54,15 @@ export default function Header({ dict, locale }: HeaderProps) {
       label: nav?.solutionsAndServices || "Solutions & Services",
       children: [
         { label: nav?.digitalTransformation || "Digital Transformation for Manufacturing", href: `/${locale}/services/digital-transformation` },
-        { label: nav?.enterpriseAgenticAI || "Enterprise Agentic AI Solutions", href: `/${locale}/services/enterprise-agentic-ai` },
-        { label: nav?.coe || "CoE - Professional Services", href: `/${locale}/services/coe` },
+        { label: nav?.coe || "CoE - Professional Services", href: "#", productId: "coe" },
       ],
     },
     {
       label: nav?.productsAndTechnologies || "Products & Technologies",
       children: [
         { label: nav?.arai      || "ArAI",                 href: "#", productId: "arai"      },
-        { label: nav?.aricaas   || "ARICAAS",              href: "#", productId: "aricaas"   },
         { label: nav?.arcloud   || "ArCloud",              href: "#", productId: "arcloud"   },
         { label: nav?.armes     || "ArMES",                href: "#", productId: "armes"     },
-        { label: nav?.blockchain || "BlockChain",          href: "#", productId: "blockchain" },
         { label: nav?.cwf       || "CWF",                  href: "#", productId: "cwf"       },
         { label: nav?.iotIgnite || "IoT-Ignite",           href: "#", productId: "iot-ignite"},
         { label: nav?.modiverse || "Modiverse",            href: "#", productId: "modiverse" },

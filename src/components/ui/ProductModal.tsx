@@ -785,104 +785,104 @@ const PRODUCTS_DATA: ProductData[] = [
   {
     id: "arai",
     name: "ArAI",
-    tag: "Industrial AI",
-    tagline: "Advanced reasoning, predictive analytics, and the proprietary data moat that makes your AI competitive.",
+    tag: "Advanced Reasoning Layer",
+    tagline: "The cognitive core bridging raw data processing and intelligent autonomous agent execution.",
     description:
-      "ArAI is ARDICTECH's industrial AI engine — delivering machine learning models, predictive analytics, anomaly detection, and recommendation systems purpose-built for manufacturing and operational technology environments.",
+      "ArAI functions as the cognitive core within ARDICTECH's Agentic Platform. It is composed of distinct functional modules—including Causal Reasoning, Semantic Analysis, and Probabilistic Inference—designed to process information at varying levels of abstraction.",
     accentColor: "#d946ef",
     gradientFrom: "#1a0520",
     gradientTo: "#2e0a40",
     slides: [
       {
-        title: "What Is ArAI?",
+        title: "The Advanced Reasoning Layer",
         type: "overview",
-        icon: "🤖",
-        content:
-          "ArAI is ARDICTECH's industrial AI platform — a suite of pre-trained and customizable machine learning models, analytics tools, and a semantic reasoning layer designed to turn raw operational data into predictions, insights, and automated decisions. It is the intelligence layer that sits above IoT-Ignite and ArMES.",
-        bullets: [
-          "Pre-built ML models for predictive maintenance, quality, and energy",
-          "Custom model training on your proprietary factory data",
-          "Anomaly detection across thousands of time-series signals",
-          "Recommendation engine for process parameter optimization",
-        ],
-      },
-      {
-        title: "AI Capabilities",
-        type: "features",
         icon: "🧠",
-        content: "ArAI covers the full spectrum of industrial AI applications — from simple threshold alerting to advanced multi-variate predictive modeling.",
+        content:
+          "ArAI acts as the critical bridge spanning raw data processing and intelligent autonomous agent execution. It utilizes five distinct reasoning modules to drive complex problem-solving.",
         bullets: [
-          "Predictive Maintenance: failure prediction 7–30 days ahead",
-          "Quality Prediction: predict defects before they occur",
-          "Energy Optimization: reduce consumption without sacrificing output",
-          "Process Optimization: find optimal machine parameters automatically",
-          "Demand Forecasting: optimize production scheduling",
-          "Computer Vision: visual quality inspection at line speed",
+          "Knowledge Graph: Structures data into entities and relationships",
+          "Contextual Reasoning Engine: Interprets data within situational contexts",
+          "Semantic Analysis: Analyzes meaning and linguistic nuances",
+          "Probabilistic Inference Engine: Statistical predictions and decisions",
+          "Causal Reasoning Module: Identifies cause-and-effect relationships"
         ],
       },
       {
-        title: "How ArAI Learns",
+        title: "Data Integration Pipeline",
         type: "architecture",
         icon: "🔄",
-        content:
-          "ArAI uses a federated learning architecture — models improve from data across multiple factories while never moving raw data across site boundaries. Your data stays yours; the intelligence accumulates.",
+        content: "ArAI is deeply integrated with a powerful Datalakehouse infrastructure, ensuring the reasoning engines have direct access to refined and governed operational data.",
         bullets: [
-          "Supervised learning: train on labeled historical failure data",
-          "Unsupervised anomaly detection: no labeled data required",
-          "Online learning: models update as new data streams in",
-          "Explainability layer: every prediction comes with a reason",
-          "Federated learning: cross-site model improvement without data sharing",
+          "Ingests from REST, GraphQL, MQTT, IoT, Kafka, and RabbitMQ",
+          "Data processing via AirByte, Nifi, Flink, and Debezium",
+          "Organizes data into Apache Hudi tiers (Bronze, Silver, Gold)",
+          "Supports relational databases like PostgreSQL and MySQL",
+          "Direct feeds from Hudi layers power the reasoning modules",
+        ],
+      },
+      {
+        title: "Orchestration & Agents",
+        type: "features",
+        icon: "🤖",
+        content:
+          "ArAI is purposefully designed to drive the actions of the platform's autonomous agents. It provides the core intelligence to orchestrators that manage specialized agents and task-specific executors.",
+        bullets: [
+          "Bidirectional connection with LangGraph Agent Orchestrator",
+          "Interacts seamlessly with the n8n workflow orchestrator",
+          "Shared state management across different agent interactions",
+          "Standardized context exchange via Model Context Protocol (MCP)",
+          "Directly drives LLM Agents and Task Specific Executors",
         ],
       },
       {
         title: "Real-World Applications",
         type: "usecase",
         icon: "🏭",
-        content: "ArAI is deployed across diverse industrial sectors — each with unique operational AI challenges.",
+        content: "ArAI's cognitive reasoning modules are deployed across diverse industrial sectors to solve complex operational challenges that transcend traditional automation.",
         bullets: [
-          "Automotive: weld quality prediction, press force optimization",
-          "Food & beverage: spoilage prediction, cold chain monitoring",
-          "Pharmaceuticals: out-of-spec batch prediction",
-          "Energy: transformer failure early warning, grid load balancing",
-          "Logistics: predictive vehicle maintenance for logistics operators",
+          "Automotive: Causal reasoning for multi-step defect resolution",
+          "Food & beverage: Contextual interpretation of cold chain anomalies",
+          "Pharmaceuticals: Probabilistic inference for out-of-spec batches",
+          "Energy: Semantic analysis of complex grid diagnostic logs",
+          "Logistics: Advanced reasoning for dynamic fleet reprioritization",
         ],
       },
       {
-        title: "The Proprietary Data Moat",
+        title: "The Proprietary Intelligence Moat",
         type: "value",
         icon: "🏆",
         content:
-          "ArAI builds you a data moat — a proprietary competitive advantage that compounds over time. The longer ArAI runs on your data, the more accurate it becomes, and the harder it is for competitors to replicate.",
+          "ArAI builds you a massive intelligence moat. By combining your proprietary factory data directly into its reasoning engine, you gain a competitive advantage that cannot be bought off the shelf.",
         bullets: [
-          "Models trained on your specific machines and processes",
-          "Institutional knowledge captured from senior operators",
-          "Continuous improvement loop: better predictions every month",
-          "Your models are yours — full IP ownership",
-          "Competitor cannot buy or replicate your operational intelligence",
+          "Reasoning models tuned on your specific entities and workflows",
+          "Institutional knowledge captured into the Knowledge Graph",
+          "Continuous autonomous improvement via workflow execution",
+          "Your causal models belong strictly to you — full IP ownership",
+          "Competitors cannot replicate your contextual operational intelligence",
         ],
       },
       {
         title: "ArAI Performance Benchmarks",
         type: "metrics",
         icon: "📊",
-        content: "ArAI's industrial models consistently outperform generic AI solutions because they are trained on manufacturing-specific data with domain-expert-curated features.",
+        content: "ArAI's targeted reasoning modules consistently outperform generic LLM wrappers, because they are fed by structured architectural and data pipelines.",
         stats: [
-          { value: "92%", label: "Failure prediction accuracy (typical)" },
-          { value: "7–30", label: "Days average warning before failure" },
-          { value: "35%", label: "Energy consumption reduction at optimized sites" },
-          { value: "60%", label: "Reduction in quality escapes after deployment" },
+          { value: "5x", label: "Faster contextual decision making vs manual data analysis" },
+          { value: "98%", label: "Accuracy in cause-and-effect relationship mapping" },
+          { value: "Zero", label: "Data latency via direct Apache Hudi Gold tier feeds" },
+          { value: "24/7", label: "Continuous autonomous agent orchestration" },
         ],
       },
       {
-        title: "Activate Your Industrial AI",
+        title: "Deploy Your Cognitive Core",
         type: "cta",
-        icon: "🤖",
+        icon: "🚀",
         content:
-          "Our AI scientists will run a 3-day data discovery workshop to identify the highest-value prediction use cases in your operation. We'll have a working proof-of-concept model running on your historical data within 4 weeks.",
+          "Let our engineers seamlessly integrate the ArAI cognitive layer atop your existing Datalakehouse. We will architect the core data pipelines and deploy the initial reasoning agents.",
         bullets: [
-          "No data science team required on your side",
-          "Start with existing historical data — no new sensors needed",
-          "Pay-per-prediction pricing available for MVPs",
+          "Full integration with your MQTT/Kafka event streams",
+          "Painless setup of the MCP integration layer",
+          "Initial LangGraph orchestrations built by our team",
         ],
       },
     ],
@@ -994,6 +994,102 @@ const PRODUCTS_DATA: ProductData[] = [
       },
     ],
   },
+  /* ── 10. COE ── */
+  {
+    id: "coe",
+    name: "CoE: Professional Services",
+    tag: "Software Outsource",
+    tagline: "Fastest way to get your products & services to the market.",
+    description: "ARDIC Center of Excellence provides software development outsourcing services and easily integrates all of your components with our managed and scalable platform even at the highest data volumes by cost effective geographically distributed hosting.",
+    accentColor: "#0ab9e6",
+    gradientFrom: "#021217",
+    gradientTo: "#052d38",
+    slides: [
+      {
+        title: "Accelerate Time to Market",
+        type: "overview",
+        icon: "🚀",
+        content: "Enlarge your team and expand your software development capabilities with an experienced tech partner by your side. We provide Ready to Connect Infrastructure for your applications and services.",
+        bullets: [
+          "Ready to Use Components for extremely fast iteration",
+          "2x Quicker Delivery compared to traditional scaling",
+          "40% Lower Development Cost",
+          "Outsource full-cycle development or augment your existing teams"
+        ],
+      },
+      {
+        title: "Software Development Lifecycle",
+        type: "features",
+        icon: "💻",
+        content: "We supply high quality software development at maximum cost-efficiency, whether you are a start-up, a midsize traditional business, or a scaling enterprise.",
+        bullets: [
+          "Cross-platform Web and Mobile Product Development",
+          "Comprehensive Lifecycle Management from architecture to release",
+          "Deep integration of AI/ML Services",
+          "Specialized Blockchain Services (Ethereum, Avalanche, Solidity)"
+        ],
+      },
+      {
+        title: "Managed Services & Cloud Native",
+        type: "architecture",
+        icon: "☁",
+        content: "We manage your system resources, CI/CD cycles, release management, and provide resilient cloud-native architectures that never sleep.",
+        bullets: [
+          "7 days a week, Tier 3 & 4 Helpdesk Support",
+          "Cost effective, geographically distributed hosting",
+          "Smart Data Backup and High Availability Deployment",
+          "Automated QA, API testing, and continuous code reviews"
+        ],
+      },
+      {
+        title: "Ready-to-Use Edge IoT Integration",
+        type: "usecase",
+        icon: "📡",
+        content: "The Global IoT Pioneer framework empowers your platforms with independent edge-to-cloud communication and real-time processing.",
+        bullets: [
+          "2000+ ready-to-use IoT APIs",
+          "Real time data processing exclusively on the Edge",
+          "Mobile IoT and Industrial IoT seamless bridging",
+          "Release the absolute power of Edge AI without custom engineering"
+        ],
+      },
+      {
+        title: "Data & Large Scale Platform",
+        type: "value",
+        icon: "📊",
+        content: "ARDIC helps Large Scale service providers map intent to production. We easily integrate all components with our managed and scalable platform—even at the highest data volumes.",
+        bullets: [
+          "ArCloud PaaS integration right out of the box",
+          "Big Data Analytics and high-velocity Data Training pipelines",
+          "Core Services orchestration: Load Balancing & App Performance Management",
+          "Multi-Tenant Management Interface for enterprise clients"
+        ],
+      },
+      {
+        title: "Engineering & Technology Mastery",
+        type: "metrics",
+        icon: "⚙",
+        content: "Our Center of Excellence engineers operate at the bleeding edge, heavily leveraging over 25 years of global experience across multiple disciplines.",
+        bullets: [
+          "Multi-Cloud: AWS, GCP, Azure, Openshift, OpenStack",
+          "Deep AI: PyTorch, TensorFlow, Hugging Face, Neptune.ai",
+          "Zero-Trust Security: Kerberos, Keycloak, OAuth, Google IAM",
+          "Advanced Architectures: Microservices, Kafka messaging, Bazel CI"
+        ],
+      },
+      {
+        title: "Expand Your Development Capabilities",
+        type: "cta",
+        icon: "👥",
+        content: "You can bring your existing service and apps, or ARDIC can provide end-to-end development. Don't build alone when you can scale instantly.",
+        bullets: [
+          "Engineers with 25+ years experience in the USA, Europe, and Asia",
+          "Over 70 cutting-edge powered live services launched",
+          "Contact us to architect your custom engineering augmented team"
+        ],
+      },
+    ],
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -1032,8 +1128,7 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
     }
     
     if (productId === "arai") {
-      const araiMap = [1, 2, 4, 6, 8, 11, 15];
-      return `/images/products/arai_placeholder/slide_${araiMap[Math.min(idx, araiMap.length - 1)]}.jpg`;
+      return `/images/products/arai/slide_${Math.min(idx + 1, 7)}.jpg`;
     }
     
     if (productId === "armes") {
@@ -1041,9 +1136,12 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
       return `/images/products/armes_illuminated/slide_${armesMap[Math.min(idx, armesMap.length - 1)]}.jpg`;
     }
 
+    if (productId === "coe") {
+      return `/images/products/coe/slide_${Math.min(idx + 1, 7)}.jpg`;
+    }
+
     if (productId === "cwf") {
-      const cwfMap = [1, 3, 5, 7, 9, 12, 14];
-      return `/images/products/cwf/slide_${cwfMap[Math.min(idx, cwfMap.length - 1)]}.png`;
+      return `/images/products/cwf/slide_${Math.min(idx + 1, 9)}.jpg`;
     }
 
     if (productId === "pilaros") return `/images/products/pilaros/slide_${idx + 1}.png`;
@@ -1352,14 +1450,14 @@ function PresentationCarousel({ slides, accentColor, productId }: { slides: Slid
               thumbPath = `/images/products/arcloud/slide_${arcloudMap[Math.min(i, arcloudMap.length - 1)]}.jpg`;
             }
           } else if (productId === "arai") {
-            const araiMap = [1, 2, 4, 6, 8, 11, 15];
-            thumbPath = `/images/products/arai_placeholder/slide_${araiMap[Math.min(i, araiMap.length - 1)]}.jpg`;
+            thumbPath = `/images/products/arai/slide_${Math.min(i + 1, 7)}.jpg`;
           } else if (productId === "armes") {
             const armesMap = [1, 2, 4, 6, 8, 11, 13];
             thumbPath = `/images/products/armes_illuminated/slide_${armesMap[Math.min(i, armesMap.length - 1)]}.jpg`;
+          } else if (productId === "coe") {
+            thumbPath = `/images/products/coe/slide_${Math.min(i + 1, 7)}.jpg`;
           } else if (productId === "cwf") {
-            const cwfMap = [1, 3, 5, 7, 9, 12, 14];
-            thumbPath = `/images/products/cwf/slide_${cwfMap[Math.min(i, cwfMap.length - 1)]}.png`;
+            thumbPath = `/images/products/cwf/slide_${Math.min(i + 1, 9)}.jpg`;
           } else if (productId === "pilaros") thumbPath = `/images/products/pilaros/slide_${i + 1}.png`;
           else if (productId === "modiverse") thumbPath = `/images/products/modiverse/slide_${i + 1}.png`;
           else if (productId === "iot-ignite") thumbPath = `/images/products/iot_ignite/slide_${i + 1}.png`;

@@ -20,6 +20,7 @@ import AIExecutionPage from "@/components/sections/AIExecutionPage";
 import LCOAICalculator from "@/components/sections/LCOAICalculator";
 import LastSilentWorld from "@/components/sections/LastSilentWorld";
 import GlassCardsTransition from "@/components/sections/GlassCardsTransition";
+import MapOfTechnology from "@/components/sections/MapOfTechnology";
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -59,6 +60,9 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ── Orchestrate & Operate — Pillar 3 full background glass layout ── */}
       <Pillar3Page />
+
+      {/* ── Map of Our Technology ── */}
+      <MapOfTechnology />
 
       {/* ── Digital Transformation For Manufacturing ── */}
       <DigitalTransformationPage />

@@ -333,7 +333,7 @@ export default function HeroSlider() {
 
                         {/* Subheadline */}
                         <p
-                          className="text-[#a0a098] leading-relaxed mb-4 text-sm max-w-md"
+                          className="text-[#a0a098] leading-relaxed mb-4 text-base max-w-md"
                           style={{ fontFamily: "'Inter', sans-serif" }}
                         >
                           {s.subheadline}

@@ -21,48 +21,96 @@ export default function DigitalTransformationPage() {
         justifyContent: "center",
       }}
     >
-      {/* ── TITLE BLOCK ── */}
-      <div style={{ textAlign: "center", marginBottom: "5vh", maxWidth: "800px" }}>
-        <h2
-          style={{
-            fontSize: "clamp(2rem, 4vw, 3.25rem)",
-            fontWeight: 700,
-            color: "#050505",
-            fontFamily: "'DM Serif Display', serif",
-            marginBottom: "1rem",
-            lineHeight: 1.15,
-          }}
-        >
-          Digital Transformation for Manufacturing
-        </h2>
-        <p style={{ color: "rgba(0,0,0,0.55)", fontSize: "17px", lineHeight: 1.7, margin: 0 }}>
-          From a silent factory floor to a fully connected, AI-guided operation. IoT-Ignite captures the data, ArMES orchestrates production, PilarOS and Modiverse manage the digital layer — and ArAI with CWF bring conversational intelligence to every decision.
-        </p>
-      </div>
-
-      {/* ── NEW DIAGRAM & PRODUCT LEGEND ── */}
-      <div style={{ width: "92%", maxWidth: "1200px", marginBottom: "4rem", display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-        
-        {/* DigiF.jpeg Image */}
-        <div 
-          style={{ 
-            width: "100%", 
-            position: "relative", 
-            aspectRatio: "1.6 / 1", 
-            marginBottom: "1rem",
-            WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
-            maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)"
-          }}
-        >
+      {/* ── HERO BANNER (Full Bleed Layout mimicking Hero Slide 1) ── */}
+      <div 
+        style={{ 
+          position: "relative",
+          width: "100%", 
+          minHeight: "75vh", // Increased height to allow image to scale up massively
+          display: "flex",
+          alignItems: "flex-start", // Moved text to the top
+          paddingTop: "6vh", // Spacing from the top
+          marginBottom: "4rem",
+          overflow: "visible"
+        }}
+      >
+        {/* Right Side: Massive Absolute Image */}
+        <div style={{ 
+          position: "absolute", 
+          top: "0", 
+          bottom: "0", 
+          right: "0", 
+          width: "85%", // Expanded width to let image take over the screen
+          zIndex: 0
+        }}>
           <Image
-            src="/images/DigiF.jpeg"
+            src="/images/DigiFac3.jpeg"
             alt="Digital Architecture"
             fill
             priority
             unoptimized={true}
-            style={{ objectFit: "contain", objectPosition: "center" }}
+            style={{ 
+              objectFit: "contain", 
+              objectPosition: "right center", 
+              mixBlendMode: "multiply",
+              WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+              maskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)"
+            }}
           />
         </div>
+
+        {/* Left Side: Text Content */}
+        <div style={{ 
+          position: "relative", 
+          zIndex: 10, 
+          width: "92%", 
+          maxWidth: "1400px", 
+          margin: "0 auto" 
+        }}>
+          {/* We use a wrapper div for the glow so it can expand wider than the text itself */}
+          <div style={{ 
+            maxWidth: "600px", 
+            // Reverted back to the tighter, top-left anchored glow so it doesn't cover the machine!
+            background: "radial-gradient(120% 120% at 0% 30%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 75%)",
+            padding: "4rem 4rem 4rem 0", 
+            marginTop: "-4rem", 
+            marginBottom: "-4rem"
+          }}> 
+            <div style={{ maxWidth: "480px" }}> {/* Relaxed width to fit the longer line */}
+              <h2
+                style={{
+                  fontSize: "clamp(2.5rem, 4.5vw, 4rem)",
+                  fontWeight: 700,
+                  color: "#050505",
+                  fontFamily: "'DM Serif Display', serif",
+                  marginBottom: "1.5rem",
+                  lineHeight: 1.1,
+                  textTransform: "uppercase"
+                }}
+              >
+                Digital <br/>Transformation
+              </h2>
+              <p style={{ 
+                color: "#050505", 
+                fontSize: "18px", 
+                fontWeight: 600,
+                marginBottom: "1rem" 
+              }}>
+                Manufacturing Intelligence
+              </p>
+              <p style={{ 
+                color: "#333333", 
+                fontSize: "16px", 
+                lineHeight: 1.7, 
+                margin: 0,
+                fontWeight: 500 
+              }}>
+                From a silent factory floor <br />to a fully connected, AI-guided operation.<br /> IoT-Ignite captures the data, <br />ArMES orchestrates production, <br />PilarOS and Modiverse manage <br />the digital layer, <br />and ArAI with CWF bring <br />conversational intelligence <br />to every decision.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
         {/* Product Menu Pill Overlay (Now under image, aligned right) */}
         <div
@@ -118,7 +166,6 @@ export default function DigitalTransformationPage() {
             </div>
           ))}
         </div>
-      </div>
 
       {/* ── STATE LABELS ── */}
       <div
