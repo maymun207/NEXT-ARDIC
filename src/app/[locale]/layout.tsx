@@ -12,7 +12,7 @@ import Footer from "@/components/layout/Footer";
 import SkipToContent from "@/components/layout/SkipToContent";
 import CookieConsent from "@/components/ui/CookieConsent";
 import ChatWidgetWrapper from "@/components/layout/ChatWidgetWrapper";
-import CursorTracker from "@/components/dev/CursorTracker";
+
 import ProductModalWrapper from "@/components/ui/ProductModalWrapper";
 
 export async function generateStaticParams() {
@@ -90,7 +90,7 @@ export default async function LocaleLayout({
         {/* ChatWidgetWrapper: floating AI assistant chat panel — visible on all pages */}
         <ChatWidgetWrapper dict={dict} locale={locale as Locale} />
         {/* DEV ONLY: cursor coordinate tracker — remove before shipping */}
-        {process.env.NODE_ENV === "development" && <CursorTracker />}
+
       </ProductModalWrapper>
     </>
   );

@@ -1,17 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { useProductModal } from "@/context/ProductModalContext";
+
+const DEBUG_MODE = true; // Re-enabled
 
 const TECHNOLOGIES = [
   {
     id: "pilaros",
     title: "1. PilarOS",
     subtitle: "The secure industrial Android operating system",
-    position: { top: "85%", left: "48%" }, 
+    position: { top: "72%", left: "27%" }, // ✓ Line endpoint
     image: "/images/tech-map/extracted_slide_4.png",
     content: [
       { label: "AFEX Layer", text: "Bypasses application permissions, granting root-level management." },
@@ -22,7 +24,7 @@ const TECHNOLOGIES = [
     id: "arcloud",
     title: "2. ArCloud",
     subtitle: "Establishing an absolute, secure tether from chip to cloud",
-    position: { top: "67%", left: "19%" }, 
+    position: { top: "41%", left: "22%" }, // ✓ Exact from debug tool
     image: "/images/tech-map/extracted_slide_8.png",
     content: [
       { label: "The Gateway", text: "Signal passes via secure APN to scalable compute nodes." },
@@ -33,7 +35,7 @@ const TECHNOLOGIES = [
     id: "modiverse",
     title: "3. Modiverse",
     subtitle: "Scales security to the exact depth of the enterprise mandate",
-    position: { top: "32%", left: "22%" }, 
+    position: { top: "21%", left: "40%" }, // ✓ Nudged right 1%
     image: "/images/tech-map/extracted_slide_5.png",
     content: [
       { label: "Hardware Level", text: "Persistent software agent providing absolute administrative lock-in." },
@@ -44,7 +46,7 @@ const TECHNOLOGIES = [
     id: "iot-ignite",
     title: "4. IoT-Ignite",
     subtitle: "Captures and standardizes the industrial telemetry pulse",
-    position: { top: "16%", left: "50%" }, 
+    position: { top: "21%", left: "59%" }, // ✓ Fine-tuned
     image: "/images/tech-map/extracted_slide_6.png",
     content: [
       { label: "Connectivity", text: "Physical Nodes (MQTT, OPC-UA) and local processing hubs." },
@@ -55,7 +57,7 @@ const TECHNOLOGIES = [
     id: "armes",
     title: "5. ArMES",
     subtitle: "Weaves the digital thread from shop-floor reality to business planning",
-    position: { top: "32%", left: "76%" }, 
+    position: { top: "41%", left: "77%" }, // ✓ Fine-tuned
     image: "/images/tech-map/extracted_slide_9.png",
     content: [
       { label: "The Handshake", text: "Two-way ERP integration importing orders and pushing live shop-floor status back." }
@@ -65,18 +67,41 @@ const TECHNOLOGIES = [
     id: "arai",
     title: "6. ArAI",
     subtitle: "The Cognitive Pipeline: From query to prescriptive insight",
-    position: { top: "67%", left: "79%" }, 
+    position: { top: "72%", left: "74%" }, // ✓ Final
     image: "/images/tech-map/extracted_slide_12.png",
     content: [
       { label: "Pipeline", text: "Natural Language Query → Semantic Search → LLM Synthesis → Multi-Modal Response." },
       { label: "Grounded Data", text: "Shared graph-based state management prevents AI hallucination." }
+    ]
+  },
+  {
+    id: "cwf",
+    title: "7. CWF",
+    subtitle: "Conversational intelligence for production decisions",
+    position: { top: "78%", left: "50%" }, // ✓ Exact from debug tool
+    image: "/images/tech-map/cwf_slide2.png",
+    content: [
+      { label: "Chat With Factory", text: "Natural language interface to query and command shop-floor operations." }
     ]
   }
 ];
 
 export default function MapOfTechnology() {
   const [activeTech, setActiveTech] = useState<string | null>(null);
+  const [clickCoords, setClickCoords] = useState<{ x: number; y: number; px: number; py: number } | null>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
   const { openProduct } = useProductModal();
+
+  const handleImageClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!DEBUG_MODE) return;
+    const rect = imageContainerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xPct = Math.round((x / rect.width) * 100);
+    const yPct = Math.round((y / rect.height) * 100);
+    setClickCoords({ x: Math.round(x), y: Math.round(y), px: xPct, py: yPct });
+  };
 
   return (
     <section className="relative w-full bg-[#f4f7f6] py-16 sm:py-24 overflow-hidden">
@@ -96,10 +121,24 @@ export default function MapOfTechnology() {
 
         {/* Diagram Image Container */}
         <div className="w-full max-w-[1200px] relative rounded-2xl overflow-visible bg-white group">
-          
-          <div className="relative w-full flex justify-center items-center rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-[#e8e8e0]">
+
+          {/* Debug coordinate display */}
+          {DEBUG_MODE && clickCoords && (
+            <div className="absolute -top-12 left-0 z-50 bg-black text-green-400 font-mono text-sm px-4 py-2 rounded-lg shadow-xl border border-green-500/40 flex gap-4">
+              <span>left: <strong>{clickCoords.px}%</strong></span>
+              <span>top: <strong>{clickCoords.py}%</strong></span>
+              <span className="text-white/40">({clickCoords.x}px, {clickCoords.y}px)</span>
+              <button onClick={() => setClickCoords(null)} className="text-white/60 hover:text-white ml-2">✕</button>
+            </div>
+          )}
+
+          <div
+            ref={imageContainerRef}
+            onClick={handleImageClick}
+            className={`relative w-full flex justify-center items-center rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-[#e8e8e0] ${DEBUG_MODE ? 'cursor-crosshair' : ''}`}
+          >
             <Image
-              src="/images/OurTechnologies.jpeg"
+              src="/images/map.jpeg"
               alt="Map of Our Technology"
               width={3004}
               height={1408}
@@ -136,10 +175,10 @@ export default function MapOfTechnology() {
                   onClick={() => setActiveTech(activeTech === tech.id ? null : tech.id)}
                 >
                   <div className="relative cursor-pointer group/hotspot p-4">
-                    {/* Outer pulsing ring */}
-                    <div className={`absolute inset-0 rounded-full bg-[#00c4a0] opacity-20 animate-ping duration-1000 ${activeTech === tech.id ? 'opacity-40' : ''}`}></div>
-                    {/* Inner solid dot */}
-                    <div className={`w-4 h-4 sm:w-6 sm:h-6 rounded-full border-2 border-white shadow-lg transition-all duration-300 ${activeTech === tech.id ? 'bg-[#1a4d3a] scale-125' : 'bg-[#00c4a0] group-hover/hotspot:bg-[#1a4d3a] group-hover/hotspot:scale-110'}`}></div>
+                    {/* Outer pulsing ring - slow */}
+                    <div className={`absolute inset-0 rounded-full bg-[#a7f3d0] animate-ping ${activeTech === tech.id ? 'opacity-60' : 'opacity-40'}`} style={{ animationDuration: '4s' }}></div>
+                    {/* Inner solid dot - fully visible */}
+                    <div className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full border-[1.5px] border-[#d1d5db] shadow-md transition-all duration-300 ${activeTech === tech.id ? 'bg-[#6ee7b7] scale-125' : 'bg-[#a7f3d0] group-hover/hotspot:bg-[#6ee7b7] group-hover/hotspot:scale-110'}`}></div>
                   </div>
 
                   {/* Hover Card */}
