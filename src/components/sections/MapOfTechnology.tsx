@@ -104,7 +104,7 @@ export default function MapOfTechnology() {
   };
 
   return (
-    <section className="relative w-full bg-[#f4f7f6] py-16 sm:py-24 overflow-hidden">
+    <section className="relative w-full bg-[#e9ebef] py-16 sm:py-24 overflow-visible">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center">
         
         {/* Header Section */}
@@ -120,7 +120,7 @@ export default function MapOfTechnology() {
         </div>
 
         {/* Diagram Image Container */}
-        <div className="w-full max-w-[1200px] relative rounded-2xl overflow-visible bg-white group">
+        <div className="w-full max-w-[1200px] relative bg-transparent group">
 
           {/* Debug coordinate display */}
           {DEBUG_MODE && clickCoords && (
@@ -135,7 +135,7 @@ export default function MapOfTechnology() {
           <div
             ref={imageContainerRef}
             onClick={handleImageClick}
-            className={`relative w-full flex justify-center items-center rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-[#e8e8e0] ${DEBUG_MODE ? 'cursor-crosshair' : ''}`}
+            className={`relative w-full flex justify-center items-center ${DEBUG_MODE ? 'cursor-crosshair' : ''}`}
           >
             <Image
               src="/images/map.jpeg"
@@ -143,9 +143,18 @@ export default function MapOfTechnology() {
               width={3004}
               height={1408}
               unoptimized
-              className="w-full h-auto object-contain rounded-2xl transition-transform duration-700 ease-in-out group-hover:scale-[1.02]"
+              className="w-full h-auto object-contain transition-transform duration-700 ease-in-out group-hover:scale-[1.02]"
+              style={{ mixBlendMode: "multiply", opacity: 0.9 }}
               priority
             />
+
+            {/* Edge Fade Overlay to blend image into background */}
+            <div className="absolute inset-0 pointer-events-none z-10" style={{
+              background: `
+                linear-gradient(to right, #e9ebef 0%, transparent 8%, transparent 92%, #e9ebef 100%),
+                linear-gradient(to bottom, #e9ebef 0%, transparent 12%, transparent 88%, #e9ebef 100%)
+              `
+            }}></div>
 
             {/* Hotspots overlay */}
             {TECHNOLOGIES.map((tech) => {
@@ -207,12 +216,15 @@ export default function MapOfTechnology() {
                           <h4 className="text-xl font-bold text-white mb-1.5 tracking-wide">{tech.title}</h4>
                           <p className="text-[#00c4a0] text-sm font-medium leading-relaxed">{tech.subtitle}</p>
                           
-                          {/* Details Link - Always visible on mobile, fades in on hover for desktop */}
-                          <div className="flex items-center text-sm font-medium text-[#00c4a0] overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] mt-4 pt-4 border-t border-white/10 max-h-[50px] opacity-100 sm:mt-0 sm:pt-0 sm:border-transparent sm:max-h-0 sm:opacity-0 sm:group-hover/card:mt-4 sm:group-hover/card:pt-4 sm:group-hover/card:border-white/10 sm:group-hover/card:max-h-[50px] sm:group-hover/card:opacity-100">
-                            <span>Click to view details</span>
-                            <svg className="h-4 w-4 ml-1.5 transform sm:-translate-x-2 sm:group-hover/card:translate-x-1 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
+                          {/* Details Link - Always visible as a button */}
+                          <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span className="text-[#00c4a0] text-sm font-medium">Learn more about {tech.title.split('. ')[1]}</span>
+                            <div className="flex items-center justify-center bg-[#00c4a0]/10 hover:bg-[#00c4a0]/20 text-[#00c4a0] text-sm font-medium px-4 py-2 rounded-lg transition-colors group-hover/card:bg-[#00c4a0]/20">
+                              <span>View details</span>
+                              <svg className="h-4 w-4 ml-1.5 transform group-hover/card:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
                           </div>
                         </div>
                         

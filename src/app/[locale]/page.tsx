@@ -15,6 +15,7 @@ import Pillar1Page from "@/components/sections/Pillar1Page";
 import Pillar2Page from "@/components/sections/Pillar2Page";
 import Pillar3Page from "@/components/sections/Pillar3Page";
 import DigitalTransformationPage from "@/components/sections/DigitalTransformationPage";
+import DigitalConsciousnessPage from "@/components/sections/DigitalConsciousnessPage";
 import EnterpriseAIPlatformPage from "@/components/sections/EnterpriseAIPlatformPage";
 import AIExecutionPage from "@/components/sections/AIExecutionPage";
 import LCOAICalculator from "@/components/sections/LCOAICalculator";
@@ -66,6 +67,9 @@ export default async function HomePage({ params }: PageProps) {
 
       {/* ── Digital Transformation For Manufacturing ── */}
       <DigitalTransformationPage />
+
+      {/* ── The Digital Consciousness of the Factory ── */}
+      <DigitalConsciousnessPage />
 
       {/* ── Factory Tree — commented out; HeroFollowSection now covers this ──
       <FactoryTreeSection />

@@ -78,28 +78,44 @@ export default function Pillar3Page({ standalone = false }: { standalone?: boole
         overflow: "hidden",
       }}
     >
-      {/* ── SECTION HEADER ── */}
-      <div style={{ position: "relative", zIndex: 10, width: "100%", padding: "0 4%", marginBottom: "2vh", display: "flex", alignItems: "center", gap: "2rem" }}>
-        <h2
-          style={{
-            fontSize: "clamp(1.5rem, 3vw, 2.2rem)",
-            fontWeight: 900,
-            color: PILLAR.textAccent,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            margin: 0,
-          }}
-        >
-          PILLAR {PILLAR.number}
-        </h2>
-        <div style={{ flex: 1, height: "2px", background: `linear-gradient(to right, ${PILLAR.textAccent}50, transparent)` }} />
+      {/* ── TOP HEADER HERO ── */}
+      <div 
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          padding: "0 5%",
+          background: "transparent",
+        }}
+      >
+        <div style={{ maxWidth: "800px", marginTop: standalone ? "4rem" : "0", paddingBottom: "3rem" }}>
+          <span style={{
+            display: "inline-flex", alignItems: "center", gap: "0.5rem",
+            background: `${PILLAR.accent}18`, border: `1px solid ${PILLAR.accent}40`,
+            borderRadius: "999px", padding: "0.4rem 1.25rem", color: PILLAR.textAccent,
+            fontSize: "12px", fontWeight: 800, letterSpacing: "0.2em", marginBottom: "1.5rem",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.05)"
+          }}>
+            ● PILLAR {PILLAR.number}
+          </span>
+          <h2 style={{
+            fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "#050505",
+            lineHeight: 1.1, fontFamily: "'DM Serif Display', serif", whiteSpace: "pre-line", marginBottom: "1rem"
+          }}>
+            {PILLAR.title}
+          </h2>
+          <p style={{
+            color: "#1c2b2b", fontSize: "18px", fontWeight: 600, letterSpacing: "0.03em", opacity: 0.8
+          }}>
+            {PILLAR.tagline}
+          </p>
+        </div>
       </div>
 
-      {/* ── TOP: IMAGE & TITLE AREA ── */}
+      {/* ── TOP: IMAGE AREA ── */}
       <div style={{ position: "relative", width: "100%", height: "45vh", minHeight: "350px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "2rem" }}>
-        {/* Soft radial background for the image to sit in */}
-        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at center, rgba(0,0,0,0.02) 0%, transparent 70%)" }} />
-        
         {/* Full Image visible using contain */}
         <Image
           src={PILLAR.image}
@@ -109,35 +125,6 @@ export default function Pillar3Page({ standalone = false }: { standalone?: boole
           unoptimized={true}
           style={{ objectFit: "contain", objectPosition: "center" }}
         />
-
-        {/* Title positioned over the top left */}
-        <div style={{ position: "absolute", top: "1rem", left: "4%", zIndex: 10 }}>
-          <h1
-            style={{
-              fontSize: "clamp(2rem, 4vw, 4.5rem)",
-              fontWeight: 700,
-              color: "#050505",
-              lineHeight: 1.1,
-              fontFamily: "'DM Serif Display', serif",
-              whiteSpace: "pre-line",
-              textShadow: "0 4px 24px rgba(255,255,255,0.9)",
-            }}
-          >
-            {PILLAR.title}
-          </h1>
-          <p
-            style={{
-              color: "#1c2b2b",
-              fontSize: "18px",
-              fontWeight: 800,
-              letterSpacing: "0.04em",
-              textShadow: "0 0 12px rgba(255,255,255,1)",
-              marginTop: "0.5rem",
-            }}
-          >
-            {PILLAR.tagline}
-          </p>
-        </div>
       </div>
 
       {/* ── BOTTOM: HOVER CARDS ROW ── */}

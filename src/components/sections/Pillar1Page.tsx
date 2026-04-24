@@ -12,7 +12,7 @@ const PILLAR = {
   tagline: "Secure. Connect. Integrate.",
   accent: "#7ab8f5",
   textAccent: "#2565a3",
-  image: "/images/BuildingF.jpeg",
+  image: "/images/DigiFac4.jpeg",
 };
 
 const SUB_SERVICES = [
@@ -97,7 +97,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
       style={{
         position: "relative",
         zIndex: 10,
-        background: "#fdfdfd", // Slight off-white to make the cards pop
+        background: "#fdfdfd", // Reverted to the clean off-white background
         fontFamily: "'Inter', sans-serif",
         paddingTop: standalone ? "4rem" : "8vh",
         paddingBottom: "8vh",
@@ -112,7 +112,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
           alignItems: "center",
           textAlign: "center",
           padding: "0 5%",
-          background: "#ffffff",
+          background: "transparent",
         }}
       >
         {/* Top: Text Content */}
@@ -141,15 +141,34 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
       </div>
         
       {/* Bottom: Edge-to-Edge Unobscured Image */}
-      <div style={{ position: "relative", width: "100%", background: "#ffffff", height: "35vh", minHeight: "300px", maxHeight: "400px" }}>
-        <Image
-          src={PILLAR.image}
-          alt={PILLAR.title}
-          fill
-          priority
-          unoptimized={true}
-          style={{ objectFit: "contain", objectPosition: "center", opacity: 0.85, mixBlendMode: "multiply" }}
-        />
+      <div style={{ display: "flex", justifyContent: "center", width: "100%", padding: "0 2%" }}>
+        <div style={{ 
+          position: "relative", 
+          width: "100%", 
+          maxWidth: "1400px",
+          aspectRatio: "2.12",
+          maxHeight: "70vh", // To prevent it from becoming too tall on ultrawide screens
+          mixBlendMode: "multiply"
+        }}>
+          <Image
+            src={PILLAR.image}
+            alt={PILLAR.title}
+            fill
+            priority
+            unoptimized={true}
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+          {/* Edge fade fog to hide image boundaries perfectly */}
+          <div style={{
+            position: "absolute", inset: 0, pointerEvents: "none", zIndex: 5,
+            background: `
+              linear-gradient(to top, #fdfdfd 0%, transparent 15%),
+              linear-gradient(to bottom, #fdfdfd 0%, transparent 15%),
+              linear-gradient(to left, #fdfdfd 0%, transparent 10%),
+              linear-gradient(to right, #fdfdfd 0%, transparent 10%)
+            `
+          }}></div>
+        </div>
       </div>
 
       {/* ── VERTICAL HOVER CARDS (GRID) ── */}
@@ -174,7 +193,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
               style={{
                 background: "#ffffff",
                 borderRadius: "20px",
-                padding: "2.5rem 2rem",
+                padding: "1.75rem 1.5rem",
                 boxShadow: isHovered 
                   ? `0 24px 48px rgba(0,0,0,0.06), 0 0 0 1px ${sub.accent}30` 
                   : "0 8px 24px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.04)",
@@ -244,7 +263,7 @@ export default function Pillar1Page({ standalone = false }: { standalone?: boole
                 background: `linear-gradient(90deg, ${sub.accent}, transparent)`,
                 borderRadius: "2px",
                 transition: "width 0.5s ease",
-                marginBottom: "1.5rem"
+                marginBottom: isHovered ? "1.5rem" : "0"
               }}/>
 
               {/* ── VERTICAL EXPANDING CONTENT (CSS Grid Transition) ── */}

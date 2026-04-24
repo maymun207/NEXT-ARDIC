@@ -5,13 +5,14 @@ import Image from "next/image";
 import { useProductModal } from "@/context/ProductModalContext";
 
 export default function DigitalTransformationPage() {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [hoveredProduct, setHoveredProduct] = useState<string | null>(null);
   const { openProduct } = useProductModal();
 
   return (
     <section
       style={{
-        background: "#ffffff",
+        background: "#e4e4e9",
         fontFamily: "'Inter', sans-serif",
         padding: "8vh 4%",
         display: "flex",
@@ -41,7 +42,8 @@ export default function DigitalTransformationPage() {
           bottom: "0", 
           right: "0", 
           width: "85%", // Expanded width to let image take over the screen
-          zIndex: 0
+          zIndex: 0,
+          mixBlendMode: "darken"
         }}>
           <Image
             src="/images/DigiFac3.jpeg"
@@ -51,12 +53,22 @@ export default function DigitalTransformationPage() {
             unoptimized={true}
             style={{ 
               objectFit: "contain", 
-              objectPosition: "right center", 
-              mixBlendMode: "multiply",
-              WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
-              maskImage: "linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)"
+              objectPosition: "right center"
             }}
           />
+          {/* Edge fade to hide sharp cuts on all sides */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            zIndex: 5,
+            background: `
+              linear-gradient(to top, #e4e4e9 0%, transparent 15%),
+              linear-gradient(to bottom, #e4e4e9 0%, transparent 15%),
+              linear-gradient(to left, #e4e4e9 0%, transparent 15%),
+              linear-gradient(to right, #e4e4e9 0%, transparent 5%)
+            `
+          }}></div>
         </div>
 
         {/* Left Side: Text Content */}
@@ -67,19 +79,18 @@ export default function DigitalTransformationPage() {
           maxWidth: "1400px", 
           margin: "0 auto" 
         }}>
-          {/* We use a wrapper div for the glow so it can expand wider than the text itself */}
+          {/* Text wrapper without the white glow, to blend cleanly into the background */}
           <div style={{ 
             maxWidth: "600px", 
-            // Reverted back to the tighter, top-left anchored glow so it doesn't cover the machine!
-            background: "radial-gradient(120% 120% at 0% 30%, rgba(255,255,255,1) 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 75%)",
             padding: "4rem 4rem 4rem 0", 
             marginTop: "-4rem", 
             marginBottom: "-4rem"
           }}> 
-            <div style={{ maxWidth: "480px" }}> {/* Relaxed width to fit the longer line */}
+            <div style={{ maxWidth: "600px" }}> {/* Relaxed width to fit the longer line */}
               <h2
+                lang="en"
                 style={{
-                  fontSize: "clamp(2.5rem, 4.5vw, 4rem)",
+                  fontSize: "clamp(2rem, 3.5vw, 3.5rem)",
                   fontWeight: 700,
                   color: "#050505",
                   fontFamily: "'DM Serif Display', serif",
@@ -88,7 +99,7 @@ export default function DigitalTransformationPage() {
                   textTransform: "uppercase"
                 }}
               >
-                Digital <br/>Transformation
+                AI-POWERED<br/> DIGITAL TRANSFORMATION <br/>FOR MANUFACTURING
               </h2>
               <p style={{ 
                 color: "#050505", 
@@ -112,10 +123,131 @@ export default function DigitalTransformationPage() {
         </div>
       </div>
 
-        {/* Product Menu Pill Overlay (Now under image, aligned right) */}
+
+
+      {/* ── BEFORE/AFTER SLIDER ── */}
+      <div style={{ width: "92%", maxWidth: "1400px", margin: "2rem auto", position: "relative" }}>
+        
+        {/* Helper Labels */}
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem", padding: "0 1rem" }}>
+          <span style={{ fontSize: "14px", fontWeight: 800, letterSpacing: "0.15em", color: "#050505" }}>🏭 BASE FACTORY</span>
+          <span style={{ fontSize: "14px", fontWeight: 800, letterSpacing: "0.15em", color: "#0ab9e6" }}>DIGITIZED FACTORY ⚡</span>
+        </div>
+
         <div
           style={{
-            background: "rgba(255, 255, 255, 0.6)",
+            position: "relative",
+            width: "100%",
+            aspectRatio: "1.87 / 1"
+          }}
+        >
+          {/* Composite wrapper for images */}
+          <div style={{ position: "absolute", inset: 0 }}>
+            {/* AFTER IMAGE (Background) */}
+            <div style={{ position: "absolute", inset: 0 }}>
+              <Image
+                src="/images/after.jpeg"
+                alt="Digitized Factory — After Transformation"
+                fill
+                priority
+                unoptimized={true}
+                style={{ objectFit: "contain", objectPosition: "center" }}
+              />
+            </div>
+
+            {/* BEFORE IMAGE (Clipped by slider position) */}
+            <div 
+              style={{ 
+                position: "absolute", 
+                inset: 0, 
+                clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`
+              }}
+            >
+              <Image
+                src="/images/before.jpeg"
+                alt="Base Factory — Before Digitization"
+                fill
+                priority
+                unoptimized={true}
+                style={{ objectFit: "contain", objectPosition: "center" }}
+              />
+            </div>
+          </div>
+
+          {/* Edge fade to hide sharp cuts on all sides */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            zIndex: 5,
+            background: `
+              linear-gradient(to top, #e4e4e9 0%, transparent 3%),
+              linear-gradient(to bottom, #e4e4e9 0%, transparent 6%),
+              linear-gradient(to left, #e4e4e9 0%, transparent 2%),
+              linear-gradient(to right, #e4e4e9 0%, transparent 2%)
+            `
+          }}></div>
+
+          {/* SLIDER LINE & HANDLE */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: `${sliderPosition}%`,
+              width: "4px",
+              backgroundColor: "#ffffff",
+              transform: "translateX(-50%)",
+              boxShadow: "0 0 16px rgba(0,0,0,0.4)",
+              pointerEvents: "none",
+              zIndex: 10,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            {/* Slider Handle */}
+            <div style={{
+              width: "48px",
+              height: "48px",
+              backgroundColor: "#ffffff",
+              borderRadius: "50%",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.25), inset 0 0 0 2px #0ab9e6",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px"
+            }}>
+              <div style={{ width: 0, height: 0, borderTop: "6px solid transparent", borderBottom: "6px solid transparent", borderRight: "7px solid #0ab9e6" }} />
+              <div style={{ width: 0, height: 0, borderTop: "6px solid transparent", borderBottom: "6px solid transparent", borderLeft: "7px solid #0ab9e6" }} />
+            </div>
+          </div>
+
+          {/* INVISIBLE RANGE INPUT FOR INTERACTION */}
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value={sliderPosition}
+            onChange={(e) => setSliderPosition(Number(e.target.value))}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              opacity: 0,
+              cursor: "ew-resize",
+              zIndex: 20
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ── PRODUCT PILL BAR WITH TOOLTIPS ── */}
+      <div style={{ position: "relative", marginTop: "-1rem", zIndex: 30, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div
+          style={{
+            background: "rgba(255, 255, 255, 0.8)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
             borderRadius: "16px",
@@ -123,7 +255,7 @@ export default function DigitalTransformationPage() {
             display: "flex",
             alignItems: "center",
             gap: "1.5rem",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.04), inset 0 2px 0 0 rgba(255, 255, 255, 0.8)",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08)",
             border: "1px solid rgba(0, 0, 0, 0.05)",
             flexWrap: "nowrap",
             overflowX: "auto",
@@ -136,7 +268,7 @@ export default function DigitalTransformationPage() {
                 style={{
                   fontSize: "14px",
                   fontWeight: 600,
-                  color: "#050505",
+                  color: hoveredProduct === item ? "#0ab9e6" : "#050505",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
@@ -144,8 +276,8 @@ export default function DigitalTransformationPage() {
                   whiteSpace: "nowrap",
                   transition: "color 0.2s"
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#0ab9e6")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#050505")}
+                onMouseEnter={() => setHoveredProduct(item)}
+                onMouseLeave={() => setHoveredProduct(null)}
                 onClick={() => {
                   const map: Record<string, string> = {
                     "PilarOS & AFEX": "pilaros",
@@ -166,189 +298,32 @@ export default function DigitalTransformationPage() {
             </div>
           ))}
         </div>
-
-      {/* ── STATE LABELS ── */}
-      <div
-        style={{
+        
+        {/* Tooltip Description */}
+        <div style={{ 
+          marginTop: "1.5rem", 
+          height: "24px", // Fixed height to prevent layout shift
           display: "flex",
-          gap: "2rem",
-          marginBottom: "2.5rem",
+          justifyContent: "center",
           alignItems: "center",
-        }}
-      >
-        <button
-          onClick={() => setIsFlipped(false)}
-          style={{
-            padding: "0.6rem 1.5rem",
-            borderRadius: "999px",
-            border: `2px solid ${!isFlipped ? "#0ab9e6" : "rgba(0,0,0,0.1)"}`,
-            background: !isFlipped ? "#0ab9e6" : "transparent",
-            color: !isFlipped ? "#fff" : "rgba(0,0,0,0.4)",
-            fontWeight: 700,
-            fontSize: "13px",
-            letterSpacing: "0.1em",
-            cursor: "pointer",
-            transition: "all 0.4s ease",
-          }}
-        >
-          BASE FACTORY
-        </button>
-
-        {/* Arrow between */}
-        <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
-          <path d="M0 8 H34 M28 2 L 40 8 L28 14" stroke={isFlipped ? "#0ab9e6" : "rgba(0,0,0,0.2)"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: "stroke 0.4s ease" }} />
-        </svg>
-
-        <button
-          onClick={() => setIsFlipped(true)}
-          style={{
-            padding: "0.6rem 1.5rem",
-            borderRadius: "999px",
-            border: `2px solid ${isFlipped ? "#0ab9e6" : "rgba(0,0,0,0.1)"}`,
-            background: isFlipped ? "#0ab9e6" : "transparent",
-            color: isFlipped ? "#fff" : "rgba(0,0,0,0.4)",
-            fontWeight: 700,
-            fontSize: "13px",
-            letterSpacing: "0.1em",
-            cursor: "pointer",
-            transition: "all 0.4s ease",
-          }}
-        >
-          DIGITIZED FACTORY
-        </button>
-      </div>
-
-      {/* ── 3D FLIP CARD ── */}
-      <div
-        onClick={() => setIsFlipped((f) => !f)}
-        style={{
-          width: "92%",
-          maxWidth: "1400px",
-          // Use DigF2's ratio (2810:1504 ≈ 1.87:1) so the back image fills fully
-          // DigF1 will show with slight whitespace top/bottom which is fine
-          aspectRatio: "1.87 / 1",
-          cursor: "pointer",
-          perspective: "2000px",
-          position: "relative",
-        }}
-      >
-        {/* The inner container that does the actual flip */}
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            position: "relative",
-            transformStyle: "preserve-3d",
-            transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
-            transition: "transform 0.85s cubic-bezier(0.4, 0.2, 0.2, 1)",
-          }}
-        >
-          {/* ── FRONT FACE: Base Factory (DigF1) ── */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-              borderRadius: "24px",
-              overflow: "hidden",
-              boxShadow: "0 24px 64px rgba(0,0,0,0.12)",
-              transform: "translateZ(0)",
-            }}
-          >
-            <Image
-              src="/images/DigF1.jpeg"
-              alt="Base Factory — Before Digitization"
-              fill
-              priority
-              unoptimized={true}
-              style={{ objectFit: "contain", objectPosition: "center" }}
-            />
-            {/* Front label badge */}
-            <div
-              style={{
-                position: "absolute",
-                top: "1.5rem",
-                left: "1.5rem",
-                background: "rgba(255,255,255,0.92)",
-                backdropFilter: "blur(12px)",
-                borderRadius: "999px",
-                padding: "0.5rem 1.25rem",
-                fontSize: "12px",
-                fontWeight: 800,
-                letterSpacing: "0.12em",
-                color: "#050505",
-                border: "1px solid rgba(0,0,0,0.08)",
-              }}
-            >
-              🏭 RAW FACTORY — BEFORE ARDICTECH
-            </div>
-            {/* Click hint */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "1.5rem",
-                right: "1.5rem",
-                background: "rgba(0,0,0,0.65)",
-                backdropFilter: "blur(12px)",
-                borderRadius: "999px",
-                padding: "0.5rem 1.25rem",
-                fontSize: "12px",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                color: "#ffffff",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              <span>Click to reveal digitized →</span>
-            </div>
-          </div>
-
-          {/* ── BACK FACE: Digitized Factory (DigF2) ── */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backfaceVisibility: "hidden",
-              WebkitBackfaceVisibility: "hidden",
-              transform: "rotateY(180deg) translateZ(0)",
-              borderRadius: "24px",
-              overflow: "hidden",
-              boxShadow: "0 24px 64px rgba(10,185,230,0.2)",
-            }}
-          >
-            <Image
-              src="/images/DigiF2.jpeg"
-              alt="Digitized Factory — After Transformation"
-              fill
-              priority
-              unoptimized={true}
-              style={{ objectFit: "contain", objectPosition: "center" }}
-            />
-            {/* Click hint */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "1.5rem",
-                right: "1.5rem",
-                background: "rgba(0,0,0,0.65)",
-                backdropFilter: "blur(12px)",
-                borderRadius: "999px",
-                padding: "0.5rem 1.25rem",
-                fontSize: "12px",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                color: "#ffffff",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-              }}
-            >
-              ← Click to go back
-            </div>
-          </div>
+        }}>
+          <p style={{
+            fontSize: "15px",
+            color: "#666",
+            fontWeight: 500,
+            opacity: hoveredProduct ? 1 : 0,
+            transform: hoveredProduct ? "translateY(0)" : "translateY(-5px)",
+            transition: "all 0.3s ease",
+            margin: 0,
+            textAlign: "center"
+          }}>
+            {hoveredProduct === "PilarOS & AFEX" && "Securely manages edge devices and digital signage across the floor."}
+            {hoveredProduct === "Modiverse" && "Centralized endpoint and remote device management platform."}
+            {hoveredProduct === "IoT-Ignite" && "Captures real-time edge data from legacy machines."}
+            {hoveredProduct === "ArMES" && "Orchestrates production, job orders, and real-time tracking."}
+            {hoveredProduct === "ArAI" && "Brings Generative AI to enterprise data."}
+            {hoveredProduct === "CWF" && "Conversational intelligence for every level of the operation."}
+          </p>
         </div>
       </div>
 

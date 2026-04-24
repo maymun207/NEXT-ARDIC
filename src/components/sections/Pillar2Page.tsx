@@ -154,7 +154,7 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
       style={{
         position: "relative",
         zIndex: 10,
-        background: "#fdfdfd", // Slight off-white to make the cards pop
+        background: "#fdfdfd", // Reverted to the clean off-white background
         fontFamily: "'Inter', sans-serif",
         paddingTop: standalone ? "4rem" : "8vh",
         paddingBottom: "8vh",
@@ -204,12 +204,10 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
           <div style={{ 
             position: "relative", 
             width: "100%", 
-            height: "65vh", 
-            minHeight: "500px", 
-            maxHeight: "800px",
-            borderRadius: "24px", 
-            overflow: "hidden", 
-            boxShadow: "0 24px 48px rgba(0,0,0,0.08)" 
+            aspectRatio: "0.75",
+            maxHeight: "95vh",
+            margin: "0 auto",
+            mixBlendMode: "multiply"
           }}>
             <Image
               src={PILLAR.image}
@@ -217,16 +215,18 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
               fill
               priority
               unoptimized={true}
-              style={{ objectFit: "contain", objectPosition: "center" }}
+              style={{ objectFit: "cover", objectPosition: "center" }}
             />
-            {/* Subtle Gradient Overlay so it looks premium */}
+            {/* Edge fade fog to hide image boundaries perfectly */}
             <div style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 100%)",
-              mixBlendMode: "multiply",
-              pointerEvents: "none"
-            }} />
+              position: "absolute", inset: 0, pointerEvents: "none", zIndex: 5,
+              background: `
+                linear-gradient(to top, #fdfdfd 0%, transparent 12%),
+                linear-gradient(to bottom, #fdfdfd 0%, transparent 12%),
+                linear-gradient(to left, #fdfdfd 0%, transparent 8%),
+                linear-gradient(to right, #fdfdfd 0%, transparent 8%)
+              `
+            }}></div>
           </div>
         </div>
 
@@ -246,7 +246,7 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
                 style={{
                   background: "#ffffff",
                   borderRadius: "20px",
-                  padding: "2.5rem 2rem", // Pillar 1 card padding
+                  padding: "1.75rem 1.5rem",
                   boxShadow: isHovered 
                     ? `0 24px 48px rgba(0,0,0,0.06), 0 0 0 1px ${sub.accent}30` 
                     : "0 8px 24px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.04)",
@@ -318,7 +318,7 @@ export default function Pillar2Page({ standalone = false }: { standalone?: boole
                   background: `linear-gradient(90deg, ${sub.accent}, transparent)`,
                   borderRadius: "2px",
                   transition: "width 0.5s ease",
-                  marginBottom: "1.5rem"
+                  marginBottom: isHovered ? "1.5rem" : "0"
                 }}/>
 
                 {/* ── VERTICAL EXPANDING CONTENT (CSS Grid Transition) ── */}
