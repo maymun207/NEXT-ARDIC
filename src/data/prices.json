@@ -1,5 +1,5 @@
 {
-  "last_verified": "2026-04-25",
+  "last_verified": "2026-04-26",
   "source": "openrouter.ai",
   "status": "live",
   "note": "Blended cost = average of input + output price per 1K tokens (50/50 split assumption)",
